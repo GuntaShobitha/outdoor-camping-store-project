@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stackly Outdoor - Administrator Operations Console. Manage products, fulfill orders, inspect customer metrics, and configure store policies." />
+  <title>Admin Operations Console &mdash; STACKLY Outdoor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8963e'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
+
+  <!-- Core & Dashboard Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body class="dash-layout">
+
+  <!-- ==========================================================================
+       SIDEBAR NAVIGATION
+       ========================================================================== -->
+  <aside class="dash-sidebar" id="dashSidebar" aria-label="Admin Navigation">
+    <div class="dash-sidebar-header">
+      <div class="dash-brand-wrap">
+        <a href="index.html" class="dash-brand-logo">[STACKLY]</a>
+        <span class="dash-brand-tag">ADMIN OPERATIONS</span>
+      </div>
+      <button type="button" class="dash-sidebar-close" id="dashSidebarClose" aria-label="Close sidebar">&times;</button>
+    </div>
+
+    <nav class="dash-sidebar-nav">
+      <span class="dash-nav-category-title">Command Center</span>
+      
+      <a href="#overview" class="dash-nav-link active" data-tab="overview" data-title="Executive Overview">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </span>
+          <span>Overview</span>
+        </div>
+        <span class="dash-nav-badge gold">Live</span>
+      </a>
+
+      <a href="#products" class="dash-nav-link" data-tab="products" data-title="Gear Catalog & Inventory">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </span>
+          <span>Gear Catalog</span>
+        </div>
+        <span class="dash-nav-badge" id="adminProdCountBadge">12</span>
+      </a>
+
+      <a href="#orders" class="dash-nav-link" data-tab="orders" data-title="Orders & Shipments">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          </span>
+          <span>Orders & Shipments</span>
+        </div>
+        <span class="dash-nav-badge" id="adminOrdersCountBadge">6</span>
+      </a>
+
+      <a href="#customers" class="dash-nav-link" data-tab="customers" data-title="Customers Directory">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </span>
+          <span>Adventurers</span>
+        </div>
+      </a>
+
+      <span class="dash-nav-category-title">Analytics & Tools</span>
+
+      <a href="#analytics" class="dash-nav-link" data-tab="analytics" data-title="Analytics & Sales Reports">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          </span>
+          <span>Sales Analytics</span>
+        </div>
+      </a>
+
+      <a href="#settings" class="dash-nav-link" data-tab="settings" data-title="Store Configuration">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </span>
+          <span>Store Settings</span>
+        </div>
+      </a>
+
+      <span class="dash-nav-category-title">Quick Switch</span>
+
+      <a href="customer-dashboard.html" class="dash-nav-link">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </span>
+          <span>Customer View</span>
+        </div>
+        <span class="dash-nav-badge">Demo</span>
+      </a>
+
+      <a href="index.html" class="dash-nav-link">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </span>
+          <span>View Public Store</span>
+        </div>
+      </a>
+    </nav>
+
+    <!-- Admin User Badge at Bottom -->
+    <div class="dash-sidebar-footer">
+      <div class="dash-user-chip">
+        <div class="dash-user-avatar" id="adminUserAvatar">M</div>
+        <div class="dash-user-meta">
+          <span class="dash-user-name" id="adminUserName">Marcus Thorne</span>
+          <span class="dash-user-role" id="adminUserRole">Store Administrator</span>
+        </div>
+      </div>
+      <button type="button" class="dash-logout-btn" id="adminLogoutBtn" title="Sign Out">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MAIN VIEWPORT
+       ========================================================================== -->
+  <main class="dash-main">
+    
+    <!-- Top Header -->
+    <header class="dash-header">
+      <div class="dash-header-left">
+        <button type="button" class="dash-mobile-toggle" id="dashMobileToggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="dash-breadcrumb-wrap">
+          <span class="dash-breadcrumb-sub" id="dashBreadcrumbSub">ADMIN PORTAL / OVERVIEW</span>
+          <h1 class="dash-page-title" id="dashPageTitle">Executive Overview</h1>
+        </div>
+      </div>
+
+      <div class="dash-header-right">
+        <!-- Global Search Filter -->
+        <div class="dash-search-box">
+          <svg class="dash-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="dashGlobalSearch" class="dash-search-input" placeholder="Search products or orders..." />
+        </div>
+
+        <button type="button" class="dash-btn dash-btn-primary" id="openAddProductModalBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>New Gear +</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Dynamic Content Body -->
+    <div class="dash-content-body">
+
+      <!-- ==========================================================================
+           TAB 1: EXECUTIVE OVERVIEW (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane active" id="tab-overview">
+        
+        <!-- Sub-section 1A: Executive KPI Overview -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Store Performance &amp; Live Velocity</h3>
+              <p>Key revenue, fulfillment, and inventory health metrics.</p>
+            </div>
+            <span class="status-pill delivered">Updated Just Now</span>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Total Revenue</span>
+                <div class="kpi-card-icon green">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+              </div>
+              <div>
+                <div class="kpi-value" id="kpiTotalRevenue">$128,450.00</div>
+                <div class="kpi-card-sub">
+                  <span class="kpi-badge up">+14.2%</span>
+                  <span>vs previous period</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Active Orders</span>
+                <div class="kpi-card-icon gold">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                </div>
+              </div>
+              <div>
+                <div class="kpi-value" id="kpiActiveOrders">42</div>
+                <div class="kpi-card-sub">
+                  <span class="kpi-badge up">+8.5%</span>
+                  <span>processing &amp; in transit</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Low Stock Warnings</span>
+                <div class="kpi-card-icon purple">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </div>
+              </div>
+              <div>
+                <div class="kpi-value" id="kpiLowStock">3</div>
+                <div class="kpi-card-sub">
+                  <span class="kpi-badge down">Attention Needed</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Total Adventurers</span>
+                <div class="kpi-card-icon blue">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                </div>
+              </div>
+              <div>
+                <div class="kpi-value" id="kpiTotalCustomers">1,842</div>
+                <div class="kpi-card-sub">
+                  <span class="kpi-badge up">+23.1%</span>
+                  <span>Trail Club Members</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 1B: Operations Command Split -->
+        <div class="dash-sub-section">
+          <div class="dash-split-grid">
+            
+            <!-- Left: Recent Store Orders -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <div>
+                  <h4>Recent Store Orders</h4>
+                  <p style="font-size: 0.78rem; color: var(--color-text-muted);">Real-time checkout feed from customer storefront</p>
+                </div>
+                <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="document.querySelector('.dash-nav-link[data-tab=\'orders\']').click()">
+                  View All Orders &rarr;
+                </button>
+              </div>
+
+              <div class="table-responsive-wrapper">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Items</th>
+                      <th>Total</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="overviewRecentOrdersList">
+                    <!-- Rendered via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Right: Top Velocity Outdoor Gear -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <div>
+                  <h4>Top Velocity Gear</h4>
+                  <p style="font-size: 0.78rem; color: var(--color-text-muted);">Most purchased items this expedition season</p>
+                </div>
+                <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="document.querySelector('.dash-nav-link[data-tab=\'products\']').click()">
+                  Manage Catalog
+                </button>
+              </div>
+
+              <div id="overviewTopGearList" style="display:flex; flex-direction:column;">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Sub-section 1C: Inventory Health & Category Breakdown -->
+        <div class="dash-sub-section">
+          <div class="dash-split-grid">
+            
+            <!-- Critical Low Stock Alerts -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <div>
+                  <h4>Critical Inventory Alerts (&le; 5 Units)</h4>
+                  <p style="font-size: 0.78rem; color: var(--color-text-muted);">Restock immediately to prevent backcountry backorders</p>
+                </div>
+                <span class="stock-tag low-stock">Low Stock Warning</span>
+              </div>
+              <div id="overviewRestockAlertsList">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+
+            <!-- Category Revenue Breakdown -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <div>
+                  <h4>Category Revenue Share</h4>
+                  <p style="font-size: 0.78rem; color: var(--color-text-muted);">Sales distribution across product lines</p>
+                </div>
+                <span class="status-pill delivered">100% Calibrated</span>
+              </div>
+              <div class="category-progress-list">
+                <div class="cat-meter-item">
+                  <div class="cat-meter-header">
+                    <span>Tents &amp; Shelters</span>
+                    <strong>38% ($48,811)</strong>
+                  </div>
+                  <div class="cat-meter-track">
+                    <div class="cat-meter-fill" style="width: 38%; background: var(--color-primary-green);"></div>
+                  </div>
+                </div>
+                <div class="cat-meter-item">
+                  <div class="cat-meter-header">
+                    <span>Sleep Systems (Bags &amp; Pads)</span>
+                    <strong>26% ($33,397)</strong>
+                  </div>
+                  <div class="cat-meter-track">
+                    <div class="cat-meter-fill" style="width: 26%; background: var(--color-gold);"></div>
+                  </div>
+                </div>
+                <div class="cat-meter-item">
+                  <div class="cat-meter-header">
+                    <span>Expedition Packs</span>
+                    <strong>19% ($24,405)</strong>
+                  </div>
+                  <div class="cat-meter-track">
+                    <div class="cat-meter-fill" style="width: 19%; background: #0284c7;"></div>
+                  </div>
+                </div>
+                <div class="cat-meter-item">
+                  <div class="cat-meter-header">
+                    <span>Camp Cooking &amp; Stoves</span>
+                    <strong>11% ($14,129)</strong>
+                  </div>
+                  <div class="cat-meter-track">
+                    <div class="cat-meter-fill" style="width: 11%; background: #9333ea;"></div>
+                  </div>
+                </div>
+                <div class="cat-meter-item">
+                  <div class="cat-meter-header">
+                    <span>Nav &amp; Solar Tech</span>
+                    <strong>6% ($7,707)</strong>
+                  </div>
+                  <div class="cat-meter-track">
+                    <div class="cat-meter-fill" style="width: 6%; background: #64748b;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 2: GEAR CATALOG & INVENTORY (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-products">
+        
+        <!-- Sub-section 2A: Inventory Control Bar -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Outdoor Equipment Master Catalog</h3>
+              <p>Manage pricing, stock counts, technical specifications, and availability.</p>
+            </div>
+            <div class="dash-sub-actions">
+              <select id="prodCategoryFilter" class="auth-input" style="padding: 8px 12px; width: auto; font-size: 0.8125rem;">
+                <option value="all">All Categories</option>
+                <option value="tents">Tents &amp; Shelters</option>
+                <option value="sleeping">Sleep Systems</option>
+                <option value="packs">Packs &amp; Bags</option>
+                <option value="cooking">Camp Cooking</option>
+                <option value="hiking">Hiking &amp; Poles</option>
+              </select>
+              <button type="button" class="dash-btn dash-btn-primary" onclick="document.getElementById('openAddProductModalBtn').click()">
+                + Add Product
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 2B: Master Products Table -->
+        <div class="dash-sub-section">
+          <div class="table-responsive-wrapper">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Product &amp; SKU</th>
+                  <th>Category</th>
+                  <th>Retail Price</th>
+                  <th>Inventory Level</th>
+                  <th>Status</th>
+                  <th>Reviews</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminProductsTableBody">
+                <!-- Rendered dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sub-section 2C: Product Category Distribution & Stock Health Stats -->
+        <div class="dash-sub-section">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-title">Total Catalog Units</span>
+              <div class="kpi-value" id="adminCatalogTotalUnits">148 units</div>
+              <span class="kpi-card-sub">In Boulder warehouse</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Catalog Inventory Valuation</span>
+              <div class="kpi-value" id="adminCatalogValuation">$48,290.00</div>
+              <span class="kpi-card-sub">At current retail pricing</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Average Product Margin</span>
+              <div class="kpi-value">58.4%</div>
+              <span class="kpi-card-sub">Net trail profitability</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Warranty Claim Rate</span>
+              <div class="kpi-value">&lt; 0.8%</div>
+              <span class="kpi-card-sub">Backed by Lifetime Guarantee</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 3: ORDERS & SHIPMENTS (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-orders">
+        
+        <!-- Sub-section 3A: Pipeline Status Filters -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Fulfillment &amp; Courier Logistics</h3>
+              <p>Process inbound orders, print shipping labels, and assign tracking numbers.</p>
+            </div>
+            <div class="dash-sub-actions" id="orderFilterPills">
+              <button class="dash-btn dash-btn-outline dash-btn-sm active" onclick="window.adminDash.renderOrdersTab()">All Orders</button>
+              <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.adminDash.renderOrdersTab(window.stacklyData.getOrders().filter(o => o.fulfillmentStatus === 'Pending'))">Pending</button>
+              <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.adminDash.renderOrdersTab(window.stacklyData.getOrders().filter(o => o.fulfillmentStatus === 'Shipped'))">Shipped</button>
+              <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.adminDash.renderOrdersTab(window.stacklyData.getOrders().filter(o => o.fulfillmentStatus === 'Delivered'))">Delivered</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 3B: Master Orders Table -->
+        <div class="dash-sub-section">
+          <div class="table-responsive-wrapper">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Order Reference</th>
+                  <th>Customer</th>
+                  <th>Gear Breakdown</th>
+                  <th>Total Cost</th>
+                  <th>Payment</th>
+                  <th>Fulfillment Status</th>
+                  <th>Dispatch Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrdersTableBody">
+                <!-- Rendered dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sub-section 3C: Shipping Service Level Summary -->
+        <div class="dash-sub-section">
+          <div class="dash-split-grid">
+            <div class="dash-panel">
+              <h4 style="margin-bottom:12px;">Active Courier Integrations</h4>
+              <p style="font-size:0.84rem; color:var(--color-text-muted); margin-bottom:14px;">Integrated logistics providers for carbon-neutral backcountry drop-off.</p>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:var(--color-bg-cream); border-radius:6px;">
+                  <span><strong>FedEx Trail Express</strong> (Expedited 2-Day)</span>
+                  <span class="status-pill delivered">Operational</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px; background:var(--color-bg-cream); border-radius:6px;">
+                  <span><strong>USPS Backcountry Priority</strong> (Ground &amp; Remote)</span>
+                  <span class="status-pill delivered">Operational</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-panel">
+              <h4 style="margin-bottom:12px;">Fulfillment Speed SLA</h4>
+              <p style="font-size:0.84rem; color:var(--color-text-muted); margin-bottom:14px;">Average warehouse turnaround time from order placement to carrier pickup.</p>
+              <div style="display:flex; align-items:baseline; gap:10px;">
+                <span style="font-family:var(--font-hero); font-size:2.4rem; font-weight:800; color:var(--color-primary-green);">18.4 hrs</span>
+                <span class="kpi-badge up">99.2% On-Time</span>
+              </div>
+              <p style="font-size:0.78rem; color:var(--color-text-muted); margin-top:6px;">All gear packed in 100% compostable paperboard.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 4: CUSTOMERS DIRECTORY (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-customers">
+        
+        <!-- Sub-section 4A: Customer Segment KPI Cards -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Registered Adventurers Directory</h3>
+              <p>Member profiles, expedition points balances, and purchasing activity.</p>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-title">Total Adventurers</span>
+              <div class="kpi-value">1,842</div>
+              <span class="kpi-card-sub">+128 this month</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">VIP Summit Club</span>
+              <div class="kpi-value">412</div>
+              <span class="kpi-card-sub">Tier 3 Adventurers</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Average Lifetime Value</span>
+              <div class="kpi-value">$348.50</div>
+              <span class="kpi-card-sub">High gear retention</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-title">Customer Retention Rate</span>
+              <div class="kpi-value">88.4%</div>
+              <span class="kpi-card-sub">Repeat backcountry orders</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 4B: Customer Master Table -->
+        <div class="dash-sub-section">
+          <div class="table-responsive-wrapper">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Adventurer</th>
+                  <th>Email</th>
+                  <th>Access Role</th>
+                  <th>Member Since</th>
+                  <th>Orders</th>
+                  <th>Lifetime Spend</th>
+                  <th>Account Status</th>
+                </tr>
+              </thead>
+              <tbody id="adminCustomersTableBody">
+                <!-- Rendered dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sub-section 4C: Top Spenders Leaderboard -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <div>
+                <h4>Top VIP Adventurer Leaderboard</h4>
+                <p style="font-size:0.78rem; color:var(--color-text-muted);">Adventurers with highest cumulative expedition gear investment</p>
+              </div>
+              <span class="dash-nav-badge gold">VIP Tier</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px;">
+              <div style="padding:14px; background:var(--color-bg-cream); border-radius:8px; border:1px solid var(--color-border);">
+                <strong style="color:var(--color-text-dark); display:block;">1. Alex Rivers</strong>
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">Boulder, CO &bull; Summit Explorer</span>
+                <div style="font-size:1.1rem; font-weight:800; color:var(--color-primary-green); margin-top:6px;">$896.95 Spent</div>
+              </div>
+              <div style="padding:14px; background:var(--color-bg-cream); border-radius:8px; border:1px solid var(--color-border);">
+                <strong style="color:var(--color-text-dark); display:block;">2. Liam Vance</strong>
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">Portland, OR &bull; Alpine Master</span>
+                <div style="font-size:1.1rem; font-weight:800; color:var(--color-primary-green); margin-top:6px;">$610.00 Spent</div>
+              </div>
+              <div style="padding:14px; background:var(--color-bg-cream); border-radius:8px; border:1px solid var(--color-border);">
+                <strong style="color:var(--color-text-dark); display:block;">3. Maya Lin</strong>
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">Salt Lake City, UT &bull; Backcountry Scout</span>
+                <div style="font-size:1.1rem; font-weight:800; color:var(--color-primary-green); margin-top:6px;">$415.00 Spent</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 5: ANALYTICS & REPORTS (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-analytics">
+        
+        <!-- Sub-section 5A: Monthly Sales Velocity Bar Chart -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <div class="dash-panel-header">
+              <div>
+                <h4>Monthly Revenue Velocity (May &ndash; Nov 2026)</h4>
+                <p style="font-size:0.78rem; color:var(--color-text-muted);">Interactive monthly performance chart with tooltip inspect</p>
+              </div>
+              <span class="kpi-badge up">+28% Peak Summer Season</span>
+            </div>
+
+            <div class="sales-bar-chart">
+              <div class="chart-bar-col">
+                <div class="chart-bar-pillar" style="height: 55%;">
+                  <span class="chart-tooltip">May: $18,400</span>
+                </div>
+                <span class="chart-bar-label">May</span>
+              </div>
+              <div class="chart-bar-col">
+                <div class="chart-bar-pillar" style="height: 70%;">
+                  <span class="chart-tooltip">Jun: $22,800</span>
+                </div>
+                <span class="chart-bar-label">Jun</span>
+              </div>
+              <div class="chart-bar-col">
+                <div class="chart-bar-pillar" style="height: 85%;">
+                  <span class="chart-tooltip">Jul: $28,900</span>
+                </div>
+                <span class="chart-bar-label">Jul</span>
+              </div>
+              <div class="chart-bar-col">
+                <div class="chart-bar-pillar" style="height: 80%;">
+                  <span class="chart-tooltip">Aug: $26,100</span>
+                </div>
+                <span class="chart-bar-label">Aug</span>
+              </div>
+              <div class="chart-bar-col">
+                <div class="chart-bar-pillar" style="height: 65%;">
+                  <span class="chart-tooltip">Sep: $21,300</span>
+                </div>
+                <span class="chart-bar-label">Sep</span>
+              </div>
+              <div class="chart-bar-col">
+                <div class="chart-bar-pillar" style="height: 75%;">
+                  <span class="chart-tooltip">Oct: $24,500</span>
+                </div>
+                <span class="chart-bar-label">Oct</span>
+              </div>
+              <div class="chart-bar-col">
+                <div class="chart-bar-pillar" style="height: 88%; background: var(--color-gold);">
+                  <span class="chart-tooltip">Nov (P): $30,200</span>
+                </div>
+                <span class="chart-bar-label">Nov</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 5B & 5C: Conversion & Funnel Breakdown -->
+        <div class="dash-sub-section">
+          <div class="dash-split-grid">
+            
+            <div class="dash-panel">
+              <h4 style="margin-bottom:12px;">Store Conversion Funnel</h4>
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
+                    <span>Catalog Browsers</span>
+                    <strong>48,200 visitors</strong>
+                  </div>
+                  <div class="cat-meter-track"><div class="cat-meter-fill" style="width:100%; background:var(--color-primary-green);"></div></div>
+                </div>
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
+                    <span>Added Gear to Cart</span>
+                    <strong>6,420 sessions (13.3%)</strong>
+                  </div>
+                  <div class="cat-meter-track"><div class="cat-meter-fill" style="width:45%; background:var(--color-gold);"></div></div>
+                </div>
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:4px;">
+                    <span>Completed Checkout</span>
+                    <strong>1,638 orders (3.4%)</strong>
+                  </div>
+                  <div class="cat-meter-track"><div class="cat-meter-fill" style="width:25%; background:#16a34a;"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-panel">
+              <h4 style="margin-bottom:12px;">Cart Abandonment &amp; Recovery</h4>
+              <p style="font-size:0.84rem; color:var(--color-text-muted); margin-bottom:16px;">Automated reminder email sequences sent to registered hikers.</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <div style="padding:12px; background:var(--color-bg-cream); border-radius:6px;">
+                  <span style="font-size:0.75rem; color:var(--color-text-muted);">Abandonment Rate</span>
+                  <strong style="display:block; font-size:1.3rem; color:var(--color-text-dark);">21.4%</strong>
+                  <small style="color:#16a34a; font-size:0.7rem;">-4.1% below industry</small>
+                </div>
+                <div style="padding:12px; background:var(--color-bg-cream); border-radius:6px;">
+                  <span style="font-size:0.75rem; color:var(--color-text-muted);">Recovered Revenue</span>
+                  <strong style="display:block; font-size:1.3rem; color:var(--color-primary-green);">$14,290</strong>
+                  <small style="color:#16a34a; font-size:0.7rem;">+18% via Trail Club</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 6: STORE SETTINGS & CONFIG (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-settings">
+        
+        <!-- Sub-section 6A: Store Identity -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <h4 style="margin-bottom:16px;">Store Identity &amp; Headquarters</h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="form-field-group">
+                <label class="field-label">Store Brand Name</label>
+                <input type="text" id="setStoreName" class="auth-input" />
+              </div>
+              <div class="form-field-group">
+                <label class="field-label">Customer Support Email</label>
+                <input type="email" id="setSupportEmail" class="auth-input" />
+              </div>
+              <div class="form-field-group">
+                <label class="field-label">Support Phone Line</label>
+                <input type="text" id="setPhone" class="auth-input" />
+              </div>
+              <div class="form-field-group">
+                <label class="field-label">Store Base Currency</label>
+                <select class="auth-input">
+                  <option value="USD">USD - United States Dollar ($)</option>
+                  <option value="CAD">CAD - Canadian Dollar ($)</option>
+                  <option value="EUR">EUR - Euro (&euro;)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 6B: Shipping & Tax Rules -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <h4 style="margin-bottom:16px;">Backcountry Shipping &amp; Sales Tax Rules</h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="form-field-group">
+                <label class="field-label">Free Shipping Threshold ($)</label>
+                <input type="number" id="setFreeShipping" class="auth-input" />
+              </div>
+              <div class="form-field-group">
+                <label class="field-label">Standard Sales Tax Rate (%)</label>
+                <input type="number" step="0.01" id="setTaxRate" class="auth-input" />
+              </div>
+            </div>
+            <div style="margin-top:16px;">
+              <button type="button" class="dash-btn dash-btn-primary" id="saveSettingsBtn">Save Policy Settings</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 6C: Data Management & Reset Demo -->
+        <div class="dash-sub-section">
+          <div class="dash-panel" style="border-color:#fecaca; background:#fffafa;">
+            <h4 style="color:#b91c1c; margin-bottom:8px;">Reset Store Demo Data</h4>
+            <p style="font-size:0.84rem; color:var(--color-text-muted); margin-bottom:16px;">Reset orders, added products, and mock tracking info back to initial default values.</p>
+            <button type="button" class="dash-btn dash-btn-danger" id="resetDemoDataBtn">
+              Reset Demo Store to Factory State
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       MODALS: ADD PRODUCT & ORDER DISPATCH
+       ========================================================================== -->
+  <!-- Add Product Modal -->
+  <div class="dash-modal-overlay" id="adminAddProductModal">
+    <div class="dash-modal-box">
+      <div class="dash-modal-header">
+        <h3>Add New Gear to Catalog</h3>
+        <button type="button" class="dash-modal-close" id="closeAddProdModalBtn">&times;</button>
+      </div>
+      <form id="addProductForm">
+        <div class="dash-modal-body">
+          <div class="form-field-group">
+            <label class="field-label">Gear Name *</label>
+            <input type="text" id="prodNameInput" required class="auth-input" placeholder="e.g. Alpine Ascent 3P Expedition Tent" />
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="form-field-group">
+              <label class="field-label">Category *</label>
+              <select id="prodCategorySelect" class="auth-input">
+                <option value="tents">Tents &amp; Shelter</option>
+                <option value="sleeping">Sleep Systems</option>
+                <option value="packs">Packs &amp; Bags</option>
+                <option value="cooking">Camp Cooking</option>
+                <option value="hiking">Hiking Equipment</option>
+              </select>
+            </div>
+            <div class="form-field-group">
+              <label class="field-label">Retail Price ($) *</label>
+              <input type="number" step="0.01" id="prodPriceInput" required class="auth-input" placeholder="249.00" />
+            </div>
+          </div>
+          <div class="form-field-group">
+            <label class="field-label">Initial Warehouse Stock Count *</label>
+            <input type="number" id="prodStockInput" value="12" class="auth-input" />
+          </div>
+          <div class="form-field-group">
+            <label class="field-label">Technical Overview</label>
+            <textarea id="prodDescInput" class="auth-input" rows="3" placeholder="Engineered for high-altitude weather resilience..."></textarea>
+          </div>
+        </div>
+        <div class="dash-modal-footer">
+          <button type="button" class="dash-btn dash-btn-outline" onclick="document.getElementById('adminAddProductModal').classList.remove('active')">Cancel</button>
+          <button type="submit" class="dash-btn dash-btn-primary">Add Product to Store</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Dispatch Modal -->
+  <div class="dash-modal-overlay" id="adminOrderModal">
+    <div class="dash-modal-box" style="max-width:680px;">
+      <div class="dash-modal-header">
+        <h3>Dispatch Order &amp; Courier Logistics</h3>
+        <button type="button" class="dash-modal-close" id="closeOrderModalBtn">&times;</button>
+      </div>
+      <div class="dash-modal-body" id="adminOrderModalContent">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard-data.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Initialize Admin Dashboard Controller
+      window.adminDash = new AdminDashboard();
+    });
+  </script>
+</body>
+</html>

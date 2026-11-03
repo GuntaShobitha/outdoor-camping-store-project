@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create your Stackly Account - Join the Trail Club, get 10% off your first expedition gear order, and access lifetime warranties." />
+  <title>Create Account &mdash; STACKLY Outdoor & Camping</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8963e'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
+
+  <!-- Core & Auth Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body class="auth-page-body">
+
+  <!-- Top Auth Header -->
+  <header class="auth-header">
+    <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">[STACKLY]</a>
+    <nav class="auth-header-nav">
+      <a href="index.html" class="auth-back-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Back to Store</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Main Auth Container -->
+  <main class="auth-main-container">
+    <div class="auth-card-container">
+      
+      <!-- Left Visual Panel -->
+      <aside class="auth-visual-panel">
+        <div>
+          <span class="auth-brand-badge">🌲 Join the Trail Club</span>
+          <div class="auth-visual-middle">
+            <h2 class="auth-visual-title">Gear Up for <span>Uncharted Trails</span>.</h2>
+            <p class="auth-visual-desc">Create your adventurer profile to unlock 200 welcome trail points, carbon-neutral shipping tracking, and member-only gear drops.</p>
+            
+            <div class="auth-features-list">
+              <div class="auth-feature-item">
+                <span class="auth-feature-icon">✨</span>
+                <span>200 Welcome Trail Points automatically credited</span>
+              </div>
+              <div class="auth-feature-item">
+                <span class="auth-feature-icon">⛺</span>
+                <span>Personalized outdoor equipment recommendations</span>
+              </div>
+              <div class="auth-feature-item">
+                <span class="auth-feature-icon">🧭</span>
+                <span>Expedited warranty claims & express checkout</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-visual-footer">
+          <span>Stackly Outdoor Gear Co. &copy; 2026</span>
+          <span>Boulder, Colorado</span>
+        </div>
+      </aside>
+
+      <!-- Right Form Panel -->
+      <div class="auth-form-panel">
+        
+        <div class="auth-form-header">
+          <span class="auth-form-eyebrow">NEW MEMBERSHIP</span>
+          <h1 class="auth-form-title">Create Account</h1>
+          <p class="auth-form-subtitle">Enter your details to join the Stackly outdoor community.</p>
+        </div>
+
+        <!-- General Alert Banner (Managed via JS) -->
+        <div class="auth-alert-banner" id="authAlertBanner" role="alert">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span id="authAlertText"></span>
+        </div>
+
+        <!-- Register Form: Strict Pure JS Validation (novalidate) -->
+        <form id="registerForm" class="auth-form" novalidate>
+          
+          <!-- Role Selection (Customer vs Admin) -->
+          <div class="role-selector-group">
+            <label class="role-selector-label">1. Choose Account Type</label>
+            <div class="role-selector-options">
+              
+              <label class="role-card-radio">
+                <input type="radio" name="authRole" value="customer" checked id="roleCustomer" />
+                <div class="role-card-inner">
+                  <span class="role-card-icon">🌲</span>
+                  <span class="role-card-title">Customer / Adventurer</span>
+                  <span class="role-card-sub">Order Gear & Earn Points</span>
+                </div>
+              </label>
+
+              <label class="role-card-radio">
+                <input type="radio" name="authRole" value="admin" id="roleAdmin" />
+                <div class="role-card-inner">
+                  <span class="role-card-icon">🛡️</span>
+                  <span class="role-card-title">Store Administrator</span>
+                  <span class="role-card-sub">Manage Store & Inventory</span>
+                </div>
+              </label>
+
+            </div>
+          </div>
+
+          <!-- Full Name -->
+          <div class="form-field-group">
+            <label for="regName" class="field-label">
+              <span>Full Name <span class="required-dot">*</span></span>
+            </label>
+            <div class="field-input-wrapper">
+              <span class="field-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </span>
+              <input 
+                type="text" 
+                id="regName" 
+                name="name" 
+                class="auth-input" 
+                placeholder="e.g. Elena Rostova" 
+                autocomplete="name" 
+              />
+            </div>
+            <!-- JS Error Message Container -->
+            <span class="auth-field-error" id="nameError" role="alert">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span class="error-text">Please enter your full name.</span>
+            </span>
+          </div>
+
+          <!-- Email Input -->
+          <div class="form-field-group">
+            <label for="regEmail" class="field-label">
+              <span>Email Address <span class="required-dot">*</span></span>
+            </label>
+            <div class="field-input-wrapper">
+              <span class="field-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </span>
+              <input 
+                type="text" 
+                id="regEmail" 
+                name="email" 
+                class="auth-input" 
+                placeholder="name@example.com" 
+                autocomplete="email" 
+                spellcheck="false"
+              />
+            </div>
+            <!-- JS Error Message Container -->
+            <span class="auth-field-error" id="emailError" role="alert">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span class="error-text">Please enter a valid email address.</span>
+            </span>
+          </div>
+
+          <!-- Password Input (Min 5 chars check) -->
+          <div class="form-field-group">
+            <label for="regPassword" class="field-label">
+              <span>Password <span class="required-dot">*</span></span>
+              <span style="font-size:0.75rem; color:var(--color-text-muted);">Min. 5 characters</span>
+            </label>
+            <div class="field-input-wrapper">
+              <span class="field-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </span>
+              <input 
+                type="password" 
+                id="regPassword" 
+                name="password" 
+                class="auth-input" 
+                placeholder="At least 5 characters" 
+                autocomplete="new-password"
+              />
+              <button type="button" class="password-toggle-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
+                <svg id="eyeIconOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <svg id="eyeIconClosed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+              </button>
+            </div>
+            <!-- Strength Bar -->
+            <div class="password-strength-container" id="strengthContainer">
+              <div class="strength-bar-track">
+                <div class="strength-bar-fill" id="strengthBarFill"></div>
+              </div>
+              <div class="strength-label">
+                <span>Strength: <strong id="strengthText">Too short</strong></span>
+                <span id="charCountText">0/5 chars</span>
+              </div>
+            </div>
+            <!-- JS Error Message Container -->
+            <span class="auth-field-error" id="passwordError" role="alert">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span class="error-text">Password must be at least 5 characters.</span>
+            </span>
+          </div>
+
+          <!-- Confirm Password Input -->
+          <div class="form-field-group">
+            <label for="regConfirmPassword" class="field-label">
+              <span>Confirm Password <span class="required-dot">*</span></span>
+            </label>
+            <div class="field-input-wrapper">
+              <span class="field-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <input 
+                type="password" 
+                id="regConfirmPassword" 
+                name="confirmPassword" 
+                class="auth-input" 
+                placeholder="Re-enter your password" 
+                autocomplete="new-password"
+              />
+            </div>
+            <!-- JS Error Message Container -->
+            <span class="auth-field-error" id="confirmPasswordError" role="alert">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span class="error-text">Passwords do not match.</span>
+            </span>
+          </div>
+
+          <!-- Terms & Conditions Checkbox -->
+          <div class="form-field-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="termsCheck" />
+              <span>I agree to the <a href="about.html" target="_blank" style="color:var(--color-gold); text-decoration:underline;">Trail Club Terms</a> &amp; Privacy Policy.</span>
+            </label>
+            <!-- JS Error Message Container -->
+            <span class="auth-field-error" id="termsError" role="alert">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span class="error-text">You must agree to continue.</span>
+            </span>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="auth-submit-btn" id="registerSubmitBtn">
+            <span>Create Account &amp; Start Exploring</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </form>
+
+        <!-- Switch to Login -->
+        <div class="auth-switch-prompt">
+          <span>Already have an account?</span>
+          <a href="login.html">Sign In Here &rarr;</a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Core Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard-data.js"></script>
+
+  <!-- Register Page Pure JavaScript Controller -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const registerForm = document.getElementById("registerForm");
+      const nameInput = document.getElementById("regName");
+      const emailInput = document.getElementById("regEmail");
+      const passwordInput = document.getElementById("regPassword");
+      const confirmPasswordInput = document.getElementById("regConfirmPassword");
+      const termsCheck = document.getElementById("termsCheck");
+
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+      const confirmPasswordError = document.getElementById("confirmPasswordError");
+      const termsError = document.getElementById("termsError");
+
+      const alertBanner = document.getElementById("authAlertBanner");
+      const alertText = document.getElementById("authAlertText");
+      const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+      const eyeIconOpen = document.getElementById("eyeIconOpen");
+      const eyeIconClosed = document.getElementById("eyeIconClosed");
+      const roleAdmin = document.getElementById("roleAdmin");
+      const submitBtn = document.getElementById("registerSubmitBtn");
+
+      const strengthContainer = document.getElementById("strengthContainer");
+      const strengthBarFill = document.getElementById("strengthBarFill");
+      const strengthText = document.getElementById("strengthText");
+      const charCountText = document.getElementById("charCountText");
+
+      // --- Pure JS Validation Helpers ---
+      function showFieldError(input, errorEl, message) {
+        if (input) input.classList.add("is-invalid");
+        errorEl.querySelector(".error-text").textContent = message;
+        errorEl.classList.add("visible");
+      }
+
+      function clearFieldError(input, errorEl) {
+        if (input) input.classList.remove("is-invalid");
+        errorEl.classList.remove("visible");
+      }
+
+      function showAlert(message, type = "error") {
+        alertText.textContent = message;
+        alertBanner.className = `auth-alert-banner ${type}`;
+        alertBanner.style.display = "flex";
+      }
+
+      function hideAlert() {
+        alertBanner.style.display = "none";
+      }
+
+      // --- Real-time Validation Listeners ---
+      nameInput.addEventListener("input", () => {
+        const check = window.stacklyAuth.validateName(nameInput.value);
+        if (check.isValid) clearFieldError(nameInput, nameError);
+        hideAlert();
+      });
+
+      emailInput.addEventListener("input", () => {
+        const check = window.stacklyAuth.validateEmail(emailInput.value);
+        if (check.isValid) clearFieldError(emailInput, emailError);
+        hideAlert();
+      });
+
+      // Real-time password strength & min 5 chars validator
+      passwordInput.addEventListener("input", () => {
+        const val = passwordInput.value;
+        const len = val.length;
+
+        if (len > 0) {
+          strengthContainer.classList.add("visible");
+          charCountText.textContent = `${len}/5 chars`;
+
+          if (len < 5) {
+            strengthBarFill.style.width = `${Math.min(100, (len / 5) * 50)}%`;
+            strengthBarFill.style.backgroundColor = "#e02424";
+            strengthText.textContent = "Too short (needs 5+)";
+            strengthText.style.color = "#e02424";
+          } else if (len >= 5 && len < 8) {
+            clearFieldError(passwordInput, passwordError);
+            strengthBarFill.style.width = "70%";
+            strengthBarFill.style.backgroundColor = "#d97706";
+            strengthText.textContent = "Good";
+            strengthText.style.color = "#d97706";
+          } else {
+            clearFieldError(passwordInput, passwordError);
+            strengthBarFill.style.width = "100%";
+            strengthBarFill.style.backgroundColor = "#16a34a";
+            strengthText.textContent = "Strong Trail Grade";
+            strengthText.style.color = "#16a34a";
+          }
+        } else {
+          strengthContainer.classList.remove("visible");
+        }
+
+        // Also check confirm password match in real-time
+        if (confirmPasswordInput.value) {
+          if (confirmPasswordInput.value === val) {
+            clearFieldError(confirmPasswordInput, confirmPasswordError);
+          }
+        }
+        hideAlert();
+      });
+
+      confirmPasswordInput.addEventListener("input", () => {
+        if (confirmPasswordInput.value === passwordInput.value) {
+          clearFieldError(confirmPasswordInput, confirmPasswordError);
+        }
+        hideAlert();
+      });
+
+      termsCheck.addEventListener("change", () => {
+        if (termsCheck.checked) {
+          clearFieldError(null, termsError);
+        }
+        hideAlert();
+      });
+
+      // --- Toggle Password Visibility ---
+      togglePasswordBtn.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+        confirmPasswordInput.type = isPassword ? "text" : "password";
+        eyeIconOpen.style.display = isPassword ? "none" : "block";
+        eyeIconClosed.style.display = isPassword ? "block" : "none";
+      });
+
+      // --- Form Submission with Complete JS Validation ---
+      registerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        hideAlert();
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        const agreedTerms = termsCheck.checked;
+        const selectedRole = roleAdmin.checked ? "admin" : "customer";
+
+        let hasError = false;
+
+        // 1. Name Check
+        const nameCheck = window.stacklyAuth.validateName(name);
+        if (!nameCheck.isValid) {
+          showFieldError(nameInput, nameError, nameCheck.message);
+          hasError = true;
+        } else {
+          clearFieldError(nameInput, nameError);
+        }
+
+        // 2. Email Format Check
+        const emailCheck = window.stacklyAuth.validateEmail(email);
+        if (!emailCheck.isValid) {
+          showFieldError(emailInput, emailError, emailCheck.message);
+          hasError = true;
+        } else {
+          clearFieldError(emailInput, emailError);
+        }
+
+        // 3. Password Check (Must be >= 5 chars)
+        const passwordCheck = window.stacklyAuth.validatePassword(password);
+        if (!passwordCheck.isValid) {
+          showFieldError(passwordInput, passwordError, passwordCheck.message);
+          hasError = true;
+        } else {
+          clearFieldError(passwordInput, passwordError);
+        }
+
+        // 4. Confirm Password Check
+        const confirmCheck = window.stacklyAuth.validateConfirmPassword(password, confirmPassword);
+        if (!confirmCheck.isValid) {
+          showFieldError(confirmPasswordInput, confirmPasswordError, confirmCheck.message);
+          hasError = true;
+        } else {
+          clearFieldError(confirmPasswordInput, confirmPasswordError);
+        }
+
+        // 5. Terms Check
+        if (!agreedTerms) {
+          showFieldError(null, termsError, "Please agree to the Trail Club Terms to proceed.");
+          hasError = true;
+        } else {
+          clearFieldError(null, termsError);
+        }
+
+        if (hasError) return;
+
+        // Execute registration in JS
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Creating your profile...</span>`;
+
+        setTimeout(() => {
+          const regResult = window.stacklyAuth.register({
+            name,
+            email,
+            password,
+            confirmPassword,
+            role: selectedRole,
+            agreedTerms
+          });
+
+          if (!regResult.success) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<span>Create Account &amp; Start Exploring</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+
+            if (regResult.errors.name) showFieldError(nameInput, nameError, regResult.errors.name);
+            if (regResult.errors.email) showFieldError(emailInput, emailError, regResult.errors.email);
+            if (regResult.errors.password) showFieldError(passwordInput, passwordError, regResult.errors.password);
+            if (regResult.errors.confirmPassword) showFieldError(confirmPasswordInput, confirmPasswordError, regResult.errors.confirmPassword);
+            if (regResult.errors.terms) showFieldError(null, termsError, regResult.errors.terms);
+          } else {
+            showAlert(`✨ Welcome to Stackly, ${name}! Your account is ready with 200 welcome points. Entering portal...`, "success");
+            submitBtn.innerHTML = `<span>Welcome aboard! Redirecting...</span>`;
+
+            setTimeout(() => {
+              window.location.href = regResult.redirectUrl;
+            }, 900);
+          }
+        }, 400);
+
+      });
+
+    });
+  </script>
+</body>
+</html>

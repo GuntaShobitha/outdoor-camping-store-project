@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stackly Outdoor - Customer Backcountry Hub. Track shipments, manage saved gear, inspect order history, and redeem Trail Club rewards." />
+  <title>Customer Hub &mdash; STACKLY Outdoor & Camping</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8963e'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
+
+  <!-- Core & Dashboard Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body class="dash-layout">
+
+  <!-- ==========================================================================
+       SIDEBAR NAVIGATION
+       ========================================================================== -->
+  <aside class="dash-sidebar" id="dashSidebar" aria-label="Customer Navigation">
+    <div class="dash-sidebar-header">
+      <div class="dash-brand-wrap">
+        <a href="index.html" class="dash-brand-logo">[STACKLY]</a>
+        <span class="dash-brand-tag">BACKCOUNTRY PORTAL</span>
+      </div>
+      <button type="button" class="dash-sidebar-close" id="dashSidebarClose" aria-label="Close sidebar">&times;</button>
+    </div>
+
+    <nav class="dash-sidebar-nav">
+      <span class="dash-nav-category-title">My Backcountry</span>
+      
+      <a href="#overview" class="dash-nav-link active" data-tab="overview" data-title="Adventurer Overview">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </span>
+          <span>Overview</span>
+        </div>
+        <span class="dash-nav-badge gold">Tier 3</span>
+      </a>
+
+      <a href="#orders" class="dash-nav-link" data-tab="orders" data-title="My Orders & Gear History">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          </span>
+          <span>My Orders</span>
+        </div>
+        <span class="dash-nav-badge" id="custOrdersCountBadge">4</span>
+      </a>
+
+      <a href="#wishlist" class="dash-nav-link" data-tab="wishlist" data-title="Saved Gear & Wishlist">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </span>
+          <span>Saved Gear</span>
+        </div>
+      </a>
+
+      <a href="#addresses" class="dash-nav-link" data-tab="addresses" data-title="Delivery Addresses & Payment">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </span>
+          <span>Addresses &amp; Pay</span>
+        </div>
+      </a>
+
+      <span class="dash-nav-category-title">Loyalty &amp; Account</span>
+
+      <a href="#rewards" class="dash-nav-link" data-tab="rewards" data-title="Trail Club Rewards">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </span>
+          <span>Trail Rewards</span>
+        </div>
+        <span class="dash-nav-badge gold">1,450 pts</span>
+      </a>
+
+      <a href="#profile" class="dash-nav-link" data-tab="profile" data-title="Profile & Preferences">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </span>
+          <span>Profile Settings</span>
+        </div>
+      </a>
+
+      <span class="dash-nav-category-title">Store &amp; Portals</span>
+
+      <a href="shop.html" class="dash-nav-link">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          </span>
+          <span>Browse Gear Store</span>
+        </div>
+      </a>
+
+      <a href="admin-dashboard.html" class="dash-nav-link">
+        <div class="dash-nav-link-left">
+          <span class="dash-nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </span>
+          <span>Admin Portal (Demo)</span>
+        </div>
+      </a>
+    </nav>
+
+    <!-- Customer User Badge at Bottom -->
+    <div class="dash-sidebar-footer">
+      <div class="dash-user-chip">
+        <div class="dash-user-avatar" id="custUserAvatar">A</div>
+        <div class="dash-user-meta">
+          <span class="dash-user-name" id="custUserName">Alex Rivers</span>
+          <span class="dash-user-role" id="custUserTier">Summit Explorer</span>
+        </div>
+      </div>
+      <button type="button" class="dash-logout-btn" id="custLogoutBtn" title="Sign Out">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MAIN VIEWPORT
+       ========================================================================== -->
+  <main class="dash-main">
+    
+    <!-- Top Header -->
+    <header class="dash-header">
+      <div class="dash-header-left">
+        <button type="button" class="dash-mobile-toggle" id="dashMobileToggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="dash-breadcrumb-wrap">
+          <span class="dash-breadcrumb-sub" id="dashBreadcrumbSub">CUSTOMER HUB / OVERVIEW</span>
+          <h1 class="dash-page-title" id="dashPageTitle">Adventurer Overview</h1>
+        </div>
+      </div>
+
+      <div class="dash-header-right">
+        <a href="shop.html" class="dash-btn dash-btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span>Continue Shopping</span>
+        </a>
+
+        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Open Cart Drawer" onclick="if(window.stacklyCart) window.stacklyCart.openDrawer()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="count-badge cart-count-badge" style="display: inline-block;">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Dynamic Content Body -->
+    <div class="dash-content-body">
+
+      <!-- ==========================================================================
+           TAB 1: ADVENTURER OVERVIEW (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane active" id="tab-overview">
+        
+        <!-- Sub-section 1A: Welcome & Loyalty Banner -->
+        <div class="dash-sub-section">
+          <div class="customer-welcome-banner">
+            <div class="welcome-info-left">
+              <span class="welcome-eyebrow">🌲 TRAIL CLUB MEMBER</span>
+              <h2 class="welcome-title">Welcome Back, <span id="custBannerName">Alex</span>.</h2>
+              <p class="welcome-desc">Your backcountry gear is trail-tested and backed by our Lifetime Guarantee. You have 1 active dispatch en route to Boulder.</p>
+            </div>
+            <div class="welcome-tier-box">
+              <div class="tier-header">
+                <span class="tier-name">Summit Explorer</span>
+                <span class="tier-points" id="custPointsVal">1,450 pts</span>
+              </div>
+              <div class="tier-progress-track">
+                <div class="tier-progress-fill" id="custPointsProgressBar" style="width: 72%;"></div>
+              </div>
+              <div class="tier-hint">550 more points until Tier 4: Alpine Guide</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 1B: Quick Activity Stat Cards -->
+        <div class="dash-sub-section">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Active Shipments</span>
+                <div class="kpi-card-icon green">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                </div>
+              </div>
+              <div>
+                <div class="kpi-value" id="statActiveShipments">1</div>
+                <div class="kpi-card-sub">
+                  <span class="kpi-badge up">On Schedule</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Total Orders Placed</span>
+                <div class="kpi-card-icon gold">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line></svg>
+                </div>
+              </div>
+              <div>
+                <div class="kpi-value" id="statTotalOrders">4</div>
+                <div class="kpi-card-sub">
+                  <span class="kpi-badge neutral">All Delivered Safely</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Saved Wishlist Gear</span>
+                <div class="kpi-card-icon purple">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </div>
+              </div>
+              <div>
+                <div class="kpi-value" id="statWishlistCount">3</div>
+                <div class="kpi-card-sub">
+                  <span class="kpi-badge up">In Stock Now</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Trail Badges</span>
+                <div class="kpi-card-icon blue">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </div>
+              </div>
+              <div>
+                <div class="kpi-value">6</div>
+                <div class="kpi-card-sub">
+                  <span class="kpi-badge up">Summit Achiever</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 1C: Active Shipment Tracker -->
+        <div class="dash-sub-section">
+          <div class="shipment-tracker-card">
+            <div class="tracker-header">
+              <div>
+                <span class="welcome-eyebrow">LIVE DELIVERY TRACKING</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--color-text-dark); margin-top:2px;">
+                  Active Dispatch: <span class="tracker-id-tag" id="trackerOrderId">#STK-91823</span>
+                </h3>
+              </div>
+              <div style="text-align:right;">
+                <span style="font-size:0.8rem; color:var(--color-text-muted);">Courier: <strong id="trackerCarrier">FedEx Trail Express</strong></span>
+                <div style="font-family:monospace; font-size:0.85rem; font-weight:700; color:var(--color-primary-green);" id="trackerCode">FDX-99281742US</div>
+              </div>
+            </div>
+
+            <div class="tracker-steps">
+              <div class="tracker-step-item completed">
+                <div class="step-circle">&#10003;</div>
+                <div class="step-label">Order Confirmed</div>
+                <div class="step-time">Oct 28, 09:15 AM</div>
+              </div>
+              <div class="tracker-step-item completed">
+                <div class="step-circle">&#10003;</div>
+                <div class="step-label">Packed at Boulder HQ</div>
+                <div class="step-time">Oct 28, 02:40 PM</div>
+              </div>
+              <div class="tracker-step-item active">
+                <div class="step-circle">3</div>
+                <div class="step-label">In Transit (Denver Hub)</div>
+                <div class="step-time">Nov 02, 08:30 AM</div>
+              </div>
+              <div class="tracker-step-item">
+                <div class="step-circle">4</div>
+                <div class="step-label">Out for Delivery</div>
+                <div class="step-time">Expected Nov 04</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 2: MY ORDERS & HISTORY (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-orders">
+        
+        <!-- Sub-section 2A: Orders Toolbar -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Expedition Gear Orders &amp; Receipts</h3>
+              <p>Review past gear shipments, view itemized invoices, or re-order with 1-click.</p>
+            </div>
+            <div class="dash-sub-actions">
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.customerDash.renderOrdersTab()">All Orders</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.customerDash.renderOrdersTab(window.stacklyData.getCustomerOrders(window.customerDash.currentUser ? window.customerDash.currentUser.email : 'alex@backcountry.com').filter(o => o.fulfillmentStatus === 'Shipped' || o.fulfillmentStatus === 'Processing'))">Active Dispatches</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.customerDash.renderOrdersTab(window.stacklyData.getCustomerOrders(window.customerDash.currentUser ? window.customerDash.currentUser.email : 'alex@backcountry.com').filter(o => o.fulfillmentStatus === 'Delivered'))">Delivered</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 2B: Detailed Orders Cards List -->
+        <div class="dash-sub-section">
+          <div id="customerOrdersList">
+            <!-- Rendered dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Sub-section 2C: Lifetime Trail Warranty Panel -->
+        <div class="dash-sub-section">
+          <div class="dash-panel" style="background:#f4fbf7; border-color:#bbf7d0;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div>
+                <strong style="font-size:1.05rem; color:var(--color-primary-green);">🛡️ Covered by the Stackly Lifetime Trail Warranty</strong>
+                <p style="font-size:0.84rem; color:var(--color-text-body); margin-top:4px;">
+                  If any seam, zipper, tent pole, or baffle fails under backcountry conditions, our Boulder lab repairs or replaces it for life.
+                </p>
+              </div>
+              <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="alert('Warranty claim initiated! Our Boulder gear technician will reach out within 24 hours.')">
+                Initiate Warranty Claim
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 3: WISHLIST & SAVED GEAR (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-wishlist">
+        
+        <!-- Sub-section 3A: Wishlist Header -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Saved Trail Gear &amp; Wishlist</h3>
+              <p>Items saved for your upcoming backcountry summit trips.</p>
+            </div>
+            <div class="dash-sub-actions">
+              <a href="shop.html" class="dash-btn dash-btn-primary dash-btn-sm">+ Find More Gear</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 3B: Saved Gear Grid -->
+        <div class="dash-sub-section">
+          <div class="cards-collection-grid" id="customerWishlistGrid">
+            <!-- Rendered dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Sub-section 3C: Seasonal Price Drop Alerts -->
+        <div class="dash-sub-section">
+          <div class="dash-panel" style="background:#fffcf5; border-color:#fde68a;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <span style="font-size:1.6rem;">⚡</span>
+              <div>
+                <strong style="color:#92400e; font-size:0.95rem;">Price Drop Alert for Members</strong>
+                <p style="font-size:0.84rem; color:var(--color-text-body); margin-top:2px;">
+                  The <strong>Sub-Zero 850-Fill Down Sleeping Bag</strong> dropped from $320 to <strong>$289</strong> for members.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 4: ADDRESSES & PAYMENT (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-addresses">
+        
+        <!-- Sub-section 4A: Saved Delivery Addresses -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Saved Shipping Addresses</h3>
+              <p>Manage your home trail base and remote mountain drop-off locations.</p>
+            </div>
+            <button type="button" class="dash-btn dash-btn-primary dash-btn-sm" id="openAddAddressModalBtn">
+              + Add Address
+            </button>
+          </div>
+
+          <div class="cards-collection-grid" id="customerAddressList">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Sub-section 4B: Payment Methods -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Saved Payment Methods</h3>
+              <p>Encrypted tokenized payment credentials for express checkout.</p>
+            </div>
+            <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="alert('Secure card tokenization active. Use the Checkout simulator on any item!')">
+              + Add Card
+            </button>
+          </div>
+
+          <div class="cards-collection-grid" id="customerPaymentList">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Sub-section 4C: Invoicing Preferences -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <h4 style="margin-bottom:12px;">Paperless Invoicing &amp; Delivery Preferences</h4>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <label class="checkbox-label">
+                <input type="checkbox" checked />
+                <span>Receive SMS delivery updates when package is within 2 hours of arrival</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked />
+                <span>Paperless digital invoicing (save trees, digital receipts only)</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked />
+                <span>100% Biodegradable &amp; Plastic-Free packaging guarantee</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 5: TRAIL CLUB REWARDS (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-rewards">
+        
+        <!-- Sub-section 5A: Points Balance & Tier Perks -->
+        <div class="dash-sub-section">
+          <div class="dash-split-grid">
+            <div class="dash-panel">
+              <span class="welcome-eyebrow">YOUR TRAIL BALANCE</span>
+              <div style="font-family:var(--font-hero); font-size:2.8rem; font-weight:800; color:var(--color-primary-green); margin:6px 0;" id="rewardsPointsBalance">
+                1,450 Points
+              </div>
+              <p style="font-size:0.84rem; color:var(--color-text-muted);">
+                Earn 10 points for every $1 spent on Stackly outdoor gear. Points never expire.
+              </p>
+            </div>
+
+            <div class="dash-panel">
+              <h4 style="margin-bottom:10px;">Tier 3 Explorer Perks</h4>
+              <ul style="display:flex; flex-direction:column; gap:8px; font-size:0.84rem;">
+                <li style="display:flex; align-items:center; gap:8px;">🌲 <span>Free 2-Day Expedition Backcountry Shipping on all orders</span></li>
+                <li style="display:flex; align-items:center; gap:8px;">⛺ <span>Annual 20% Summit Gear Voucher</span></li>
+                <li style="display:flex; align-items:center; gap:8px;">🧭 <span>Priority access to limited edition ultralight drops</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-section 5B: Redeemable Vouchers -->
+        <div class="dash-sub-section">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Redeemable Reward Vouchers</h3>
+              <p>Exchange your earned trail points for instant discount coupons.</p>
+            </div>
+          </div>
+
+          <div class="vouchers-grid" id="customerVouchersGrid">
+            <!-- Rendered dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Sub-section 5C: Trail Badges -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <h4 style="margin-bottom:14px;">Unlocked Adventure Badges</h4>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:14px;">
+              <div style="padding:12px; background:var(--color-bg-cream); border-radius:8px; text-align:center;">
+                <div style="font-size:1.8rem; margin-bottom:4px;">🏔️</div>
+                <strong style="font-size:0.8rem; display:block;">First Ascent</strong>
+                <small style="color:var(--color-text-muted); font-size:0.7rem;">First summit purchase</small>
+              </div>
+              <div style="padding:12px; background:var(--color-bg-cream); border-radius:8px; text-align:center;">
+                <div style="font-size:1.8rem; margin-bottom:4px;">⛺</div>
+                <strong style="font-size:0.8rem; display:block;">Shelter Master</strong>
+                <small style="color:var(--color-text-muted); font-size:0.7rem;">Ridge 2P tent owner</small>
+              </div>
+              <div style="padding:12px; background:var(--color-bg-cream); border-radius:8px; text-align:center;">
+                <div style="font-size:1.8rem; margin-bottom:4px;">❄️</div>
+                <strong style="font-size:0.8rem; display:block;">Winter Warrior</strong>
+                <small style="color:var(--color-text-muted); font-size:0.7rem;">Sub-Zero down tested</small>
+              </div>
+              <div style="padding:12px; background:var(--color-bg-cream); border-radius:8px; text-align:center;">
+                <div style="font-size:1.8rem; margin-bottom:4px;">🌱</div>
+                <strong style="font-size:0.8rem; display:block;">Zero Trace</strong>
+                <small style="color:var(--color-text-muted); font-size:0.7rem;">Carbon-neutral advocate</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==========================================================================
+           TAB 6: PROFILE & PREFERENCES (3 Sub-sections)
+           ========================================================================== -->
+      <section class="dash-tab-pane" id="tab-profile">
+        
+        <!-- Sub-section 6A: Personal Details -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <h4 style="margin-bottom:16px;">Personal Information</h4>
+            <form id="profileDetailsForm">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                <div class="form-field-group">
+                  <label class="field-label">Full Name</label>
+                  <input type="text" id="profileNameInput" class="auth-input" />
+                </div>
+                <div class="form-field-group">
+                  <label class="field-label">Email Address (Read-only)</label>
+                  <input type="email" id="profileEmailInput" disabled class="auth-input" style="background:#f1ede6;" />
+                </div>
+                <div class="form-field-group">
+                  <label class="field-label">Mobile Phone Number</label>
+                  <input type="text" id="profilePhoneInput" class="auth-input" />
+                </div>
+                <div class="form-field-group">
+                  <label class="field-label">Home Mountain Region</label>
+                  <input type="text" value="Rocky Mountains, Colorado" class="auth-input" />
+                </div>
+              </div>
+              <div style="margin-top:16px;">
+                <button type="submit" class="dash-btn dash-btn-primary">Save Profile Changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Sub-section 6B: Password & Security -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <h4 style="margin-bottom:16px;">Password &amp; Security (Min 5 Characters)</h4>
+            <form id="profilePasswordForm">
+              <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+                <div class="form-field-group">
+                  <label class="field-label">Current Password</label>
+                  <input type="password" id="currPassInput" class="auth-input" placeholder="••••••" />
+                </div>
+                <div class="form-field-group">
+                  <label class="field-label">New Password (Min 5)</label>
+                  <input type="password" id="newPassInput" class="auth-input" placeholder="New password" />
+                </div>
+                <div class="form-field-group">
+                  <label class="field-label">Confirm New Password</label>
+                  <input type="password" id="confirmPassInput" class="auth-input" placeholder="Repeat new password" />
+                </div>
+              </div>
+              <div style="margin-top:16px;">
+                <button type="submit" class="dash-btn dash-btn-outline">Update Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Sub-section 6C: Outdoor Activity Preferences -->
+        <div class="dash-sub-section">
+          <div class="dash-panel">
+            <h4 style="margin-bottom:14px;">Outdoor Interests &amp; Backcountry Activities</h4>
+            <p style="font-size:0.84rem; color:var(--color-text-muted); margin-bottom:14px;">We customize gear drop notifications according to your preferences.</p>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px;">
+              <label class="checkbox-label"><input type="checkbox" checked /> <span>Alpine Backpacking</span></label>
+              <label class="checkbox-label"><input type="checkbox" checked /> <span>Winter Snow Camping</span></label>
+              <label class="checkbox-label"><input type="checkbox" checked /> <span>Whitewater Kayaking</span></label>
+              <label class="checkbox-label"><input type="checkbox" /> <span>Rock &amp; Ice Climbing</span></label>
+              <label class="checkbox-label"><input type="checkbox" checked /> <span>Ultralight Thru-Hiking</span></label>
+              <label class="checkbox-label"><input type="checkbox" /> <span>Fly Fishing &amp; Camp</span></label>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       MODALS: ADD ADDRESS & INVOICE RECEIPT
+       ========================================================================== -->
+  <!-- Add Address Modal -->
+  <div class="dash-modal-overlay" id="custAddAddressModal">
+    <div class="dash-modal-box">
+      <div class="dash-modal-header">
+        <h3>Add New Delivery Address</h3>
+        <button type="button" class="dash-modal-close" id="closeAddAddrModalBtn">&times;</button>
+      </div>
+      <form id="custAddressForm">
+        <div class="dash-modal-body">
+          <div class="form-field-group">
+            <label class="field-label">Address Label (e.g. Home, Trail Cabin)</label>
+            <input type="text" id="addrLabelInput" class="auth-input" placeholder="Primary Base" />
+          </div>
+          <div class="form-field-group">
+            <label class="field-label">Recipient Full Name *</label>
+            <input type="text" id="addrFullNameInput" required class="auth-input" placeholder="Alex Rivers" />
+          </div>
+          <div class="form-field-group">
+            <label class="field-label">Street Address *</label>
+            <input type="text" id="addrStreetInput" required class="auth-input" placeholder="1420 Pine Needle Way" />
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+            <div class="form-field-group">
+              <label class="field-label">City *</label>
+              <input type="text" id="addrCityInput" required class="auth-input" placeholder="Boulder" />
+            </div>
+            <div class="form-field-group">
+              <label class="field-label">State *</label>
+              <input type="text" id="addrStateInput" required class="auth-input" placeholder="Colorado" />
+            </div>
+            <div class="form-field-group">
+              <label class="field-label">ZIP Code *</label>
+              <input type="text" id="addrZipInput" required class="auth-input" placeholder="80301" />
+            </div>
+          </div>
+          <div class="form-field-group">
+            <label class="field-label">Phone Number (For courier alerts)</label>
+            <input type="text" id="addrPhoneInput" class="auth-input" placeholder="+1 (303) 847-2910" />
+          </div>
+          <label class="checkbox-label" style="margin-top:6px;">
+            <input type="checkbox" id="addrDefaultCheck" />
+            <span>Set as my default backcountry shipping address</span>
+          </label>
+        </div>
+        <div class="dash-modal-footer">
+          <button type="button" class="dash-btn dash-btn-outline" onclick="document.getElementById('custAddAddressModal').classList.remove('active')">Cancel</button>
+          <button type="submit" class="dash-btn dash-btn-primary">Save Address</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Receipt Slip Modal -->
+  <div class="dash-modal-overlay" id="custReceiptModal">
+    <div class="dash-modal-box">
+      <div class="dash-modal-header">
+        <h3>Official Order Receipt</h3>
+        <button type="button" class="dash-modal-close" id="closeReceiptModalBtn">&times;</button>
+      </div>
+      <div class="dash-modal-body" id="custReceiptContent">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard-data.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Initialize Customer Dashboard Controller
+      window.customerDash = new CustomerDashboard();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stackly - Premium Outdoor & Camping Gear. High-performance tents, backpacks, sleeping bags, and trail equipment engineered for nature's wildest challenges." />
+  <meta name="theme-color" content="#143828" />
+  <title>STACKLY &mdash; Gear for when it actually matters.</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8963e'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Top Decorative Topo Vector Definition -->
+  <svg style="display: none;">
+    <defs>
+      <g id="topo-lines">
+        <path d="M10,80 Q90,10 180,60 T350,70 T500,40" fill="none" stroke="#c8963e" stroke-width="1.2" opacity="0.35"/>
+        <path d="M20,110 Q110,40 200,90 T370,100 T520,70" fill="none" stroke="#c8963e" stroke-width="1.2" opacity="0.3"/>
+        <path d="M0,140 Q100,70 190,120 T360,130 T510,100" fill="none" stroke="#c8963e" stroke-width="1.2" opacity="0.25"/>
+        <path d="M30,170 Q120,100 210,150 T380,160 T530,130" fill="none" stroke="#c8963e" stroke-width="1.2" opacity="0.2"/>
+        <path d="M10,200 Q100,130 190,180 T360,190 T510,160" fill="none" stroke="#c8963e" stroke-width="1.2" opacity="0.15"/>
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ==========================================================================
+       SITE HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      
+      <!-- Mobile Hamburger Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Left Navigation -->
+      <nav class="header-nav-left" aria-label="Main Navigation Left">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="shop.html" class="nav-link">Services</a>
+      </nav>
+
+      <!-- Centered Brand Logo: [STACKLY] -->
+      <div class="header-brand">
+        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">[STACKLY]</a>
+      </div>
+
+      <!-- Right Navigation & Icons -->
+      <div class="header-nav-right">
+        <div class="header-links-right">
+          <a href="shop.html" class="nav-link">Shop</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="login.html" class="nav-link" title="Sign In or Register">Account</a>
+        </div>
+
+        <!-- Action Icons: Search, Wishlist, Cart -->
+        <button type="button" class="header-action-btn search-trigger-btn" aria-label="Search gear">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <a href="shop.html?view=wishlist" class="header-action-btn" aria-label="Wishlist items">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="count-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+
+        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Open shopping cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="count-badge cart-count-badge" style="display: none;">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">[STACKLY]</div>
+      <button type="button" class="close-mobile-nav-btn" id="closeMobileNavBtn" aria-label="Close navigation">&times;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html" class="active"><span>Home</span> <span>&rarr;</span></a>
+      <a href="about.html"><span>About Us</span> <span>&rarr;</span></a>
+      <a href="shop.html"><span>Shop Catalog</span> <span>&rarr;</span></a>
+      <a href="customer-dashboard.html"><span>Customer Hub</span> <span>&rarr;</span></a>
+      <a href="admin-dashboard.html"><span>Admin Console</span> <span>&rarr;</span></a>
+      <a href="contact.html"><span>Contact & Support</span> <span>&rarr;</span></a>
+      <a href="login.html" style="color:var(--color-gold);"><span>Account / Sign In</span> <span>&rarr;</span></a>
+    </nav>
+    <div class="mobile-nav-footer">
+      <p>🌲 Stackly Outdoor Gear Co.</p>
+      <p>Free Backcountry Shipping on Orders $75+</p>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION (Pixel-Perfect Match to Reference Image)
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-wrapper">
+        <img src="assets/images/banners/hero-lake-kayak.webp" alt="Backpacker overlooking tranquil mountain lake" class="hero-bg-img" />
+        <div class="hero-gradient-overlay"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-eyebrow">FOR ADVENTURERS</span>
+          <h1 class="hero-title">
+            Gear for when<br />
+            it actually<br />
+            matters.
+          </h1>
+          <p class="hero-description">
+            We engineer rugged, lightweight, and uncompromising backcountry gear designed to keep you safe and comfortable when nature tests your limits.
+          </p>
+          <div class="hero-actions">
+            <a href="shop.html" class="btn btn-primary">Explore Gear</a>
+            <a href="about.html" class="btn btn-outline">Our Story</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: "A BIT ABOUT US." (Tent Overlook + Text)
+         ========================================================================== -->
+    <section class="section about-section" id="about-us">
+      <!-- Topo background lines -->
+      <svg class="topo-bg-right" viewBox="0 0 500 240"><use href="#topo-lines" /></svg>
+      
+      <div class="container">
+        <div class="about-grid">
+          
+          <!-- Left: Rounded Tent Image Card -->
+          <div class="about-image-card reveal-up">
+            <img src="assets/images/sections/about-tent-view.webp" alt="Camping tent overlooking scenic mountain lake" class="about-img" loading="lazy" />
+          </div>
+
+          <!-- Right: Typography & Content -->
+          <div class="about-content reveal-fade">
+            <span class="section-eyebrow">WHO WE ARE</span>
+            <h2 class="section-title-serif">A BIT ABOUT US.</h2>
+            <p class="about-paragraph">
+              Stackly is an American outdoor company focused on the adventurous lifestyle of camping and outdoor gear. We design products for anyone who appreciates the outdoors, with high quality materials that will withstand the test of time and nature's elements.
+            </p>
+            <a href="about.html" class="link-gold-arrow">
+              Read more
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: "SETTING THE BAR FOR OUR PRODUCTS" (Our Promise & 6 Feature Badges)
+         ========================================================================== -->
+    <section class="section promise-section" id="promise">
+      <!-- Topographic Contour Mound Decorations (from uploaded reference assets) -->
+      <img src="assets/images/sections/topo-mound-crop.png" alt="" class="topo-bg-left" aria-hidden="true" />
+      <img src="assets/images/sections/topo-mound.png" alt="" class="topo-bg-right" aria-hidden="true" />
+
+      <div class="container">
+        <div class="section-header-center reveal-up">
+          <span class="section-eyebrow">OUR PROMISE</span>
+          <h2 class="section-title-serif">SETTING THE BAR FOR OUR PRODUCTS.</h2>
+          <p class="section-subtitle">
+            We create equipment for real-world adventures and the toughest conditions. With our attention to detail, we deliver excellence at all times.
+          </p>
+        </div>
+
+        <div class="features-grid reveal-stagger">
+          
+          <!-- Feature 1: Sustainable Sourcing -->
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <!-- Leaf / Sprout Icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+            </div>
+            <h3 class="feature-title">SUSTAINABLE SOURCING</h3>
+            <p class="feature-desc">100% recycled nylon shells and ethically harvested RDS down insulation built with minimal planetary footprint.</p>
+          </div>
+
+          <!-- Feature 2: Lifetime Warranty -->
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <!-- Target / Compass Icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>
+            </div>
+            <h3 class="feature-title">LIFETIME WARRANTY</h3>
+            <p class="feature-desc">We guarantee every stitch, zipper, and seam for life. If your gear ever falters, our repair team fixes or replaces it.</p>
+          </div>
+
+          <!-- Feature 3: All-Terrain Tested -->
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <!-- Mountain Peak Icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>
+            </div>
+            <h3 class="feature-title">ALL-TERRAIN TESTED</h3>
+            <p class="feature-desc">Rigorously put through alpine squalls, jagged scree slopes, and freezing nights before entering your pack.</p>
+          </div>
+
+          <!-- Feature 4: Premium Materials -->
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <!-- Diamond Gemstone Icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M11 3 8 9l4 13 4-13-3-6"></path><path d="M2 9h20"></path></svg>
+            </div>
+            <h3 class="feature-title">PREMIUM MATERIALS</h3>
+            <p class="feature-desc">DAC aluminum poles, YKK AquaGuard zippers, and Cordura ripstop fabrics engineered for extreme endurance.</p>
+          </div>
+
+          <!-- Feature 5: Designed By You -->
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <!-- Aperture / Camera Lens Icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+            </div>
+            <h3 class="feature-title">DESIGNED BY YOU</h3>
+            <p class="feature-desc">Refined through thousands of hours of feedback from wilderness guides, Appalachian thru-hikers, and climbers.</p>
+          </div>
+
+          <!-- Feature 6: Quality Assured -->
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <!-- Shield Check / Certificate Icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            </div>
+            <h3 class="feature-title">QUALITY ASSURED</h3>
+            <p class="feature-desc">Multi-point hydrostatic pressure testing, tear resistance verification, and rigorous batch inspection standards.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: "WHAT WE HAVE IN STORE FOR YOU" (Category Bento Grid)
+         ========================================================================== -->
+    <section class="section category-section" id="collections">
+      <!-- Topographic Contour Line Decorations (from uploaded reference asset) -->
+      <img src="assets/images/sections/topo-contour.png" alt="" class="topo-bg-left" aria-hidden="true" />
+      <img src="assets/images/sections/topo-contour.png" alt="" class="topo-bg-right" aria-hidden="true" />
+
+      <div class="container">
+        <div class="section-header-center reveal-up">
+          <span class="section-eyebrow">WHAT WE OFFER</span>
+          <h2 class="section-title-serif">WHAT WE HAVE IN STORE FOR YOU.</h2>
+          <p class="section-subtitle">
+            Discover our gear made for nature's wildest challenges. Our collection guarantees you are prepared for whatever comes your way.
+          </p>
+        </div>
+
+        <!-- 6 Staggered Category Cards matching Reference Bento Layout -->
+        <div class="category-masonry-grid reveal-stagger">
+          
+          <!-- Card 1: Camping Gear (Left column top) -->
+          <a href="shop.html?category=tents" class="cat-card cat-card-1">
+            <img src="assets/images/categories/cat-camping.webp" alt="Campfire in front of tents at dusk" class="cat-card-img" loading="lazy" />
+            <div class="cat-card-overlay"></div>
+            <div class="cat-card-content">
+              <h3 class="cat-card-title">CAMPING GEAR</h3>
+              <p class="cat-card-desc">Stay cozy anywhere under the starry wilderness night.</p>
+            </div>
+          </a>
+
+          <!-- Card 2: Apparel (Center column top) -->
+          <a href="shop.html?category=apparel" class="cat-card cat-card-2">
+            <img src="assets/images/categories/cat-apparel.webp" alt="Backpacker walking mountain ridge" class="cat-card-img" loading="lazy" />
+            <div class="cat-card-overlay"></div>
+            <div class="cat-card-content">
+              <h3 class="cat-card-title">APPAREL</h3>
+              <p class="cat-card-desc">Breathable, waterproof apparel built for changing conditions.</p>
+            </div>
+          </a>
+
+          <!-- Card 3: Climbing Gear (Right column top) -->
+          <a href="shop.html?category=gear" class="cat-card cat-card-3">
+            <img src="assets/images/categories/cat-climbing.webp" alt="Rock climber ascending rock wall" class="cat-card-img" loading="lazy" />
+            <div class="cat-card-overlay"></div>
+            <div class="cat-card-content">
+              <h3 class="cat-card-title">CLIMBING GEAR</h3>
+              <p class="cat-card-desc">Engineered strength for technical ascents and steep crags.</p>
+            </div>
+          </a>
+
+          <!-- Card 4: Headwear (Left column bottom) -->
+          <a href="shop.html?category=apparel" class="cat-card cat-card-4">
+            <img src="assets/images/categories/cat-headwear.webp" alt="Woman outdoor adventurer in cap" class="cat-card-img" loading="lazy" />
+            <div class="cat-card-overlay"></div>
+            <div class="cat-card-content">
+              <h3 class="cat-card-title">HEADWEAR</h3>
+              <p class="cat-card-desc">All-weather caps, beanies, and sun protection for the trail.</p>
+            </div>
+          </a>
+
+          <!-- Card 5: Hiking Gear (Center column bottom) -->
+          <a href="shop.html?category=gear" class="cat-card cat-card-5">
+            <img src="assets/images/categories/cat-hiking.webp" alt="Hikers with poles on mountain peak" class="cat-card-img" loading="lazy" />
+            <div class="cat-card-overlay"></div>
+            <div class="cat-card-content">
+              <h3 class="cat-card-title">HIKING GEAR</h3>
+              <p class="cat-card-desc">Carbon trekking poles, precision compasses, and tools.</p>
+            </div>
+          </a>
+
+          <!-- Card 6: Packs & Bags (Right column bottom) -->
+          <a href="shop.html?category=packs" class="cat-card cat-card-6">
+            <img src="assets/images/categories/cat-packs.webp" alt="Hiker with expedition backpack" class="cat-card-img" loading="lazy" />
+            <div class="cat-card-overlay"></div>
+            <div class="cat-card-content">
+              <h3 class="cat-card-title">PACKS &amp; BAGS</h3>
+              <p class="cat-card-desc">Ultralight daypacks and ergonomic multi-day haulers.</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: STORY FROM THE WILD (Aerial Paddleboards Banner)
+         ========================================================================== -->
+    <section class="story-banner-section" id="story-banner">
+      <img src="assets/images/sections/story-paddleboard.webp" alt="Two paddleboarders on crystal turquoise lake from above" class="story-bg-img" loading="lazy" />
+      <div class="container">
+        <div class="story-content-container reveal-fade">
+          <div class="story-card-box">
+            <span class="story-eyebrow">A STORY FROM THE WILD</span>
+            <h2 class="story-headline">
+              Learn more about <span>product design</span>, test stories, and the secret spots in our journey.
+            </h2>
+            <a href="about.html" class="link-gold-arrow">
+              Read more
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         [ADDITIONAL SECTION 1]: EXPLORE OUTDOOR ADVENTURES
+         Fits naturally after Story Banner — Discover destinations & gear
+         ========================================================================== -->
+    <section class="section adventures-section" id="adventures">
+      <div class="container">
+        <div class="section-header-center reveal-up">
+          <span class="section-eyebrow">EXPEDITIONS &amp; DESTINATIONS</span>
+          <h2 class="section-title-serif">EXPLORE OUTDOOR ADVENTURES.</h2>
+          <p class="section-subtitle">
+            From high-altitude glacial passes to silent coastal fjords, discover tested itineraries and the exact specialized gear required for each terrain.
+          </p>
+        </div>
+
+        <div class="adventures-grid reveal-stagger">
+          
+          <!-- Adventure 1: Alpine -->
+          <div class="adventure-card">
+            <div class="adventure-img-wrap">
+              <span class="adventure-badge">Glacial Summit</span>
+              <img src="assets/images/sections/adv-alpine.webp" alt="Snow-capped alpine peaks" class="adventure-img" loading="lazy" />
+            </div>
+            <div class="adventure-info">
+              <h3 class="adventure-title">Alpine Glaciers &amp; High Summits</h3>
+              <p class="adventure-desc">Cross knife-edge moraines, high cols, and deep alpine valleys with sub-zero rated sleep and shelter systems.</p>
+              <div class="adventure-meta-list">
+                <span>Elevation: <strong>3,850m / 12,630 ft</strong></span>
+                <span>Difficulty: <strong>Advanced Mountaineering</strong></span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm adv-guide-trigger" data-adv="alpine">
+                View Trail Guide &amp; Gear &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Adventure 2: Forest -->
+          <div class="adventure-card">
+            <div class="adventure-img-wrap">
+              <span class="adventure-badge">Temperate Rainforest</span>
+              <img src="assets/images/sections/adv-forest.webp" alt="Lush redwood forest trail" class="adventure-img" loading="lazy" />
+            </div>
+            <div class="adventure-info">
+              <h3 class="adventure-title">Pacific Northwest Redwood Forests</h3>
+              <p class="adventure-desc">Trek beneath millennia-old giants amidst perpetual coastal mist. Requires waterproof shells and high-lumen illumination.</p>
+              <div class="adventure-meta-list">
+                <span>Elevation: <strong>650m / 2,130 ft</strong></span>
+                <span>Difficulty: <strong>Moderate Backpacking</strong></span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm adv-guide-trigger" data-adv="forest">
+                View Trail Guide &amp; Gear &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Adventure 3: Canyon -->
+          <div class="adventure-card">
+            <div class="adventure-img-wrap">
+              <span class="adventure-badge">Desert Slickrock</span>
+              <img src="assets/images/sections/adv-canyon.webp" alt="Red rock canyon plateaus" class="adventure-img" loading="lazy" />
+            </div>
+            <div class="adventure-info">
+              <h3 class="adventure-title">Red Rock Desert Canyons</h3>
+              <p class="adventure-desc">Navigate sun-drenched slot canyons where water sources are rare. Vacuum insulation and solar gear are essential.</p>
+              <div class="adventure-meta-list">
+                <span>Elevation: <strong>1,420m / 4,650 ft</strong></span>
+                <span>Difficulty: <strong>Strenuous Sun &amp; Sand</strong></span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm adv-guide-trigger" data-adv="canyon">
+                View Trail Guide &amp; Gear &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Adventure 4: Fjord -->
+          <div class="adventure-card">
+            <div class="adventure-img-wrap">
+              <span class="adventure-badge">Coastal Traverse</span>
+              <img src="assets/images/sections/adv-fjord.webp" alt="Nordic mountain fjord waters" class="adventure-img" loading="lazy" />
+            </div>
+            <div class="adventure-info">
+              <h3 class="adventure-title">Nordic Fjords &amp; Waterfall Routes</h3>
+              <p class="adventure-desc">Climb granite sea cliffs overlooking turquoise ocean fjords. Sudden squalls demand rugged windproof camp stoves.</p>
+              <div class="adventure-meta-list">
+                <span>Elevation: <strong>1,100m / 3,600 ft</strong></span>
+                <span>Difficulty: <strong>All-Terrain Traverse</strong></span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm adv-guide-trigger" data-adv="fjord">
+                View Trail Guide &amp; Gear &rarr;
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: CHECK OUT OUR PRODUCTS / VISIT SHOP CALLOUT
+         ========================================================================== -->
+    <section class="shop-callout-section" id="shop-callout">
+      <div class="container">
+        <div class="reveal-up">
+          <span class="shop-callout-eyebrow">SHOP</span>
+          <h2 class="shop-callout-title">CHECK OUT OUR PRODUCTS</h2>
+          <p class="shop-callout-desc">
+            We design gear for everyone from day hikers to seasoned mountaineers. Explore our full range of durable and comfortable outdoor equipment.
+          </p>
+          <a href="shop.html" class="btn btn-visit-shop">[ VISIT SHOP ]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         [ADDITIONAL SECTION 2]: BEST-SELLING CAMPING ESSENTIALS
+         Featured live interactive products with category filtering, ratings & cart
+         ========================================================================== -->
+    <section class="section bestsellers-section" id="bestsellers">
+      <div class="container">
+        <div class="section-header-center reveal-up">
+          <span class="section-eyebrow">PROVEN ON THE TRAIL</span>
+          <h2 class="section-title-serif">BEST-SELLING CAMPING ESSENTIALS.</h2>
+          <p class="section-subtitle">
+            Field-tested equipment engineered for reliability, lightweight packability, and unyielding protection across every season.
+          </p>
+        </div>
+
+        <!-- Filter Category Tabs -->
+        <div class="category-tabs-bar reveal-fade">
+          <button type="button" class="category-tab-btn active" data-cat="all">All Essentials</button>
+          <button type="button" class="category-tab-btn" data-cat="tents">Tents &amp; Shelter</button>
+          <button type="button" class="category-tab-btn" data-cat="sleeping">Sleep Systems</button>
+          <button type="button" class="category-tab-btn" data-cat="packs">Packs &amp; Bags</button>
+          <button type="button" class="category-tab-btn" data-cat="cooking">Camp Cooking</button>
+          <button type="button" class="category-tab-btn" data-cat="lighting">Lighting &amp; Power</button>
+        </div>
+
+        <!-- Dynamic Product Grid loaded by products.js & main.js -->
+        <div class="products-grid reveal-stagger" id="bestsellersGrid">
+          <!-- Populated dynamically with 8 high-performance products -->
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;" class="reveal-fade">
+          <a href="shop.html" class="btn btn-primary">
+            View All 12 Products in Shop &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         [ADDITIONAL SECTION 3]: WHY CHOOSE OUR OUTDOOR STORE?
+         Trust pillars, field warranties, and verified adventurer testimonials
+         ========================================================================== -->
+    <section class="section why-us-section" id="why-choose-us">
+      <div class="container">
+        <div class="section-header-center reveal-up">
+          <span class="section-eyebrow">THE STACKLY STANDARD</span>
+          <h2 class="section-title-serif">WHY CHOOSE OUR OUTDOOR STORE?</h2>
+          <p class="section-subtitle">
+            Built by wilderness explorers for wilderness explorers. Every piece of equipment is backed by our lifetime repair commitment and environmental standards.
+          </p>
+        </div>
+
+        <!-- 4 Core Pillars Grid -->
+        <div class="pillars-grid reveal-stagger">
+          
+          <div class="pillar-card">
+            <div class="pillar-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 class="pillar-title">100% Trail-Tested Guarantee</h3>
+            <p class="pillar-desc">Every tent, bag, and stove undergoes sub-zero testing and multi-day storm battering before leaving our workbench.</p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            </div>
+            <h3 class="pillar-title">Free Carbon-Neutral Shipping</h3>
+            <p class="pillar-desc">Complimentary shipping on orders over $75 with 100% plastic-free, recyclable trail packaging.</p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            </div>
+            <h3 class="pillar-title">Lifetime Field Repair</h3>
+            <p class="pillar-desc">Torn seam? Broken tent pole? Send it to our repair studio and we will restore it for another lifetime of adventures.</p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <h3 class="pillar-title">24/7 Backcountry Gear Experts</h3>
+            <p class="pillar-desc">Consult directly with licensed mountain guides for trail recommendations, pack weighting, and expedition advice.</p>
+          </div>
+
+        </div>
+
+        <!-- 3 Verified Adventurer Reviews -->
+        <div class="testimonials-row reveal-stagger">
+          
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">
+              "The Summit Ridge 2P tent weathered a 50mph gale on Mt. Rainier without so much as a creak. The silicone coating shed freezing rain with ease. Stackly gear has earned my absolute trust."
+            </p>
+            <div class="test-author-box">
+              <img src="assets/images/sections/avatar-1.webp" alt="Elena Rostova" class="test-avatar" loading="lazy" />
+              <div>
+                <h4 class="test-name">Elena Rostova</h4>
+                <span class="test-role">Alpine Guide &bull; Cascade Range</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">
+              "I thru-hiked 1,200 miles of the Continental Divide with the Expedition Pro 65L pack. The weight distribution kept my shoulders pain-free even on 28-mile push days. Unbelievable build quality."
+            </p>
+            <div class="test-author-box">
+              <img src="assets/images/sections/avatar-2.webp" alt="Marcus Vance" class="test-avatar" loading="lazy" />
+              <div>
+                <h4 class="test-name">Marcus Vance</h4>
+                <span class="test-role">Triple Crown Thru-Hiker</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-quote">
+              "Customer service is on another level. When an airline damaged my trekking poles en route to Norway, Stackly shipped replacement parts directly to my trail hostel. A customer for life."
+            </p>
+            <div class="test-author-box">
+              <img src="assets/images/sections/avatar-3.webp" alt="Sarah Chen" class="test-avatar" loading="lazy" />
+              <div>
+                <h4 class="test-name">Sarah Chen</h4>
+                <span class="test-role">Wilderness Photographer</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: SUBSCRIBE TO OUR MAGAZINE TODAY
+         ========================================================================== -->
+    <section class="section magazine-section" id="magazine">
+      <div class="container">
+        <div class="magazine-grid">
+          
+          <!-- Left: 3D Perspective Publications Mockup -->
+          <div class="magazine-mockup-wrap reveal-up">
+            <img src="assets/images/sections/magazine-stack.webp" alt="Stack of Stackly outdoor magazine print editions" class="magazine-stack-img" loading="lazy" />
+          </div>
+
+          <!-- Right: Typography & Subscription Form -->
+          <div class="magazine-content reveal-fade">
+            <span class="section-eyebrow">SOME LIGHT READING</span>
+            <h2 class="section-title-serif">SUBSCRIBE TO OUR MAGAZINE TODAY.</h2>
+            <p class="magazine-paragraph">
+              Get our quarterly print edition delivered to your door. Full of inspiring backcountry stories, route beta, breathtaking photography, and gear maintenance guides from seasoned explorers.
+            </p>
+            
+            <form class="magazine-sub-form">
+              <input type="email" placeholder="Enter your email for the print edition..." required aria-label="Email address for magazine subscription" />
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+
+            <a href="about.html" class="link-gold-arrow">
+              Read more
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       SITE FOOTER WITH MISTY PINE FOREST & [STACKLY] WATERMARK
+       ========================================================================== -->
+  <footer class="site-footer" id="siteFooter">
+    <!-- Misty Forest Background Image -->
+    <img src="assets/images/banners/footer-misty-forest.webp" alt="Misty pine forest landscape" class="footer-forest-bg" loading="lazy" />
+    <div class="footer-overlay-gradient"></div>
+
+    <div class="container footer-content-wrap">
+      
+      <!-- 4 Columns matching Reference Footer -->
+      <div class="footer-columns-grid">
+        
+        <!-- Col 1: Explore -->
+        <div class="footer-col">
+          <h3 class="footer-col-title">Explore</h3>
+          <ul class="footer-col-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html">Shop Catalog</a></li>
+            <li><a href="customer-dashboard.html">Customer Hub</a></li>
+            <li><a href="admin-dashboard.html">Admin Portal</a></li>
+            <li><a href="login.html">Sign In / Register</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Contact -->
+        <div class="footer-col">
+          <h3 class="footer-col-title">Contact</h3>
+          <ul class="footer-col-list">
+            <li><span>[8420 Alpine Crest Way]</span></li>
+            <li><span>Boulder, Colorado 80302</span></li>
+            <li><span>[+1 (800) 555-TRAIL]</span></li>
+            <li><a href="mailto:hello@stacklyoutdoor.com">[hello@stackly.com]</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Hours -->
+        <div class="footer-col">
+          <h3 class="footer-col-title">Hours</h3>
+          <ul class="footer-col-list">
+            <li><span>[Mon &ndash; Fri: 08:00 &ndash; 18:00]</span></li>
+            <li><span>[Sat &ndash; Sun: 09:00 &ndash; 16:00]</span></li>
+            <li><span>Mountain Standard Time (MST)</span></li>
+            <li><span>24/7 Online Order Dispatch</span></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Follow -->
+        <div class="footer-col">
+          <h3 class="footer-col-title">Follow</h3>
+          <ul class="footer-col-list">
+            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a></li>
+            <li><a href="https://strava.com" target="_blank" rel="noopener">Strava Club</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Massive [STACKLY] Brand Watermark at Footer Bottom -->
+      <div class="footer-brand-watermark">
+        <span class="footer-watermark-text">[STACKLY]</span>
+        <p class="footer-copyright-note">
+          &copy; 2026 STACKLY Outdoor Co. All rights reserved. Field-tested in the American Rocky Mountains.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SHOPPING CART DRAWER (Slide-in)
+       ========================================================================== -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    
+    <div class="cart-drawer-header">
+      <h3>Your Trail Pack</h3>
+      <button type="button" class="cart-drawer-close" id="closeCartBtn" aria-label="Close cart">&times;</button>
+    </div>
+
+    <!-- Free Shipping Progress -->
+    <div class="free-shipping-bar">
+      <div class="free-ship-label" id="freeShippingText">
+        Add <strong>$75.00</strong> more for <strong>FREE Shipping</strong>
+      </div>
+      <div class="free-ship-progress-track">
+        <div class="free-ship-progress-fill" id="freeShippingProgress"></div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="cart-empty-state" id="cartEmptyState" style="display: none;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+      <h4>Your pack is empty</h4>
+      <p>Equip yourself with tents, sleeping bags, and essential trail gear.</p>
+      <a href="shop.html" class="btn btn-primary btn-sm" onclick="window.stacklyCart.closeDrawer()">Explore Shop</a>
+    </div>
+
+    <!-- Cart Item List -->
+    <div class="cart-items-body" id="cartItemsList">
+      <!-- Items dynamically injected by cart.js -->
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-coupon-row">
+        <input type="text" id="cartCouponInput" placeholder="Promo code (Try: ADVENTURE10)" />
+        <button type="button" class="btn btn-outline" id="applyCouponBtn">Apply</button>
+      </div>
+
+      <div class="cart-totals-list">
+        <div class="total-line">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0.00</span>
+        </div>
+        <div class="total-line discount-line" id="cartDiscountRow" style="display: none;">
+          <span>Adventure Discount (10%)</span>
+          <span id="cartDiscount">-$0.00</span>
+        </div>
+        <div class="total-line">
+          <span>Shipping</span>
+          <span id="cartShipping">FREE</span>
+        </div>
+        <div class="total-line final-total">
+          <span>Estimated Total</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" id="checkoutBtn">
+        Proceed to Checkout &rarr;
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- JavaScript Applications -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/dashboard-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

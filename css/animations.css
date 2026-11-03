@@ -1,0 +1,163 @@
+/* ==========================================================================
+   STACKLY OUTDOOR & CAMPING - ANIMATIONS & MICRO-INTERACTIONS
+   Smooth transitions, scroll reveals, keyframes, and reduced-motion rules
+   ========================================================================== */
+
+/* 1. Keyframe Definitions */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes shimmerEffect {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 2. Scroll Reveal Utility Classes */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.reveal-fade.revealed {
+  opacity: 1;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.revealed > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.revealed > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger.revealed > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger.revealed > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.40s; }
+.reveal-stagger.revealed > *:nth-child(7) { transition-delay: 0.47s; }
+.reveal-stagger.revealed > *:nth-child(8) { transition-delay: 0.54s; }
+
+.reveal-stagger.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. Hero Load In Sequence */
+.hero-content .hero-eyebrow {
+  animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-content .hero-title {
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.hero-content .hero-description {
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+}
+
+.hero-content .hero-actions {
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both;
+}
+
+/* 4. Interactive Hover & Focus Enhancements */
+.card-hover-lift {
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-6px);
+}
+
+/* Wishlist heart burst on activation */
+.wishlist-toggle-btn.active svg {
+  animation: pulseSubtle 0.35s ease-in-out;
+}
+
+/* 5. Accessibility: Respect User's Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-fade,
+  .reveal-up,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,374 @@
+/* ==========================================================================
+   STACKLY OUTDOOR & CAMPING - RESPONSIVE STYLESHEET
+   Carefully calibrated across Desktop, Laptop, Tablet, and Mobile
+   ========================================================================== */
+
+/* 1. Large Screens & Desktops (1440px and above) */
+@media (min-width: 1440px) {
+  :root {
+    --container-max: 1360px;
+  }
+
+  .hero-title {
+    font-size: 4.5rem;
+  }
+
+  .section-title-serif {
+    font-size: 2.5rem;
+  }
+}
+
+/* 2. Laptops & Smaller Desktops (1024px - 1366px) */
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: 3.25rem;
+  }
+
+  .category-masonry-grid {
+    gap: 20px;
+  }
+
+  .cat-card-1 { height: 350px; }
+  .cat-card-2 { height: 400px; }
+  .cat-card-3 { height: 370px; }
+  .cat-card-4 { height: 350px; margin-top: -15px; }
+  .cat-card-5 { height: 400px; margin-top: -15px; }
+  .cat-card-6 { height: 380px; margin-top: -15px; }
+
+  .adventures-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3. Tablets (768px - 1023px) */
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 76px;
+    --container-pad: 24px;
+  }
+
+  .section {
+    padding: 75px 0;
+  }
+
+  /* Header adjustments */
+  .header-nav-left,
+  .header-links-right {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .brand-logo {
+    font-size: 1.45rem;
+    letter-spacing: 0.18em;
+  }
+
+  /* Hero */
+  .hero-section {
+    min-height: 580px;
+    padding-top: calc(var(--header-height) + 40px);
+    padding-bottom: 70px;
+  }
+
+  .hero-title {
+    font-size: 2.85rem;
+  }
+
+  .hero-gradient-overlay {
+    background: linear-gradient(
+      to right,
+      rgba(235, 245, 240, 0.94) 0%,
+      rgba(235, 245, 240, 0.88) 50%,
+      rgba(235, 245, 240, 0.35) 85%,
+      rgba(235, 245, 240, 0.1) 100%
+    );
+  }
+
+  /* About */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-content {
+    padding-left: 0;
+  }
+
+  /* Features */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
+  }
+
+  /* Category Bento Grid */
+  .category-masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cat-card-1, .cat-card-2, .cat-card-3,
+  .cat-card-4, .cat-card-5, .cat-card-6 {
+    height: 320px;
+    margin-top: 0;
+  }
+
+  /* Category Topographic Contours - Tablet */
+  .category-section .topo-bg-left {
+    top: 160px;
+    left: -110px;
+    width: 290px;
+    height: 580px;
+    opacity: 0.6;
+  }
+
+  .category-section .topo-bg-right {
+    top: 360px;
+    right: -110px;
+    width: 290px;
+    height: 580px;
+    opacity: 0.6;
+  }
+
+  /* Story Banner */
+  .story-content-container {
+    justify-content: center;
+  }
+
+  .story-card-box {
+    max-width: 100%;
+    margin: 0 20px;
+  }
+
+  /* Products Grid */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* Pillars & Testimonials */
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .testimonials-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Magazine Section */
+  .magazine-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .magazine-content {
+    padding-right: 0;
+  }
+
+  .magazine-sub-form {
+    margin: 0 auto 14px auto;
+  }
+
+  .magazine-stack-img {
+    max-width: 340px;
+  }
+
+  /* Footer */
+  .footer-columns-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 30px;
+  }
+
+  .footer-watermark-text {
+    font-size: clamp(2.75rem, 8vw, 4.5rem);
+    letter-spacing: 0.2em;
+  }
+
+  /* Quick View Modal */
+  .qv-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+}
+
+/* 4. Mobile Devices (320px - 767px) */
+@media (max-width: 767px) {
+  :root {
+    --header-height: 68px;
+    --container-pad: 18px;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  .section-title-serif {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9375rem;
+  }
+
+  /* Hero */
+  .hero-section {
+    min-height: 520px;
+    padding-top: calc(var(--header-height) + 24px);
+    padding-bottom: 50px;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+    line-height: 1.12;
+  }
+
+  .hero-description {
+    font-size: 0.9375rem;
+    margin-bottom: 24px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* About */
+  .about-content .section-title-serif {
+    font-size: 1.85rem;
+  }
+
+  .about-paragraph {
+    font-size: 0.9375rem;
+  }
+
+  /* Features */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  /* Category Grid */
+  .category-masonry-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cat-card {
+    height: 280px !important;
+    margin-top: 0 !important;
+  }
+
+  /* Category Topographic Contours - Mobile */
+  .category-section .topo-bg-left {
+    top: 200px;
+    left: -110px;
+    width: 220px;
+    height: 440px;
+    opacity: 0.35;
+  }
+
+  .category-section .topo-bg-right {
+    top: 540px;
+    right: -110px;
+    width: 220px;
+    height: 440px;
+    opacity: 0.35;
+  }
+
+  /* Adventures */
+  .adventures-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Products */
+  .category-tabs-bar {
+    gap: 8px;
+  }
+
+  .category-tab-btn {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Pillars */
+  .pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 45px;
+  }
+
+  /* Magazine */
+  .magazine-content .section-title-serif {
+    font-size: 1.75rem;
+  }
+
+  .magazine-sub-form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Footer */
+  .footer-columns-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-watermark-text {
+    font-size: 2.2rem;
+    letter-spacing: 0.12em;
+  }
+
+  /* Cart Drawer */
+  .cart-drawer {
+    max-width: 100%;
+  }
+
+  /* Checkout Dialog */
+  .checkout-dialog {
+    padding: 24px 16px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Toast */
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+
+  .back-to-top-btn {
+    left: 18px;
+    bottom: 18px;
+    width: 38px;
+    height: 38px;
+  }
+}

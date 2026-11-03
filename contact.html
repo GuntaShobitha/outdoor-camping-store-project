@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Stackly Outdoor Co. &mdash; Customer Support, Gear Advising, Headquarters in Boulder, Colorado." />
+  <meta name="theme-color" content="#143828" />
+  <title>Contact &amp; Backcountry Support &mdash; STACKLY Outdoor Co.</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8963e'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 50px;
+      padding: 60px 0 90px;
+    }
+    .contact-info-card {
+      background: #ffffff;
+      padding: 36px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-info-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .contact-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-bg-cream);
+      color: var(--color-primary-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-form-card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-section {
+      background: var(--color-bg-cream);
+      padding: 85px 0;
+    }
+    .faq-accordion {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 18px 24px;
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .faq-question:hover {
+      color: var(--color-primary-green);
+    }
+    .faq-icon-arrow {
+      transition: transform 0.25s ease;
+      color: var(--color-gold);
+    }
+    .faq-item.active .faq-icon-arrow {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px;
+      font-size: 0.9375rem;
+      color: var(--color-text-body);
+      line-height: 1.65;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="header-nav-left" aria-label="Main Navigation Left">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="shop.html" class="nav-link">Services</a>
+      </nav>
+
+      <div class="header-brand">
+        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">[STACKLY]</a>
+      </div>
+
+      <div class="header-nav-right">
+        <div class="header-links-right">
+          <a href="shop.html" class="nav-link">Shop</a>
+          <a href="contact.html" class="nav-link active">Contact</a>
+          <a href="login.html" class="nav-link" title="Sign In or Register">Account</a>
+        </div>
+
+        <button type="button" class="header-action-btn search-trigger-btn" aria-label="Search gear">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <a href="shop.html?view=wishlist" class="header-action-btn" aria-label="Wishlist items">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="count-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+
+        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Open shopping cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="count-badge cart-count-badge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">[STACKLY]</div>
+      <button type="button" class="close-mobile-nav-btn" id="closeMobileNavBtn" aria-label="Close navigation">&times;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html"><span>Home</span> <span>&rarr;</span></a>
+      <a href="about.html"><span>About Us</span> <span>&rarr;</span></a>
+      <a href="shop.html"><span>Shop Catalog</span> <span>&rarr;</span></a>
+      <a href="customer-dashboard.html"><span>Customer Hub</span> <span>&rarr;</span></a>
+      <a href="admin-dashboard.html"><span>Admin Console</span> <span>&rarr;</span></a>
+      <a href="contact.html" class="active"><span>Contact & Support</span> <span>&rarr;</span></a>
+      <a href="login.html" style="color:var(--color-gold);"><span>Account / Sign In</span> <span>&rarr;</span></a>
+    </nav>
+  </aside>
+
+  <!-- Contact Banner -->
+  <section class="section" style="background-color: var(--color-primary-green); color: #ffffff; padding-top: calc(var(--header-height) + 50px); padding-bottom: 50px; text-align: center;">
+    <div class="container">
+      <span class="section-eyebrow" style="color: var(--color-gold);">WE ARE HERE ON THE TRAIL</span>
+      <h1 class="section-title-serif" style="color: #ffffff; font-size: 2.75rem; margin-bottom: 12px;">Contact Backcountry Support</h1>
+      <p style="color: rgba(255, 255, 255, 0.85); max-width: 600px; margin: 0 auto; font-size: 1rem;">
+        Have a question about gear compatibility, custom sizing, trail routes, or lifetime repairs? Our licensed wilderness advisors are standing by.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Contact Area -->
+  <main class="container">
+    <div class="contact-layout">
+      
+      <!-- Left: Contact Details -->
+      <div class="contact-info-card">
+        <span class="section-eyebrow">HEADQUARTERS</span>
+        <h2 class="section-title-serif" style="font-size: 1.75rem; margin-bottom: 24px;">Boulder Repair Studio &amp; HQ</h2>
+        
+        <div class="contact-info-item">
+          <div class="contact-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div>
+            <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--color-text-dark); margin-bottom: 4px;">Street Address</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-body); line-height: 1.5;">
+              8420 Alpine Crest Way<br />
+              Boulder, Colorado 80302, USA
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <div>
+            <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--color-text-dark); margin-bottom: 4px;">Toll-Free Phone</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-body);">+1 (800) 555-TRAIL</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div>
+            <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--color-text-dark); margin-bottom: 4px;">Direct Email</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-body);">hello@stackly.com</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div>
+            <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--color-text-dark); margin-bottom: 4px;">Hours of Operation</h4>
+            <p style="font-size: 0.875rem; color: var(--color-text-body); line-height: 1.5;">
+              Mon &ndash; Fri: 08:00 &ndash; 18:00 MST<br />
+              Sat &ndash; Sun: 09:00 &ndash; 16:00 MST
+            </p>
+          </div>
+        </div>
+
+        <div style="background: var(--color-bg-cream); padding: 18px; border-radius: var(--radius-sm); margin-top: 20px;">
+          <h5 style="font-size: 0.8125rem; font-weight: 700; color: var(--color-primary-green); margin-bottom: 4px;">Field Repairs Drop-In:</h5>
+          <p style="font-size: 0.8125rem; color: var(--color-text-body); line-height: 1.5;">
+            Local adventurers can drop off damaged tents, packs, and jackets directly at our Boulder facility for expedited service.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: Interactive Validated Form -->
+      <div class="contact-form-card">
+        <span class="section-eyebrow">MESSAGE OUR ADVISORS</span>
+        <h2 class="section-title-serif" style="font-size: 1.75rem; margin-bottom: 20px;">Send a Dispatch</h2>
+        
+        <form id="stacklyContactForm" novalidate>
+          <div class="form-group">
+            <label for="contactName">Full Name *</label>
+            <input type="text" id="contactName" placeholder="e.g. Jordan Miller" required />
+            <span class="field-error" id="errContactName"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="contactEmail">Email Address *</label>
+            <input type="email" id="contactEmail" placeholder="e.g. jordan.miller@trailmail.com" required />
+            <span class="field-error" id="errContactEmail"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="contactTopic">Inquiry Topic *</label>
+            <select id="contactTopic" required>
+              <option value="" disabled selected>Select an adventure topic...</option>
+              <option value="gear">Gear Advice &amp; Sizing</option>
+              <option value="order">Order Tracking &amp; Delivery</option>
+              <option value="warranty">Lifetime Warranty &amp; Repair</option>
+              <option value="partnership">Guide &amp; Expedition Sponsorship</option>
+              <option value="other">General Inquiry</option>
+            </select>
+            <span class="field-error" id="errContactTopic"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="contactMessage">Your Message or Trail Notes *</label>
+            <textarea id="contactMessage" rows="5" placeholder="Let us know what trail or expedition you are planning..." required></textarea>
+            <span class="field-error" id="errContactMsg"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 8px;">
+            Dispatch Message to Support &rarr;
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow">FREQUENTLY ASKED QUESTIONS</span>
+        <h2 class="section-title-serif">Backcountry Guide Answers</h2>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item active">
+          <button type="button" class="faq-question">
+            <span>How does the Stackly Lifetime Warranty work?</span>
+            <span class="faq-icon-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            We cover defects in materials and craftsmanship for the usable lifetime of the product. If your tent pole snaps, zipper jams, or fabric tears on the trail, simply send it to our Boulder clinic and we will repair it free of charge. If it is unrepairable, we replace it.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>What are your shipping times and free shipping minimums?</span>
+            <span class="faq-icon-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            All orders over $75 qualify for Free Carbon-Neutral Backcountry Shipping (typically 2-4 business days across the continental US). We also offer expedited 2-day delivery directly to trail outposts and mountain hostels.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>Can I test gear on a real camping trip and still return it?</span>
+            <span class="faq-icon-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            Yes! We offer a 30-Day Trail Trial. Take the tent, sleep in the bag, hike with the boots. If you are not completely satisfied with its comfort and weather resistance, return it within 30 days for an exchange or full refund.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>Are Stackly products sustainably made?</span>
+            <span class="faq-icon-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            100% of our shell fabrics are woven from recycled post-consumer nylon, and our down insulation is certified by the Responsible Down Standard (RDS). All packaging is 100% plastic-free and biodegradable.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="cart-drawer-header">
+      <h3>Your Trail Pack</h3>
+      <button type="button" class="cart-drawer-close" id="closeCartBtn" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="free-shipping-bar">
+      <div class="free-ship-label" id="freeShippingText">Add <strong>$75.00</strong> more for <strong>FREE Shipping</strong></div>
+      <div class="free-ship-progress-track">
+        <div class="free-ship-progress-fill" id="freeShippingProgress"></div>
+      </div>
+    </div>
+    <div class="cart-empty-state" id="cartEmptyState" style="display: none;">
+      <h4>Your pack is empty</h4>
+      <p>Equip yourself with tents, sleeping bags, and essential trail gear.</p>
+    </div>
+    <div class="cart-items-body" id="cartItemsList"></div>
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-coupon-row">
+        <input type="text" id="cartCouponInput" placeholder="Promo code (Try: ADVENTURE10)" />
+        <button type="button" class="btn btn-outline" id="applyCouponBtn">Apply</button>
+      </div>
+      <div class="cart-totals-list">
+        <div class="total-line"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+        <div class="total-line discount-line" id="cartDiscountRow" style="display: none;"><span>Discount</span><span id="cartDiscount">-$0.00</span></div>
+        <div class="total-line"><span>Shipping</span><span id="cartShipping">FREE</span></div>
+        <div class="total-line final-total"><span>Estimated Total</span><span id="cartTotal">$0.00</span></div>
+      </div>
+      <button type="button" class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout &rarr;</button>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <img src="assets/images/banners/footer-misty-forest.webp" alt="Misty pine forest landscape" class="footer-forest-bg" loading="lazy" />
+    <div class="footer-overlay-gradient"></div>
+    <div class="container footer-content-wrap">
+      <div class="footer-columns-grid">
+        <div class="footer-col">
+          <h3 class="footer-col-title">Explore</h3>
+          <ul class="footer-col-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html">Shop</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Contact</h3>
+          <ul class="footer-col-list">
+            <li><span>Boulder, Colorado 80302</span></li>
+            <li><a href="mailto:hello@stackly.com">[hello@stackly.com]</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Hours</h3>
+          <ul class="footer-col-list">
+            <li><span>[Mon &ndash; Fri: 08:00 &ndash; 18:00]</span></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Follow</h3>
+          <ul class="footer-col-list">
+            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-brand-watermark">
+        <span class="footer-watermark-text">[STACKLY]</span>
+        <p class="footer-copyright-note">&copy; 2026 STACKLY Outdoor Co. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/dashboard-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Accordion Toggle Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".faq-question").forEach(q => {
+        q.addEventListener("click", () => {
+          const item = q.closest(".faq-item");
+          item.classList.toggle("active");
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
