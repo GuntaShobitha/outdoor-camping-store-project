@@ -878,6 +878,7 @@
   <script src="js/dashboard.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      if (window.stacklyAuth && !window.stacklyAuth.requireAuth('admin')) return; // Protect route
       // Initialize Admin Dashboard Controller
       window.adminDash = new AdminDashboard();
     });

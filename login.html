@@ -234,10 +234,10 @@
       // Check if user is already logged in
       if (window.stacklyAuth && window.stacklyAuth.isLoggedIn()) {
         const u = window.stacklyAuth.currentUser;
-        showAlert(`You are currently signed in as ${u.name}. Redirecting to your dashboard...`, "success");
-        setTimeout(() => {
-          window.location.href = u.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
-        }, 1200);
+        showAlert(`Currently signed in as ${u.name} (${u.roleLabel}). You may sign in with another account below or <a href="${u.role === 'admin' ? 'admin-dashboard.html' : 'customer-dashboard.html'}" style="color:var(--color-gold);text-decoration:underline;margin-left:6px;font-weight:700;">Open Dashboard &rarr;</a>`, "info");
+
+
+
       }
 
       // --- Pure JavaScript Validation Helpers ---
@@ -253,7 +253,7 @@
       }
 
       function showAlert(message, type = "error") {
-        alertText.textContent = message;
+        alertText.innerHTML = message;
         alertBanner.className = `auth-alert-banner ${type}`;
         alertBanner.style.display = "flex";
       }
@@ -379,6 +379,7 @@
         submitBtn.disabled = true;
         submitBtn.innerHTML = `<span>Checking credentials...</span>`;
 
+
         setTimeout(() => {
           const authResult = window.stacklyAuth.login(email, password, selectedRole);
 
@@ -399,6 +400,7 @@
             showAlert(`Success! Welcome, ${authResult.user.name}. Opening ${authResult.user.role === 'admin' ? 'Admin Console' : 'Backcountry Dashboard'}...`, "success");
             submitBtn.innerHTML = `<span>Redirecting...</span>`;
 
+    
             setTimeout(() => {
               window.location.href = authResult.redirectUrl;
             }, 800);

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stories Beyond the Ordinary &mdash; Stackly Outdoor & Camping Blog. Backcountry guides, wilderness skills, destination reviews, and sustainable travel journals." />
+  <meta name="theme-color" content="#102A24" />
+  <title>Adventure Journal &mdash; Stories Beyond the Ordinary &bull; STACKLY</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C49A52'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
+
+  <!-- Core & Enhancement Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navbar-redesign.css" />
+  <link rel="stylesheet" href="css/nature-effects.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       SITE HEADER & NAVBAR (Premium Nature Redesign)
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      
+      <!-- Left: Logo -->
+      <div class="header-brand">
+        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">
+          <svg class="brand-icon" viewBox="0 0 24 24">
+            <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z"/>
+          </svg>
+          <span>[STACKLY]</span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation Links -->
+      <nav class="header-nav-center" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Right: Cart & Login Button -->
+      <div class="header-nav-right">
+        <!-- Live Search Trigger -->
+        <button type="button" class="header-action-btn search-trigger-btn" aria-label="Search gear">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <!-- Wishlist -->
+        <a href="shop.html?view=wishlist" class="header-action-btn" aria-label="Wishlist items">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="count-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+
+        <!-- Shopping Cart Bag -->
+        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="count-badge cart-count-badge" style="display: none;">0</span>
+        </button>
+
+        <!-- Navbar Login Button (Always opens Login page) -->
+        <a href="login.html" class="nav-login-btn" id="navbarLoginBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Login</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">[STACKLY]</div>
+      <button type="button" class="close-mobile-nav-btn" id="closeMobileNavBtn" aria-label="Close navigation">&times;</button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html"><span>Home</span> <span>&rarr;</span></a>
+      <a href="about.html"><span>About Us</span> <span>&rarr;</span></a>
+      <a href="services.html"><span>Services &amp; Expeditions</span> <span>&rarr;</span></a>
+      <a href="blog.html" class="active"><span>Adventure Journal</span> <span>&rarr;</span></a>
+      <a href="shop.html"><span>Shop Catalog</span> <span>&rarr;</span></a>
+      <a href="customer-dashboard.html"><span>Customer Hub</span> <span>&rarr;</span></a>
+      <a href="contact.html"><span>Contact &amp; Support</span> <span>&rarr;</span></a>
+      <a href="login.html" style="color:var(--color-gold-accent);"><span>Account / Sign In</span> <span>&rarr;</span></a>
+    </nav>
+    <div class="mobile-nav-footer">
+      <p>🌲 Stackly Outdoor Gear Co.</p>
+      <p>Field Journals &bull; Wilderness Exploration</p>
+    </div>
+  </aside>
+
+  <main style="padding-top: var(--header-height);">
+
+    <!-- ==========================================================================
+         SECTION 1: BLOG HERO SECTION
+         ========================================================================== -->
+    <section class="section" style="position:relative; background:linear-gradient(180deg, #102A24 0%, #183D32 100%); color:#F7F5EF; padding:100px 0 80px; text-align:center; overflow:hidden;">
+      <div class="nature-leaves-overlay">
+        <canvas id="heroLeavesCanvas" class="leaf-canvas"></canvas>
+      </div>
+      <div class="forest-mist-drift"></div>
+
+      <div class="container" style="position:relative; z-index:3;">
+        <span class="section-eyebrow" style="color:#C49A52; letter-spacing:0.18em;">THE BACKCOUNTRY CHRONICLES</span>
+        <h1 class="section-title-serif" style="color:#ffffff; font-size:clamp(2.4rem, 5vw, 3.8rem); margin:16px auto 20px; max-width:850px; line-height:1.15;">
+          Stories Beyond the Ordinary
+        </h1>
+        <p style="color:#E9E0CE; font-size:1.15rem; max-width:680px; margin:0 auto; line-height:1.7;">
+          Firsthand expedition dispatches, survival philosophies, gear test field reports, and technical mountain guides written by seasoned wilderness explorers.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: FEATURED ADVENTURE STORY (High-Impact Split)
+         ========================================================================== -->
+    <section class="section" style="background-color: var(--color-bg-cream);">
+      <div class="container">
+        <div style="background:#ffffff; border-radius:24px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); display:grid; grid-template-columns:1.1fr 1fr; gap:0;" class="reveal-up">
+          
+          <div style="position:relative; min-height:380px;">
+            <img src="assets/images/blog/blog-featured-continental.webp" alt="Traversing the Continental Divide" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+            <span style="position:absolute; top:20px; left:20px; background:#102A24; color:#C49A52; font-size:0.75rem; font-weight:800; padding:6px 14px; border-radius:9999px; letter-spacing:0.08em; text-transform:uppercase;">
+              Featured Expedition
+            </span>
+          </div>
+
+          <div style="padding:48px 40px; display:flex; flex-direction:column; justify-content:center;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; font-size:0.8125rem; color:var(--color-moss-green); font-weight:600;">
+              <span>EXPEDITION DISPATCH</span>
+              <span>&bull;</span>
+              <span>14 MIN READ</span>
+              <span>&bull;</span>
+              <span>OCT 24, 2026</span>
+            </div>
+
+            <h2 style="font-family:var(--font-serif); font-size:clamp(1.5rem, 2.8vw, 2.2rem); color:var(--color-dark-green); line-height:1.25; margin-bottom:16px;">
+              Traversing the Continental Divide: 14 Days Above Tree Line
+            </h2>
+
+            <p style="color:var(--color-text-body); font-size:0.98rem; line-height:1.7; margin-bottom:24px;">
+              Scaling sheer granite knife-edges at 13,800 feet, Marcus Thorne recounts an unforgiving autumn expedition testing next-generation geodesic ultralight shelters through unseasonal sub-zero blizzards.
+            </p>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; border-top:1px solid #eee; padding-top:20px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <img src="assets/images/team/team-marcus.webp" alt="Marcus Thorne" style="width:44px; height:44px; border-radius:50%; object-fit:cover; border:2px solid #C49A52;" />
+                <div>
+                  <strong style="display:block; font-size:0.88rem; color:var(--color-dark-green);">Marcus Thorne</strong>
+                  <span style="font-size:0.75rem; color:var(--color-text-muted);">Chief Expedition Officer</span>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-sm btn-gold read-article-trigger" data-article-id="art-featured">
+                Read Full Story &rarr;
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3 & 4: CATEGORY FILTER & LATEST OUTDOOR STORIES (6–8 Posts Grid)
+         ========================================================================== -->
+    <section class="section" style="background-color: #ffffff;">
+      <div class="container">
+        
+        <!-- Explore Blog Categories (Section 4) -->
+        <div style="text-align:center; margin-bottom:48px;" id="blogCategoriesSection">
+          <span class="section-eyebrow" style="color:var(--color-gold);">CURATED TOPICS</span>
+          <h2 class="section-title-serif" style="color:var(--color-dark-green); margin-bottom:12px;">Explore Blog Categories</h2>
+          <p style="color:var(--color-text-body); max-width:540px; margin:0 auto 20px; font-size:0.92rem;">Filter field dispatches by adventure discipline to find guides tailored to your next expedition.</p>
+          
+          <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px;" id="blogCategoryPills">
+            <button class="category-pill active" data-category="all" style="padding:8px 18px; border-radius:9999px; font-size:0.84rem; font-weight:700; border:1px solid var(--color-gold); background:var(--color-dark-green); color:#C49A52; cursor:pointer;">All Dispatches (8)</button>
+            <button class="category-pill" data-category="camping" style="padding:8px 18px; border-radius:9999px; font-size:0.84rem; font-weight:600; border:1px solid var(--color-border); background:#ffffff; color:var(--color-text-dark); cursor:pointer;">Camping (3)</button>
+            <button class="category-pill" data-category="hiking" style="padding:8px 18px; border-radius:9999px; font-size:0.84rem; font-weight:600; border:1px solid var(--color-border); background:#ffffff; color:var(--color-text-dark); cursor:pointer;">Hiking &amp; Trekking (3)</button>
+            <button class="category-pill" data-category="equipment" style="padding:8px 18px; border-radius:9999px; font-size:0.84rem; font-weight:600; border:1px solid var(--color-border); background:#ffffff; color:var(--color-text-dark); cursor:pointer;">Outdoor Equipment (2)</button>
+            <button class="category-pill" data-category="sustainability" style="padding:8px 18px; border-radius:9999px; font-size:0.84rem; font-weight:600; border:1px solid var(--color-border); background:#ffffff; color:var(--color-text-dark); cursor:pointer;">Nature &amp; Wildlife (2)</button>
+          </div>
+        </div>
+
+        <!-- Latest Outdoor Stories Header (Section 3) -->
+        <div style="text-align:center; margin-bottom:32px;">
+          <span class="section-eyebrow" style="color:var(--color-gold);">FIELD JOURNAL</span>
+          <h2 class="section-title-serif" style="color:var(--color-dark-green); margin-bottom:8px;">Latest Outdoor Stories</h2>
+        </div>
+
+        <!-- 8 Detailed Blog Cards -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:32px;" id="blogArticlesGrid">
+          
+          <!-- Article 1 -->
+          <article class="blog-card reveal-up" data-category="camping" style="background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="position:relative; height:210px; overflow:hidden;">
+                <img src="assets/images/blog/blog-camping-tips.webp" alt="Essential Camping Tips" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+                <span style="position:absolute; bottom:12px; left:14px; background:rgba(16,42,36,0.85); color:#E9E0CE; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:6px;">CAMPING</span>
+              </div>
+              <div style="padding:24px 22px 16px;">
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">6 min read &bull; Sep 28, 2026</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin:8px 0 10px; line-height:1.35;">Essential Camping Tips for Beginners</h3>
+                <p style="font-size:0.88rem; color:var(--color-text-body); line-height:1.6;">How to choose a level campsite, pitch tensioned guylines against wind, and establish clean camp kitchen protocols.</p>
+              </div>
+            </div>
+            <div style="padding:0 22px 22px;">
+              <button type="button" class="btn btn-sm btn-outline read-article-trigger" data-article-id="art-1" style="width:100%;">Read Article &rarr;</button>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="blog-card reveal-up" data-category="hiking" style="background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="position:relative; height:210px; overflow:hidden;">
+                <img src="assets/images/blog/blog-mountain-destinations.webp" alt="Top 10 Mountain Destinations" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+                <span style="position:absolute; bottom:12px; left:14px; background:rgba(16,42,36,0.85); color:#E9E0CE; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:6px;">DESTINATIONS</span>
+              </div>
+              <div style="padding:24px 22px 16px;">
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">9 min read &bull; Oct 02, 2026</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin:8px 0 10px; line-height:1.35;">Top 10 Mountain Destinations for 2027</h3>
+                <p style="font-size:0.88rem; color:var(--color-text-body); line-height:1.6;">From the remote jagged spires of the Wind River Range to the turquoise tarns of the North Cascades.</p>
+              </div>
+            </div>
+            <div style="padding:0 22px 22px;">
+              <button type="button" class="btn btn-sm btn-outline read-article-trigger" data-article-id="art-2" style="width:100%;">Read Article &rarr;</button>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="blog-card reveal-up" data-category="hiking" style="background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="position:relative; height:210px; overflow:hidden;">
+                <img src="assets/images/blog/blog-first-trek.webp" alt="First Multi-Day Trek" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+                <span style="position:absolute; bottom:12px; left:14px; background:rgba(16,42,36,0.85); color:#E9E0CE; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:6px;">TREKKING</span>
+              </div>
+              <div style="padding:24px 22px 16px;">
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">8 min read &bull; Oct 10, 2026</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin:8px 0 10px; line-height:1.35;">How to Prepare for Your First Trek</h3>
+                <p style="font-size:0.88rem; color:var(--color-text-body); line-height:1.6;">Weight distribution ratios, blister prevention strategies, and packing essentials to maintain a base weight under 18 lbs.</p>
+              </div>
+            </div>
+            <div style="padding:0 22px 22px;">
+              <button type="button" class="btn btn-sm btn-outline read-article-trigger" data-article-id="art-3" style="width:100%;">Read Article &rarr;</button>
+            </div>
+          </article>
+
+          <!-- Article 4 -->
+          <article class="blog-card reveal-up" data-category="equipment" style="background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="position:relative; height:210px; overflow:hidden;">
+                <img src="assets/images/blog/blog-best-equipment.webp" alt="Best Camping Equipment" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+                <span style="position:absolute; bottom:12px; left:14px; background:rgba(16,42,36,0.85); color:#E9E0CE; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:6px;">EQUIPMENT</span>
+              </div>
+              <div style="padding:24px 22px 16px;">
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">11 min read &bull; Oct 15, 2026</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin:8px 0 10px; line-height:1.35;">Best Camping Equipment for Explorers</h3>
+                <p style="font-size:0.88rem; color:var(--color-text-body); line-height:1.6;">Our lab team breaks down ultralight shelters, multi-fuel inverted canister stoves, and Gore-Tex waterproofing.</p>
+              </div>
+            </div>
+            <div style="padding:0 22px 22px;">
+              <button type="button" class="btn btn-sm btn-outline read-article-trigger" data-article-id="art-4" style="width:100%;">Read Article &rarr;</button>
+            </div>
+          </article>
+
+          <!-- Article 5 -->
+          <article class="blog-card reveal-up" data-category="hiking" style="background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="position:relative; height:210px; overflow:hidden;">
+                <img src="assets/images/blog/blog-forest-trails.webp" alt="Beauty of Forest Trails" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+                <span style="position:absolute; bottom:12px; left:14px; background:rgba(16,42,36,0.85); color:#E9E0CE; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:6px;">FOREST TRAILS</span>
+              </div>
+              <div style="padding:24px 22px 16px;">
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">7 min read &bull; Oct 18, 2026</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin:8px 0 10px; line-height:1.35;">Exploring the Beauty of Forest Trails</h3>
+                <p style="font-size:0.88rem; color:var(--color-text-body); line-height:1.6;">Why immersion in ancient old-growth evergreen forests improves cognitive resilience and reduces physiological stress.</p>
+              </div>
+            </div>
+            <div style="padding:0 22px 22px;">
+              <button type="button" class="btn btn-sm btn-outline read-article-trigger" data-article-id="art-5" style="width:100%;">Read Article &rarr;</button>
+            </div>
+          </article>
+
+          <!-- Article 6 -->
+          <article class="blog-card reveal-up" data-category="sustainability" style="background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="position:relative; height:210px; overflow:hidden;">
+                <img src="assets/images/blog/blog-leave-no-trace.webp" alt="Leave No Trace" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+                <span style="position:absolute; bottom:12px; left:14px; background:rgba(16,42,36,0.85); color:#E9E0CE; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:6px;">CONSERVATION</span>
+              </div>
+              <div style="padding:24px 22px 16px;">
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">5 min read &bull; Oct 20, 2026</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin:8px 0 10px; line-height:1.35;">Sustainable Camping: Leave No Trace</h3>
+                <p style="font-size:0.88rem; color:var(--color-text-body); line-height:1.6;">The seven core principles of backcountry stewardship to preserve pristine wilderness ecosystems for future generations.</p>
+              </div>
+            </div>
+            <div style="padding:0 22px 22px;">
+              <button type="button" class="btn btn-sm btn-outline read-article-trigger" data-article-id="art-6" style="width:100%;">Read Article &rarr;</button>
+            </div>
+          </article>
+
+          <!-- Article 7 -->
+          <article class="blog-card reveal-up" data-category="equipment" style="background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="position:relative; height:210px; overflow:hidden;">
+                <img src="assets/images/blog/blog-navigation-compass.webp" alt="Navigation Without GPS" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+                <span style="position:absolute; bottom:12px; left:14px; background:rgba(16,42,36,0.85); color:#E9E0CE; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:6px;">NAVIGATION</span>
+              </div>
+              <div style="padding:24px 22px 16px;">
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">10 min read &bull; Oct 22, 2026</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin:8px 0 10px; line-height:1.35;">Navigation: Mastering Map &amp; Compass</h3>
+                <p style="font-size:0.88rem; color:var(--color-text-body); line-height:1.6;">When batteries fail in freezing temperatures, analog topographic triangulations and magnetic declination adjustments save lives.</p>
+              </div>
+            </div>
+            <div style="padding:0 22px 22px;">
+              <button type="button" class="btn btn-sm btn-outline read-article-trigger" data-article-id="art-7" style="width:100%;">Read Article &rarr;</button>
+            </div>
+          </article>
+
+          <!-- Article 8 -->
+          <article class="blog-card reveal-up" data-category="camping" style="background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="position:relative; height:210px; overflow:hidden;">
+                <img src="assets/images/blog/blog-campfire-gourmet.webp" alt="Campfire Gourmet" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+                <span style="position:absolute; bottom:12px; left:14px; background:rgba(16,42,36,0.85); color:#E9E0CE; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:6px;">FOOD &amp; NUTRITION</span>
+              </div>
+              <div style="padding:24px 22px 16px;">
+                <span style="font-size:0.75rem; color:var(--color-text-muted);">6 min read &bull; Oct 25, 2026</span>
+                <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin:8px 0 10px; line-height:1.35;">Campfire Gourmet: High-Energy Trail Meals</h3>
+                <p style="font-size:0.88rem; color:var(--color-text-body); line-height:1.6;">Nutrient-dense, lightweight dehydrated recipes delivering 3,500 daily calories with gourmet alpine flavor.</p>
+              </div>
+            </div>
+            <div style="padding:0 22px 22px;">
+              <button type="button" class="btn btn-sm btn-outline read-article-trigger" data-article-id="art-8" style="width:100%;">Read Article &rarr;</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: ADVENTURE NEWSLETTER (Interactive Email Validation)
+         ========================================================================== -->
+    <section class="section" style="background:var(--color-dark-green); color:#F7F5EF; padding:80px 0;">
+      <div class="container">
+        <div style="max-width:680px; margin:0 auto; text-align:center; background:rgba(24,61,50,0.6); padding:48px 36px; border-radius:24px; border:1px solid rgba(196,154,82,0.3); box-shadow:0 12px 36px rgba(0,0,0,0.35);" class="reveal-up">
+          <span style="font-size:2rem; display:block; margin-bottom:12px;">📬</span>
+          <span class="section-eyebrow" style="color:#C49A52;">STAY CONNECTED WITH THE WILD</span>
+          <h2 class="section-title-serif" style="color:#ffffff; font-size:2rem; margin:8px 0 14px;">The Backcountry Newsletter</h2>
+          <p style="color:#E9E0CE; font-size:0.95rem; line-height:1.6; margin-bottom:28px;">
+            Receive monthly trail reports, secret campsite coordinates, gear field test results, and member-exclusive expedition discounts directly to your inbox.
+          </p>
+
+          <form id="blogNewsletterForm" novalidate style="display:flex; flex-direction:column; gap:12px; max-width:480px; margin:0 auto;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <input 
+                type="email" 
+                id="blogNewsletterEmail" 
+                placeholder="Enter your email address..." 
+                required 
+                class="auth-input" 
+                style="flex:1; min-width:240px; background:#ffffff; color:#102A24;" 
+              />
+              <button type="submit" class="btn btn-gold" id="blogSubscribeBtn" style="white-space:nowrap;">Subscribe Free</button>
+            </div>
+            <span id="blogNewsletterFeedback" style="font-size:0.8125rem; display:none; text-align:left;"></span>
+          </form>
+          <p style="font-size:0.75rem; color:#A7B89A; margin-top:16px;">We respect your inbox. Strictly zero spam. Unsubscribe with 1-click anytime.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: EXPLORE MORE ADVENTURES (High-Impact CTA)
+         ========================================================================== -->
+    <section class="section" style="position:relative; background-color: var(--color-deep-forest); color:#F7F5EF; padding:90px 0; text-align:center; overflow:hidden;">
+      <div class="sunbeam-overlay"></div>
+      <div class="container" style="position:relative; z-index:2;">
+        <span class="section-eyebrow" style="color:#C49A52;">READY FOR YOUR NEXT EXPEDITION?</span>
+        <h2 class="section-title-serif" style="color:#ffffff; font-size:clamp(2rem, 4vw, 3rem); margin:14px auto 18px; max-width:700px;">
+          The Mountains Are Calling. Go Prepared.
+        </h2>
+        <p style="color:#E9E0CE; max-width:600px; margin:0 auto 32px; font-size:1.05rem;">
+          Equip yourself with elite gear from our store, or book an all-inclusive guided trek with our certified wilderness guides.
+        </p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="shop.html" class="btn btn-primary" style="background:#C49A52; color:#102A24; border-color:#C49A52;">Explore Store Gear</a>
+          <a href="services.html" class="btn btn-outline" style="color:#ffffff; border-color:#ffffff;">View Guided Services</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       INTERACTIVE ARTICLE READER MODAL (Preserves and improves reading experience)
+       ========================================================================== -->
+  <div class="dash-modal-overlay" id="articleReaderModal">
+    <div class="dash-modal-box" style="max-width:820px; max-height:90vh; overflow-y:auto; padding:0; border-radius:24px;">
+      
+      <!-- Article Header Cover -->
+      <div style="position:relative; height:320px; overflow:hidden;">
+        <img id="modalArticleImg" src="assets/images/blog/blog-featured-continental.webp" alt="Article Cover" style="width:100%; height:100%; object-fit:cover;" />
+        <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,42,36,0.95) 0%, transparent 70%);"></div>
+        <button type="button" class="dash-modal-close" id="closeArticleModalBtn" style="position:absolute; top:20px; right:20px; background:rgba(0,0,0,0.5); color:#fff; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:none; cursor:pointer; font-size:1.4rem;">&times;</button>
+        
+        <div style="position:absolute; bottom:24px; left:30px; right:30px; color:#ffffff;">
+          <span id="modalArticleBadge" style="background:#C49A52; color:#102A24; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:4px; text-transform:uppercase;">EXPEDITION</span>
+          <h2 id="modalArticleTitle" style="font-family:var(--font-serif); font-size:clamp(1.4rem, 2.5vw, 2rem); margin-top:8px; line-height:1.25;">Article Title</h2>
+        </div>
+      </div>
+
+      <!-- Article Content Body -->
+      <div style="padding:36px 32px; background:#ffffff; color:#32443b; line-height:1.8; font-size:1.02rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding-bottom:16px; margin-bottom:24px; font-size:0.85rem; color:var(--color-text-muted);">
+          <span id="modalArticleAuthor">By Marcus Thorne &bull; Chief Expedition Officer</span>
+          <span id="modalArticleDate">October 24, 2026</span>
+        </div>
+
+        <div id="modalArticleText">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Social Share / Feedback -->
+        <div style="margin-top:36px; padding-top:24px; border-top:1px solid #eee; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+          <div>
+            <strong style="color:var(--color-dark-green); font-size:0.95rem;">Did you enjoy this journal dispatch?</strong>
+            <p style="font-size:0.84rem; color:var(--color-text-muted);">Share it with your backcountry hiking crew.</p>
+          </div>
+          <button type="button" class="btn btn-sm btn-gold" onclick="alert('Article link copied to clipboard! Share happy trails with friends.')">Share Dispatch 🔗</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" style="background:#102A24; color:#F7F5EF; padding:60px 0 30px; border-top:1px solid rgba(196,154,82,0.2);">
+    <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px; align-items:center;">
+      <div>
+        <span style="font-family:var(--font-serif); font-size:1.4rem; color:#C49A52; font-weight:700;">[STACKLY]</span>
+        <p style="color:#A7B89A; font-size:0.88rem; margin-top:6px;">High performance gear and guided wilderness expeditions.</p>
+      </div>
+      <div style="display:flex; gap:24px;">
+        <a href="about.html" style="color:#E9E0CE; text-decoration:none;">About</a>
+        <a href="services.html" style="color:#E9E0CE; text-decoration:none;">Services</a>
+        <a href="blog.html" style="color:#C49A52; text-decoration:none;">Blog</a>
+        <a href="shop.html" style="color:#E9E0CE; text-decoration:none;">Shop</a>
+        <a href="contact.html" style="color:#E9E0CE; text-decoration:none;">Contact</a>
+      </div>
+      <p style="color:#A7B89A; font-size:0.8rem; width:100%; text-align:center; margin-top:20px; border-top:1px solid rgba(255,255,255,0.08); padding-top:20px;">
+        &copy; 2026 Stackly Outdoor Gear Co. &bull; Boulder, Colorado. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/nature-effects.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Category Filtering
+      const pills = document.querySelectorAll(".category-pill");
+      const cards = document.querySelectorAll(".blog-card");
+
+      pills.forEach(pill => {
+        pill.addEventListener("click", () => {
+          pills.forEach(p => {
+            p.style.background = "#ffffff";
+            p.style.color = "var(--color-text-dark)";
+            p.style.borderColor = "var(--color-border)";
+            p.classList.remove("active");
+          });
+          pill.style.background = "var(--color-dark-green)";
+          pill.style.color = "#C49A52";
+          pill.style.borderColor = "var(--color-gold)";
+          pill.classList.add("active");
+
+          const cat = pill.getAttribute("data-category");
+          cards.forEach(card => {
+            if (cat === "all" || card.getAttribute("data-category") === cat) {
+              card.style.display = "flex";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // 2. Newsletter Validation
+      const newsForm = document.getElementById("blogNewsletterForm");
+      const newsEmail = document.getElementById("blogNewsletterEmail");
+      const feedback = document.getElementById("blogNewsletterFeedback");
+
+      if (newsForm) {
+        newsForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const email = newsEmail.value.trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!email || !emailRegex.test(email)) {
+            feedback.style.display = "block";
+            feedback.style.color = "#f87171";
+            feedback.textContent = "Please enter a valid email address (e.g. explorer@summit.com).";
+            newsEmail.focus();
+            return;
+          }
+
+          feedback.style.display = "block";
+          feedback.style.color = "#4ade80";
+          feedback.textContent = "Welcome to the Trail Club! Check your inbox for your first field report.";
+          if (window.stacklyCart && typeof window.stacklyCart.showToast === "function") {
+            window.stacklyCart.showToast("Subscribed! Welcome to Backcountry Chronicles.", "success");
+          }
+          newsEmail.value = "";
+        });
+      }
+
+      // 3. Article Reader Modal
+      const modal = document.getElementById("articleReaderModal");
+      const closeBtn = document.getElementById("closeArticleModalBtn");
+      const titleEl = document.getElementById("modalArticleTitle");
+      const badgeEl = document.getElementById("modalArticleBadge");
+      const imgEl = document.getElementById("modalArticleImg");
+      const textEl = document.getElementById("modalArticleText");
+
+      const articlesData = {
+        "art-featured": {
+          title: "Traversing the Continental Divide: 14 Days Above Tree Line",
+          badge: "EXPEDITION DISPATCH",
+          img: "assets/images/blog/blog-featured-continental.webp",
+          text: `
+            <p>At 13,800 feet, the wind doesn't merely blow; it asserts dominion over everything foolish enough to stand upright. On day four of our traverse along the knife-edge ridge of the Colorado Rockies, autumn made its sudden, violent transformation into early winter.</p>
+            <p>We pitched the <strong>Summit Ridge 2P Ultralight Tent</strong> in an alpine col between two jagged granite cirques. With gusts clocking upwards of 54 mph, the aerospace aluminum poles flexed predictably, absorbing kinetic strain while our 850-fill down bags kept interior warmth at a steady 68&deg;F despite outside temperatures sinking to 4&deg;F.</p>
+            <blockquote style="margin:24px 0; padding:16px 24px; border-left:4px solid #C49A52; background:var(--color-bg-cream); font-style:italic; font-family:var(--font-serif); font-size:1.1rem; color:var(--color-dark-green);">
+              "Nature never negotiates. Survival in the high backcountry is fundamentally an exercise in humility, preparation, and uncompromising gear integrity."
+            </blockquote>
+            <p>Throughout our two-week expedition, every single piece of gear had to justify its ounces. In this field journal, we detail topographic route choices, daily caloric pacing, and the key lessons learned traversing 140 miles of remote Continental Divide territory.</p>
+          `
+        },
+        "art-1": {
+          title: "Essential Camping Tips for Beginners",
+          badge: "CAMPING SKILLS",
+          img: "assets/images/blog/blog-camping-tips.webp",
+          text: `
+            <p>Stepping out for your first overnight camping trip can feel intimidating. The secret to an unforgettable trip lies in three fundamentals: shelter selection, campsite ergonomics, and temperature management.</p>
+            <p>Always inspect the ground before laying your footprint. Remove pinecones, sharp rocks, and sticks. Pitch your shelter with the narrowest profile facing into the prevailing wind, and always secure your guylines at a 45-degree angle to prevent fabric flapping.</p>
+            <p>Finally, keep your sleeping pad insulated. A high R-value pad prevents conductive heat loss to the cold forest floor far more effectively than extra blankets stacked on top.</p>
+          `
+        },
+        "art-2": {
+          title: "Top 10 Mountain Destinations for 2027",
+          badge: "DESTINATIONS",
+          img: "assets/images/blog/blog-mountain-destinations.webp",
+          text: `
+            <p>Our expedition scouts surveyed mountain wildernesses across North America to bring you the ten most awe-inspiring alpine destinations for the upcoming season.</p>
+            <p>From the granite cathedral towers of the Wind River Range in Wyoming to the moss-draped emerald valleys of Olympic National Park and the jagged glacial tarns of the North Cascades, each destination offers pristine solitude, untamed wildlife, and world-class trail networks.</p>
+          `
+        },
+        "art-3": {
+          title: "How to Prepare for Your First Multi-Day Trek",
+          badge: "TREKKING",
+          img: "assets/images/blog/blog-first-trek.webp",
+          text: `
+            <p>Multi-day backpacking differs vastly from day hiking. Packing efficiency is everything. Follow the rule of thirds: heavy items (food, camp stove, water) should rest close to your spine in the mid-section of your backpack.</p>
+            <p>Carry backup water filtration (both a hollow-fiber squeeze filter and chlorine dioxide tablets), and break in your trail footwear with at least 25 miles of loaded walking before taking on steep elevation gains.</p>
+          `
+        },
+        "art-4": {
+          title: "Best Camping Equipment for Every Explorer",
+          badge: "EQUIPMENT",
+          img: "assets/images/blog/blog-best-equipment.webp",
+          text: `
+            <p>What separates adequate gear from equipment you can trust with your life? Our materials lab tests fabrics under simulated 60mph wind, sub-zero cold chambers, and 5,000mm hydrostatic head water pressures.</p>
+            <p>In this guide, we review our top picks for titanium stoves, carbon fiber anti-shock trekking poles, and ultralight sil-nylon shelters engineered to endure season after season.</p>
+          `
+        },
+        "art-5": {
+          title: "Exploring the Beauty of Forest Trails in Autumn",
+          badge: "FOREST TRAILS",
+          img: "assets/images/blog/blog-forest-trails.webp",
+          text: `
+            <p>Autumn in old-growth pine forests offers crisp air, golden aspen canopies, and serene trails free of summer crowds. Walking among these giants triggers what Japanese researchers call <em>Shinrin-yoku</em> (forest bathing), proven to lower cortisol levels and stimulate creative problem-solving.</p>
+          `
+        },
+        "art-6": {
+          title: "Sustainable Camping: Leave No Trace in the Wild",
+          badge: "CONSERVATION",
+          img: "assets/images/blog/blog-leave-no-trace.webp",
+          text: `
+            <p>The Leave No Trace philosophy comprises seven core principles: plan ahead and prepare, travel and camp on durable surfaces, dispose of waste properly, leave what you find, minimize campfire impacts, respect wildlife, and be considerate of other visitors.</p>
+            <p>By using biodegradable campsuds, packing out all micro-trash, and adhering to designated trail footprints, we ensure these wild sanctuaries remain pristine.</p>
+          `
+        },
+        "art-7": {
+          title: "Navigation Without GPS: Mastering Map & Compass",
+          badge: "NAVIGATION",
+          img: "assets/images/blog/blog-navigation-compass.webp",
+          text: `
+            <p>When electronic screens freeze or batteries die, an analog topographic map and liquid-damped compass remain 100% reliable. Learn how to orient a map to magnetic north, calculate local declination, and shoot bearings to identifiable terrain landmarks.</p>
+          `
+        },
+        "art-8": {
+          title: "Campfire Gourmet: High-Energy Trail Meals",
+          badge: "FOOD & NUTRITION",
+          img: "assets/images/blog/blog-campfire-gourmet.webp",
+          text: `
+            <p>Expedition nutrition shouldn't mean bland mush. By pairing freeze-dried ingredients with dehydrated herbs, clarified butter (ghee), and toasted pine nuts, you can create nutrient-dense meals that restore glycogen reserves and boost camp morale after a grueling 12-mile ascent.</p>
+          `
+        }
+      };
+
+      document.querySelectorAll(".read-article-trigger").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-article-id") || "art-featured";
+          const data = articlesData[id] || articlesData["art-featured"];
+          titleEl.textContent = data.title;
+          badgeEl.textContent = data.badge;
+          imgEl.src = data.img;
+          textEl.innerHTML = data.text;
+          modal.classList.add("active");
+        });
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+      }
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("active");
+      });
+    });
+  </script>
+</body>
+</html>

@@ -378,21 +378,25 @@ class AuthManager {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
             ${dashboardLabel}
           </a>
+  
           ${user.role === "admin" ? `
             <a href="customer-dashboard.html" class="dropdown-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
               Customer View
             </a>
+    
           ` : `
             <a href="admin-dashboard.html" class="dropdown-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               Admin Portal
             </a>
+    
           `}
           <a href="shop.html?view=wishlist" class="dropdown-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
             Saved Gear
           </a>
+  
           <div class="dropdown-divider"></div>
           <button type="button" class="dropdown-item logout-btn" id="headerLogoutBtn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
@@ -427,10 +431,10 @@ class AuthManager {
       }
     } else {
       userBtn.innerHTML = `
-        <a href="login.html" class="header-action-btn auth-sign-in-link" title="Sign In or Register" aria-label="Sign In">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          <span class="auth-btn-label">Sign In</span>
-        </a>
+        <!-- no duplicate button -->
+
+
+
       `;
     }
 
@@ -466,14 +470,14 @@ class AuthManager {
         </div>
         <div class="mobile-auth-nav-links">
           <a href="${dashboardLink}" class="mobile-auth-link">
-            <span>📊 ${dashboardLabel}</span> <span>&rarr;</span>
-          </a>
+            <span>📊 ${dashboardLabel}</span> <span>&rarr;</span></a>
+  
           <a href="admin-dashboard.html" class="mobile-auth-link">
-            <span>🛡️ Admin Portal</span> <span>&rarr;</span>
-          </a>
+            <span>🛡️ Admin Portal</span> <span>&rarr;</span></a>
+  
           <a href="customer-dashboard.html" class="mobile-auth-link">
-            <span>🌲 Customer Hub</span> <span>&rarr;</span>
-          </a>
+            <span>🌲 Customer Hub</span> <span>&rarr;</span></a>
+  
           <button type="button" class="mobile-logout-btn" id="mobileLogoutBtn">
             <span>🚪 Sign Out</span>
           </button>
@@ -488,17 +492,17 @@ class AuthManager {
       authLinksContainer.innerHTML = `
         <div class="mobile-auth-nav-links">
           <a href="login.html" class="mobile-auth-link highlight">
-            <span>🔑 Sign In</span> <span>&rarr;</span>
-          </a>
+            <span>🔑 Sign In</span> <span>&rarr;</span></a>
+  
           <a href="register.html" class="mobile-auth-link">
-            <span>✨ Create Account</span> <span>&rarr;</span>
-          </a>
+            <span>✨ Create Account</span> <span>&rarr;</span></a>
+  
           <a href="customer-dashboard.html" class="mobile-auth-link">
-            <span>🌲 Customer Dashboard (Demo)</span> <span>&rarr;</span>
-          </a>
+            <span>🌲 Customer Dashboard (Demo)</span> <span>&rarr;</span></a>
+  
           <a href="admin-dashboard.html" class="mobile-auth-link">
-            <span>🛡️ Admin Dashboard (Demo)</span> <span>&rarr;</span>
-          </a>
+            <span>🛡️ Admin Dashboard (Demo)</span> <span>&rarr;</span></a>
+  
         </div>
       `;
     }

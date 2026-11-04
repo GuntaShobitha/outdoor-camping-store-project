@@ -13,6 +13,7 @@
   <!-- Core Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navbar-redesign.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 
   <style>
@@ -154,43 +155,57 @@
        ========================================================================== -->
   <header class="site-header" id="siteHeader">
     <div class="header-container">
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
 
-      <nav class="header-nav-left" aria-label="Main Navigation Left">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="shop.html" class="nav-link active">Services</a>
-      </nav>
-
+      <!-- Left: Logo & Emblem -->
       <div class="header-brand">
-        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">[STACKLY]</a>
+        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">
+          <svg class="brand-icon" viewBox="0 0 24 24">
+            <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z"/>
+          </svg>
+          <span>[STACKLY]</span>
+        </a>
       </div>
 
-      <div class="header-nav-right">
-        <div class="header-links-right">
-          <a href="shop.html" class="nav-link active">Shop</a>
-          <a href="contact.html" class="nav-link">Contact</a>
-          <a href="login.html" class="nav-link" title="Sign In or Register">Account</a>
-        </div>
+      <!-- Center: Navigation Links -->
+      <nav class="header-nav-center" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
 
+      <!-- Right: Cart & Login Button -->
+      <div class="header-nav-right">
+        <!-- Live Search Trigger -->
         <button type="button" class="header-action-btn search-trigger-btn" aria-label="Search gear">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </button>
 
+        <!-- Wishlist -->
         <a href="shop.html?view=wishlist" class="header-action-btn" aria-label="Wishlist items">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
           <span class="count-badge wishlist-count-badge" style="display: none;">0</span>
         </a>
 
-        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Open shopping cart">
+        <!-- Shopping Cart Bag -->
+        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Shopping Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           <span class="count-badge cart-count-badge" style="display: none;">0</span>
         </button>
+
+        <!-- Navbar Login Button (Always opens Login page) -->
+        <a href="login.html" class="nav-login-btn" id="navbarLoginBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Login</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile navigation">
+          <span></span><span></span><span></span>
+        </button>
       </div>
+
     </div>
   </header>
 
@@ -204,11 +219,13 @@
     <nav class="mobile-nav-links">
       <a href="index.html"><span>Home</span> <span>&rarr;</span></a>
       <a href="about.html"><span>About Us</span> <span>&rarr;</span></a>
+      <a href="services.html"><span>Services &amp; Expeditions</span> <span>&rarr;</span></a>
+      <a href="blog.html"><span>Adventure Journal</span> <span>&rarr;</span></a>
       <a href="shop.html" class="active"><span>Shop Catalog</span> <span>&rarr;</span></a>
       <a href="customer-dashboard.html"><span>Customer Hub</span> <span>&rarr;</span></a>
       <a href="admin-dashboard.html"><span>Admin Console</span> <span>&rarr;</span></a>
-      <a href="contact.html"><span>Contact & Support</span> <span>&rarr;</span></a>
-      <a href="login.html" style="color:var(--color-gold);"><span>Account / Sign In</span> <span>&rarr;</span></a>
+      <a href="contact.html"><span>Contact &amp; Support</span> <span>&rarr;</span></a>
+      <a href="login.html" style="color:var(--color-gold-accent);"><span>Account / Sign In</span> <span>&rarr;</span></a>
     </nav>
   </aside>
 

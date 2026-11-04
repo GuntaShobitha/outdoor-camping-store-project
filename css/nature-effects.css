@@ -1,0 +1,450 @@
+/* ==========================================================================
+   STACKLY OUTDOOR & CAMPING - NATURE EFFECTS & INTERACTIVE STORYTELLING
+   Falling leaves, Layered Forest Parallax, Scroll-Bound Trail Runner
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. FALLING LEAVES ATMOSPHERE
+   -------------------------------------------------------------------------- */
+.nature-leaves-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.leaf-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   2. LAYERED FOREST BACKGROUND WITH PARALLAX & MIST
+   -------------------------------------------------------------------------- */
+.layered-forest-section {
+  position: relative;
+  background-color: var(--color-dark-evergreen);
+  overflow: hidden;
+  color: var(--color-cream-white);
+}
+
+.forest-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center bottom;
+  will-change: transform;
+}
+
+/* Atmospheric Sunbeams & Morning Mist */
+.forest-mist-drift {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: radial-gradient(ellipse at 40% 60%, rgba(255, 248, 235, 0.12) 0%, rgba(167, 184, 154, 0.06) 45%, transparent 75%);
+  pointer-events: none;
+  animation: mistFloat 24s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+@keyframes mistFloat {
+  0% { transform: translateX(0) scale(1); }
+  50% { transform: translateX(4%) scale(1.05); }
+  100% { transform: translateX(8%) scale(1); }
+}
+
+.sunbeam-overlay {
+  position: absolute;
+  top: 0;
+  right: 15%;
+  width: 500px;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(196, 154, 82, 0.15) 0%, rgba(233, 224, 206, 0.04) 50%, transparent 80%);
+  transform: skewX(-25deg);
+  pointer-events: none;
+  filter: blur(20px);
+  z-index: 2;
+}
+
+/* Tree Silhouettes Background */
+.tree-silhouettes-svg {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------------------------
+   3. RUNNING PERSON TRAIL ANIMATION (Scroll-Bound)
+   -------------------------------------------------------------------------- */
+.trail-exploration-section {
+  position: relative;
+  background: linear-gradient(180deg, var(--color-dark-evergreen) 0%, var(--color-deep-forest) 50%, var(--color-dark-evergreen) 100%);
+  color: var(--color-cream-white);
+  padding: 100px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(196, 154, 82, 0.2);
+  border-bottom: 1px solid rgba(196, 154, 82, 0.2);
+}
+
+.trail-runner-container {
+  position: relative;
+  margin-top: 48px;
+  padding: 36px 30px;
+  background: rgba(16, 42, 36, 0.75);
+  border: 1px solid rgba(196, 154, 82, 0.3);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 48px rgba(10, 26, 21, 0.4);
+}
+
+/* Telemetry Header */
+.trail-telemetry-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px;
+}
+
+.telemetry-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold-accent);
+}
+
+.pulse-trail-dot {
+  width: 9px;
+  height: 9px;
+  background-color: var(--color-gold-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--color-gold-accent);
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+.telemetry-stats-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.telemetry-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-sage-green);
+}
+
+.stat-val {
+  font-family: var(--font-hero);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Trail Track Stage */
+.trail-track-stage {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(100, 124, 80, 0.18) 0%, transparent 70%);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Background Topographic Grid */
+.trail-topo-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.45;
+}
+
+/* Path SVG */
+.trail-path-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.trail-base-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 4;
+  stroke-dasharray: 6 6;
+}
+
+.trail-progress-line {
+  fill: none;
+  stroke: var(--color-gold-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear;
+  filter: drop-shadow(0 0 6px rgba(196, 154, 82, 0.6));
+}
+
+/* Waypoints along the Trail */
+.trail-waypoint {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.waypoint-pin {
+  width: 18px;
+  height: 18px;
+  background: var(--color-dark-evergreen);
+  border: 2px solid var(--color-sage-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.waypoint-pin::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--color-sage-green);
+  border-radius: 50%;
+}
+
+.trail-waypoint.reached .waypoint-pin {
+  border-color: var(--color-gold-accent);
+  background: var(--color-gold-accent);
+  box-shadow: 0 0 14px var(--color-gold-accent);
+}
+
+.trail-waypoint.reached .waypoint-pin::after {
+  background: var(--color-dark-evergreen);
+}
+
+.waypoint-label {
+  margin-top: 8px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-sage-green);
+  white-space: nowrap;
+  background: rgba(16, 42, 36, 0.85);
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: color 0.3s ease;
+}
+
+.trail-waypoint.reached .waypoint-label {
+  color: #ffffff;
+  border-color: rgba(196, 154, 82, 0.4);
+}
+
+/* Running Person Avatar Element */
+.trail-runner-avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 70px;
+  margin-left: -30px;
+  margin-top: -65px;
+  pointer-events: none;
+  z-index: 10;
+  will-change: transform;
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.runner-svg-sprite {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+}
+
+/* Trail Runner Dynamic Gait Keyframes */
+.runner-arm-front {
+  transform-origin: 25px 22px;
+  animation: runnerArmSwing 0.6s infinite ease-in-out alternate;
+}
+
+.runner-arm-back {
+  transform-origin: 25px 22px;
+  animation: runnerArmSwingBack 0.6s infinite ease-in-out alternate;
+}
+
+.runner-leg-front {
+  transform-origin: 23px 38px;
+  animation: runnerLegStrideFront 0.6s infinite ease-in-out alternate;
+}
+
+.runner-leg-back {
+  transform-origin: 23px 38px;
+  animation: runnerLegStrideBack 0.6s infinite ease-in-out alternate;
+}
+
+.runner-body-bob {
+  animation: runnerTorsoBob 0.3s infinite ease-in-out alternate;
+}
+
+@keyframes runnerTorsoBob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+@keyframes runnerArmSwing {
+  0% { transform: rotate(-35deg); }
+  100% { transform: rotate(35deg); }
+}
+
+@keyframes runnerArmSwingBack {
+  0% { transform: rotate(35deg); }
+  100% { transform: rotate(-35deg); }
+}
+
+@keyframes runnerLegStrideFront {
+  0% { transform: rotate(-45deg); }
+  100% { transform: rotate(45deg); }
+}
+
+@keyframes runnerLegStrideBack {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(-45deg); }
+}
+
+/* Dust Trail Particles */
+.dust-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgba(233, 224, 206, 0.45);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: dustPuff 0.6s forwards ease-out;
+}
+
+@keyframes dustPuff {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
+  100% { transform: scale(2.2) translate(-16px, -10px); opacity: 0; }
+}
+
+/* Trail Controls */
+.trail-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.trail-scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  color: var(--color-sage-green);
+}
+
+.mouse-scroll-icon {
+  width: 18px;
+  height: 28px;
+  border: 2px solid var(--color-sage-green);
+  border-radius: 12px;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.mouse-scroll-wheel {
+  width: 3px;
+  height: 6px;
+  background: var(--color-gold-accent);
+  border-radius: 2px;
+  position: absolute;
+  top: 5px;
+  animation: mouseWheel 1.5s infinite;
+}
+
+@keyframes mouseWheel {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(9px); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .runner-arm-front,
+  .runner-arm-back,
+  .runner-leg-front,
+  .runner-leg-back,
+  .runner-body-bob,
+  .forest-mist-drift,
+  .pulse-trail-dot {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .trail-track-stage {
+    height: 180px;
+  }
+  .telemetry-stats-group {
+    gap: 14px;
+  }
+  .stat-val {
+    font-size: 0.95rem;
+  }
+  .trail-runner-container {
+    padding: 22px 16px;
+  }
+}

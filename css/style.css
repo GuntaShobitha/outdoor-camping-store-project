@@ -9,21 +9,29 @@
 /* 2. Design Tokens & CSS Variables */
 :root {
   /* Exact Colors from Reference */
-  --color-primary-green: #143828;       /* Deep Pine / Hunter Green (Hero title, accents) */
-  --color-dark-green: #10291f;          /* Very Dark Green (Icon circles, banners) */
-  --color-forest-deep: #0c1a14;         /* Nav bar & dark elements */
-  --color-gold: #c8963e;                /* Golden ochre (Logo, subheadings, tags) */
-  --color-gold-hover: #b07f2e;          /* Deeper gold for hover */
-  --color-gold-light: #f5eedf;          /* Tinted light gold */
-  --color-bg-cream: #faf8f5;            /* Warm off-white / light cream */
+  --color-primary-green: #183D32;       /* Deep Forest Green */
+  --color-dark-green: #102A24;          /* Dark Evergreen */
+  --color-forest-deep: #102A24;         /* Dark Evergreen */
+  --color-gold: #C49A52;                /* Golden Accent */
+  --color-gold-hover: #b0873d;          /* Deeper gold for hover */
+  --color-gold-light: #E9E0CE;          /* Warm Sand */
+  --color-bg-cream: #F7F5EF;            /* Cream White */
   --color-bg-white: #ffffff;            /* Pure white */
-  --color-bg-alt: #f3efe8;              /* Soft stone gray-beige */
+  --color-bg-alt: #E9E0CE;              /* Warm Sand */
+  --color-deep-forest: #183D32;         /* Deep Forest Green */
+  --color-dark-evergreen: #102A24;      /* Dark Evergreen */
+  --color-moss-green: #647C50;          /* Moss Green */
+  --color-sage-green: #A7B89A;          /* Sage Green */
+  --color-warm-sand: #E9E0CE;           /* Warm Sand */
+  --color-cream-white: #F7F5EF;         /* Cream White */
+  --color-earth-brown: #795C43;         /* Earth Brown */
+  --color-gold-accent: #C49A52;         /* Golden Accent */
   
   /* Text Colors */
-  --color-text-dark: #121c17;           /* Main headings & text */
-  --color-text-body: #4a5951;           /* Readable body copy */
-  --color-text-muted: #74837b;          /* Meta, specs, small text */
-  --color-text-light: #ffffff;          /* White text on dark */
+  --color-text-dark: #102A24;           /* Dark Evergreen */
+  --color-text-body: #32443b;           /* Deep readable forest tone */
+  --color-text-muted: #647C50;          /* Moss Green meta */
+  --color-text-light: #F7F5EF;          /* Cream White text on dark */
   
   /* Borders & Shadows */
   --color-border: #e3ded5;

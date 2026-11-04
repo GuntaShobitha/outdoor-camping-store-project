@@ -3,62 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="About Stackly Outdoor & Camping Gear - Heritage, craftsmanship, sustainable sourcing, and our lifetime backcountry guarantee." />
-  <meta name="theme-color" content="#143828" />
-  <title>About Us &mdash; STACKLY Outdoor Co.</title>
+  <meta name="description" content="About Stackly Outdoor & Camping Co. - Heritage, Craftsmanship, Wilderness Philosophy, and Sustainable Backcountry Expeditions." />
+  <meta name="theme-color" content="#102A24" />
+  <title>About Us &mdash; Heritage &bull; Purpose &bull; Craft &bull; STACKLY</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8963e'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C49A52'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
 
-  <!-- Core Stylesheets -->
+  <!-- Core & Enhancement Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navbar-redesign.css" />
+  <link rel="stylesheet" href="css/nature-effects.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
 
-  <!-- Site Header -->
+  <!-- ==========================================================================
+       SITE HEADER & NAVBAR (Premium Nature Redesign)
+       ========================================================================== -->
   <header class="site-header" id="siteHeader">
     <div class="header-container">
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="header-nav-left" aria-label="Main Navigation Left">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link active">About</a>
-        <a href="shop.html" class="nav-link">Services</a>
-      </nav>
-
+      
+      <!-- Left: Logo -->
       <div class="header-brand">
-        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">[STACKLY]</a>
+        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">
+          <svg class="brand-icon" viewBox="0 0 24 24">
+            <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z"/>
+          </svg>
+          <span>[STACKLY]</span>
+        </a>
       </div>
 
-      <div class="header-nav-right">
-        <div class="header-links-right">
-          <a href="shop.html" class="nav-link">Shop</a>
-          <a href="contact.html" class="nav-link">Contact</a>
-          <a href="login.html" class="nav-link" title="Sign In or Register">Account</a>
-        </div>
+      <!-- Center: Navigation Links -->
+      <nav class="header-nav-center" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
 
+      <!-- Right: Cart & Login Button -->
+      <div class="header-nav-right">
+        <!-- Live Search Trigger -->
         <button type="button" class="header-action-btn search-trigger-btn" aria-label="Search gear">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </button>
 
+        <!-- Wishlist -->
         <a href="shop.html?view=wishlist" class="header-action-btn" aria-label="Wishlist items">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
           <span class="count-badge wishlist-count-badge" style="display: none;">0</span>
         </a>
 
-        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Open shopping cart">
+        <!-- Shopping Cart Bag -->
+        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Shopping Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           <span class="count-badge cart-count-badge" style="display: none;">0</span>
         </button>
+
+        <!-- Navbar Login Button (Always opens Login page) -->
+        <a href="login.html" class="nav-login-btn" id="navbarLoginBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Login</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile navigation">
+          <span></span><span></span><span></span>
+        </button>
       </div>
+
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
+  <!-- Mobile Navigation Drawer -->
   <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
   <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
@@ -68,229 +88,404 @@
     <nav class="mobile-nav-links">
       <a href="index.html"><span>Home</span> <span>&rarr;</span></a>
       <a href="about.html" class="active"><span>About Us</span> <span>&rarr;</span></a>
+      <a href="services.html"><span>Services &amp; Expeditions</span> <span>&rarr;</span></a>
+      <a href="blog.html"><span>Adventure Journal</span> <span>&rarr;</span></a>
       <a href="shop.html"><span>Shop Catalog</span> <span>&rarr;</span></a>
       <a href="customer-dashboard.html"><span>Customer Hub</span> <span>&rarr;</span></a>
-      <a href="admin-dashboard.html"><span>Admin Console</span> <span>&rarr;</span></a>
-      <a href="contact.html"><span>Contact & Support</span> <span>&rarr;</span></a>
-      <a href="login.html" style="color:var(--color-gold);"><span>Account / Sign In</span> <span>&rarr;</span></a>
+      <a href="contact.html"><span>Contact &amp; Support</span> <span>&rarr;</span></a>
+      <a href="login.html" style="color:var(--color-gold-accent);"><span>Account / Sign In</span> <span>&rarr;</span></a>
     </nav>
   </aside>
 
-  <!-- Main Content -->
-  <main>
-    <!-- About Hero Banner -->
-    <section class="section" style="background-color: var(--color-primary-green); color: #ffffff; padding-top: calc(var(--header-height) + 60px); padding-bottom: 70px; text-align: center;">
-      <div class="container">
-        <span class="section-eyebrow" style="color: var(--color-gold);">HERITAGE &bull; PURPOSE &bull; CRAFT</span>
-        <h1 class="section-title-serif" style="color: #ffffff; font-size: 3rem; margin-bottom: 16px;">Gear Built for Nature's Realities</h1>
-        <p style="color: rgba(255, 255, 255, 0.85); max-width: 650px; margin: 0 auto; font-size: 1.0625rem; line-height: 1.7;">
-          Born out of the Colorado Rockies, Stackly was founded on a singular premise: outdoors gear should never fail when weather turns ferocious.
+  <main style="padding-top: var(--header-height);">
+
+    <!-- ==========================================================================
+         SECTION 1: ABOUT OUR JOURNEY (Hero with Mountain Backdrop & Text Reveal)
+         ========================================================================== -->
+    <section class="section" style="position:relative; background:linear-gradient(180deg, #102A24 0%, #183D32 100%); color:#F7F5EF; padding:110px 0 85px; text-align:center; overflow:hidden;">
+      <div class="nature-leaves-overlay">
+        <canvas id="heroLeavesCanvas" class="leaf-canvas"></canvas>
+      </div>
+      <div class="forest-mist-drift"></div>
+
+      <div class="container" style="position:relative; z-index:3;">
+        <span class="section-eyebrow" style="color:#C49A52; letter-spacing:0.18em;">HERITAGE &bull; PURPOSE &bull; CRAFT</span>
+        <h1 class="section-title-serif" style="color:#ffffff; font-size:clamp(2.5rem, 5vw, 4rem); margin:18px auto 22px; max-width:880px; line-height:1.15;">
+          About Our Journey
+        </h1>
+        <p style="color:#E9E0CE; font-size:1.15rem; max-width:720px; margin:0 auto 32px; line-height:1.7;">
+          Born in the shadow of the Colorado Rockies, Stackly was founded on a singular conviction: outdoor adventure should forge deep humility with nature, backed by equipment that will never fail when elements turn ferocious.
         </p>
+        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(196,154,82,0.3); padding:8px 20px; border-radius:9999px; font-size:0.84rem; color:#A7B89A;">
+          <span>🌲</span> <span>ESTABLISHED 2014 &bull; BOULDER, COLORADO</span>
+        </div>
       </div>
     </section>
 
-    <!-- Detailed About Story Section with Reference Tent Photo -->
-    <section class="section about-section">
+    <!-- ==========================================================================
+         SECTION 2: OUR STORY (Split Layout with Scenic Camping Image)
+         ========================================================================== -->
+    <section class="section about-section" style="background-color: var(--color-bg-cream);">
       <div class="container">
-        <div class="about-grid">
-          <div class="about-image-card">
-            <img src="assets/images/sections/about-tent-view.webp" alt="Camping tent pitched on mountain overlook" class="about-img" />
+        <div class="about-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:54px; align-items:center;">
+          
+          <!-- Image Card -->
+          <div class="about-image-card reveal-up" style="border-radius:24px; overflow:hidden; box-shadow:var(--shadow-card); position:relative;">
+            <img src="assets/images/sections/about-tent-view.webp" alt="Camping tent overlooking serene mountain lake" class="about-img" loading="lazy" style="width:100%; height:460px; object-fit:cover;" />
+            <div style="position:absolute; bottom:20px; left:20px; background:rgba(16,42,36,0.9); padding:12px 20px; border-radius:12px; border:1px solid rgba(196,154,82,0.3);">
+              <span style="color:#C49A52; font-size:0.75rem; font-weight:700; text-transform:uppercase;">FIELD TEST LOCATION</span>
+              <strong style="display:block; color:#ffffff; font-size:0.95rem;">Emerald Tarn Basecamp, 10,400 FT</strong>
+            </div>
           </div>
-          <div class="about-content">
-            <span class="section-eyebrow">WHO WE ARE</span>
-            <h2 class="section-title-serif">A BIT ABOUT US.</h2>
-            <p class="about-paragraph">
-              Stackly is an American outdoor company focused on the adventurous lifestyle of camping and outdoor gear. We design products for anyone who appreciates the outdoors, with high quality materials that will withstand the test of time and nature's elements.
+
+          <!-- Story Text Content -->
+          <div class="about-content reveal-up">
+            <span class="section-eyebrow" style="color:var(--color-gold);">WHO WE ARE</span>
+            <h2 class="section-title-serif" style="color:var(--color-dark-green); margin:10px 0 20px;">Our Story</h2>
+            <p style="color:var(--color-text-body); font-size:1.02rem; line-height:1.75; margin-bottom:16px;">
+              Over a decade ago, our founders found themselves trapped by an unpredicted September blizzard on an exposed ridge above 12,000 feet. When cheap seams sheared and fiberglass poles splintered in the gale, a fundamental truth became clear: standard gear was built for showrooms, not real wilderness survival.
             </p>
-            <p class="about-paragraph">
-              Whether you are pitching a tent beneath the northern lights or hiking along the Continental Divide, our equipment is built with lightweight precision, obsessive stitching, and materials engineered to perform across every climate zone on Earth.
+            <p style="color:var(--color-text-body); font-size:1.02rem; line-height:1.75; margin-bottom:24px;">
+              Returning to Boulder, they gathered master pattern-makers, aerospace metallurgists, and veteran mountain guides to craft gear obsessive about structural integrity, featherlight portability, and ethical sourcing. Today, Stackly is trusted across polar traverses, deep canyon explorations, and peaceful family weekends.
             </p>
-            <div style="margin-top: 24px; display: flex; gap: 16px;">
-              <a href="shop.html" class="btn btn-primary">Explore Our Gear</a>
-              <a href="contact.html" class="btn btn-outline">Connect With Us</a>
+            <div style="display:flex; gap:16px; flex-wrap:wrap;">
+              <a href="services.html" class="btn btn-primary" style="background:#183D32; color:#ffffff; border-color:#183D32;">Explore Our Services</a>
+              <a href="shop.html" class="btn btn-outline" style="color:var(--color-dark-green); border-color:var(--color-dark-green);">Browse Armory</a>
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- The 6 Pillars of Product Integrity (From Reference Section) -->
-    <section class="section promise-section" style="background-color: var(--color-bg-white);">
-      <!-- Topographic Contour Mound Decorations (from uploaded reference assets) -->
-      <img src="assets/images/sections/topo-mound-crop.png" alt="" class="topo-bg-left" aria-hidden="true" />
-      <img src="assets/images/sections/topo-mound.png" alt="" class="topo-bg-right" aria-hidden="true" />
+    <!-- ==========================================================================
+         SECTION 3: OUR MISSION & VISION (Modern Animated Cards)
+         ========================================================================== -->
+    <section class="section" style="background-color: var(--color-bg-white);">
       <div class="container">
-        <div class="section-header-center">
-          <span class="section-eyebrow">OUR PROMISE</span>
-          <h2 class="section-title-serif">SETTING THE BAR FOR OUR PRODUCTS.</h2>
-          <p class="section-subtitle">
-            Every tent pole, zipper tooth, and down baffle is engineered to strict alpine standards.
-          </p>
+        <div style="text-align:center; max-width:680px; margin:0 auto 54px;">
+          <span class="section-eyebrow" style="color:var(--color-gold);">CORE PRINCIPLES</span>
+          <h2 class="section-title-serif" style="color:var(--color-dark-green);">Our Mission &amp; Vision</h2>
+          <p style="color:var(--color-text-body); margin-top:12px;">Guiding every expedition route, product prototype, and conservation partnership we undertake.</p>
         </div>
 
-        <div class="features-grid">
-          <div class="feature-item">
-            <div class="feature-icon-circle">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
-            </div>
-            <h3 class="feature-title">SUSTAINABLE SOURCING</h3>
-            <p class="feature-desc">We partner exclusively with bluesign® certified mills and RDS (Responsible Down Standard) farms.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:28px;">
+          
+          <div class="reveal-up" style="background:var(--color-bg-cream); padding:36px 28px; border-radius:20px; border:1px solid var(--color-border); box-shadow:var(--shadow-sm); transition:transform 0.3s ease;">
+            <span style="font-size:2.2rem; display:block; margin-bottom:16px;">🌲</span>
+            <h3 style="font-family:var(--font-serif); font-size:1.3rem; color:var(--color-dark-green); margin-bottom:10px;">Wilderness Stewardship</h3>
+            <p style="color:var(--color-text-body); font-size:0.92rem; line-height:1.65;">
+              Instilling an unwavering Leave No Trace ethos. We advocate for wild land preservation, trail restoration, and zero ecological footprint on every route.
+            </p>
           </div>
 
-          <div class="feature-item">
-            <div class="feature-icon-circle">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>
-            </div>
-            <h3 class="feature-title">LIFETIME WARRANTY</h3>
-            <p class="feature-desc">Every piece of gear comes with free field repairs at our Boulder repair clinic for the life of the product.</p>
+          <div class="reveal-up" style="background:var(--color-bg-cream); padding:36px 28px; border-radius:20px; border:1px solid var(--color-border); box-shadow:var(--shadow-sm); transition:transform 0.3s ease;">
+            <span style="font-size:2.2rem; display:block; margin-bottom:16px;">🛡️</span>
+            <h3 style="font-family:var(--font-serif); font-size:1.3rem; color:var(--color-dark-green); margin-bottom:10px;">Uncompromising Durability</h3>
+            <p style="color:var(--color-text-body); font-size:0.92rem; line-height:1.65;">
+              Rejecting planned obsolescence. Every product is built with ripstop siliconized cordura, aircraft aluminum, and lifetime repairability.
+            </p>
           </div>
 
-          <div class="feature-item">
-            <div class="feature-icon-circle">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>
-            </div>
-            <h3 class="feature-title">ALL-TERRAIN TESTED</h3>
-            <p class="feature-desc">Prototyped in winter conditions at 12,000+ feet in the Colorado Rocky Mountains.</p>
+          <div class="reveal-up" style="background:var(--color-bg-cream); padding:36px 28px; border-radius:20px; border:1px solid var(--color-border); box-shadow:var(--shadow-sm); transition:transform 0.3s ease;">
+            <span style="font-size:2.2rem; display:block; margin-bottom:16px;">🧭</span>
+            <h3 style="font-family:var(--font-serif); font-size:1.3rem; color:var(--color-dark-green); margin-bottom:10px;">Universal Access</h3>
+            <p style="color:var(--color-text-body); font-size:0.92rem; line-height:1.65;">
+              Democratizing the great outdoors. Through accessible rental gear and community trail scholarships, we believe nature belongs to everyone.
+            </p>
           </div>
 
-          <div class="feature-item">
-            <div class="feature-icon-circle">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12l4 6-10 13L2 9z"></path></svg>
-            </div>
-            <h3 class="feature-title">PREMIUM MATERIALS</h3>
-            <p class="feature-desc">High-tenacity ripstop Cordura, DAC Featherlite alloy poles, and waterproof YKK AquaGuard closures.</p>
-          </div>
-
-          <div class="feature-item">
-            <div class="feature-icon-circle">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line></svg>
-            </div>
-            <h3 class="feature-title">DESIGNED BY YOU</h3>
-            <p class="feature-desc">Direct feedback channels with certified AMGA guides and Appalachian trail thru-hikers.</p>
-          </div>
-
-          <div class="feature-item">
-            <div class="feature-icon-circle">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-            </div>
-            <h3 class="feature-title">QUALITY ASSURED</h3>
-            <p class="feature-desc">Hydrostatic head pressure testing up to 3,000mm to guarantee impenetrable waterproofing.</p>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Environmental Stewardship Section -->
-    <section class="section" id="sustainability" style="background-color: var(--color-bg-cream);">
+    <!-- ==========================================================================
+         SECTION 4: EXPLORE THE WILDERNESS (Curated Image Grid)
+         ========================================================================== -->
+    <section class="section" style="background-color: var(--color-dark-green); color:#F7F5EF;">
       <div class="container">
-        <div style="max-width: 760px; margin: 0 auto; text-align: center;">
-          <span class="section-eyebrow">PRESERVING WILD SPACES</span>
-          <h2 class="section-title-serif">Our Planetary Commitment</h2>
-          <p style="font-size: 1.0625rem; line-height: 1.7; color: var(--color-text-body); margin-bottom: 30px;">
-            We believe that outdoor businesses have an existential responsibility to protect the wild environments our customers explore. We contribute 1% of every order to public lands conservation, trail restoration, and reforestation initiatives.
+        <div style="text-align:center; max-width:700px; margin:0 auto 50px;">
+          <span class="section-eyebrow" style="color:var(--color-gold);">FIELD DESTINATIONS</span>
+          <h2 class="section-title-serif" style="color:#ffffff;">Explore the Wilderness</h2>
+          <p style="color:var(--color-warm-sand); margin-top:12px;">From ancient temperate rainforests to crystalline alpine lakes, discover the natural sanctuaries our team frequents.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(270px, 1fr)); gap:24px;">
+          
+          <div class="reveal-up" style="position:relative; height:320px; border-radius:18px; overflow:hidden; border:1px solid rgba(196,154,82,0.25);">
+            <img src="assets/images/sections/about-forest-sanctuary.webp" alt="Old-Growth Forest Sanctuary" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;" />
+            <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,42,36,0.95) 0%, transparent 65%);"></div>
+            <div style="position:absolute; bottom:20px; left:20px; right:20px;">
+              <span style="color:#C49A52; font-size:0.75rem; font-weight:700; text-transform:uppercase;">OLD-GROWTH CANOPY</span>
+              <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:#ffffff; margin:4px 0 2px;">Redwood Forest Sanctuary</h4>
+              <p style="font-size:0.8rem; color:#A7B89A;">Hoh Valley &bull; Mossy River Basins</p>
+            </div>
+          </div>
+
+          <div class="reveal-up" style="position:relative; height:320px; border-radius:18px; overflow:hidden; border:1px solid rgba(196,154,82,0.25);">
+            <img src="assets/images/sections/about-alpine-summit.webp" alt="Alpine Summit Ridges" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;" />
+            <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,42,36,0.95) 0%, transparent 65%);"></div>
+            <div style="position:absolute; bottom:20px; left:20px; right:20px;">
+              <span style="color:#C49A52; font-size:0.75rem; font-weight:700; text-transform:uppercase;">HIGH ELEVATION</span>
+              <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:#ffffff; margin:4px 0 2px;">Alpine Summit Ridges</h4>
+              <p style="font-size:0.8rem; color:#A7B89A;">14,000 FT &bull; Continental Divide</p>
+            </div>
+          </div>
+
+          <div class="reveal-up" style="position:relative; height:320px; border-radius:18px; overflow:hidden; border:1px solid rgba(196,154,82,0.25);">
+            <img src="assets/images/sections/about-crystal-lake.webp" alt="Glacial Emerald Lake" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;" />
+            <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,42,36,0.95) 0%, transparent 65%);"></div>
+            <div style="position:absolute; bottom:20px; left:20px; right:20px;">
+              <span style="color:#C49A52; font-size:0.75rem; font-weight:700; text-transform:uppercase;">GLACIAL WATERS</span>
+              <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:#ffffff; margin:4px 0 2px;">Emerald Lake Glacial Tarn</h4>
+              <p style="font-size:0.8rem; color:#A7B89A;">Alpine Cirques &bull; Packrafting Haven</p>
+            </div>
+          </div>
+
+          <div class="reveal-up" style="position:relative; height:320px; border-radius:18px; overflow:hidden; border:1px solid rgba(196,154,82,0.25);">
+            <img src="assets/images/sections/about-campfire-twilight.webp" alt="Campfire Under the Stars" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;" />
+            <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(16,42,36,0.95) 0%, transparent 65%);"></div>
+            <div style="position:absolute; bottom:20px; left:20px; right:20px;">
+              <span style="color:#C49A52; font-size:0.75rem; font-weight:700; text-transform:uppercase;">NIGHT SKY CAMP</span>
+              <h4 style="font-family:var(--font-serif); font-size:1.25rem; color:#ffffff; margin:4px 0 2px;">Twilight Campfire Base</h4>
+              <p style="font-size:0.8rem; color:#A7B89A;">Dark Sky Reserve &bull; Milky Way Vistas</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: OUR ADVENTURE PHILOSOPHY (Creative Typography & Animated Content)
+         ========================================================================== -->
+    <section class="section" style="background-color: var(--color-bg-cream);">
+      <div class="container">
+        <div style="max-width:840px; margin:0 auto; text-align:center;" class="reveal-up">
+          <span class="section-eyebrow" style="color:var(--color-gold);">THE BACKCOUNTRY CREED</span>
+          <h2 class="section-title-serif" style="color:var(--color-dark-green); font-size:clamp(1.8rem, 3.5vw, 2.8rem); line-height:1.3; margin:16px 0 24px;">
+            "We do not conquer mountains; we surrender to their timeless lessons."
+          </h2>
+          <p style="color:var(--color-text-body); font-size:1.1rem; line-height:1.8; margin-bottom:36px;">
+            True exploration is neither a speed contest nor an accumulation of summit selfies. It is an intentional slowing down, an acute awareness of wind shift, altitude change, and track patterns beneath your boots. Our gear is silent, reliable, and deliberately unpretentious.
           </p>
-          <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
-            <div>
-              <strong style="font-size: 2rem; color: var(--color-primary-green); font-family: var(--font-serif); display: block;">100%</strong>
-              <span style="font-size: 0.8125rem; text-transform: uppercase; color: var(--color-text-muted);">Plastic-Free Trail Packaging</span>
+
+          <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+            <div style="background:#ffffff; border:1px solid var(--color-border); border-radius:12px; padding:16px 24px;">
+              <strong style="color:var(--color-dark-green); font-size:1.1rem; display:block;">Purity of Purpose</strong>
+              <span style="font-size:0.82rem; color:var(--color-text-muted);">Every gram justified by function</span>
             </div>
-            <div>
-              <strong style="font-size: 2rem; color: var(--color-primary-green); font-family: var(--font-serif); display: block;">14,000+</strong>
-              <span style="font-size: 0.8125rem; text-transform: uppercase; color: var(--color-text-muted);">Gear Repairs Kept Out of Landfills</span>
+            <div style="background:#ffffff; border:1px solid var(--color-border); border-radius:12px; padding:16px 24px;">
+              <strong style="color:var(--color-dark-green); font-size:1.1rem; display:block;">Leave No Trace</strong>
+              <span style="font-size:0.82rem; color:var(--color-text-muted);">Footprints only, memories taken</span>
             </div>
-            <div>
-              <strong style="font-size: 2rem; color: var(--color-primary-green); font-family: var(--font-serif); display: block;">Net Zero</strong>
-              <span style="font-size: 0.8125rem; text-transform: uppercase; color: var(--color-text-muted);">Carbon Footprint on All Shipments</span>
+            <div style="background:#ffffff; border:1px solid var(--color-border); border-radius:12px; padding:16px 24px;">
+              <strong style="color:var(--color-dark-green); font-size:1.1rem; display:block;">Endless Curiosity</strong>
+              <span style="font-size:0.82rem; color:var(--color-text-muted);">Always questioning what lies past the ridge</span>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ==========================================================================
+         SECTION 6: MEET OUR ADVENTURE TEAM (Realistic Outdoor Photography)
+         ========================================================================== -->
+    <section class="section" style="background-color: #ffffff;">
+      <div class="container">
+        <div style="text-align:center; max-width:680px; margin:0 auto 54px;">
+          <span class="section-eyebrow" style="color:var(--color-gold);">WILDERNESS EXPERTS</span>
+          <h2 class="section-title-serif" style="color:var(--color-dark-green);">Meet Our Adventure Team</h2>
+          <p style="color:var(--color-text-body); margin-top:12px;">Mountain guides, rescue medics, and materials scientists united by a passion for the backcountry.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:32px;">
+          
+          <!-- Member 1 -->
+          <div class="team-card reveal-up" style="background:var(--color-bg-cream); border-radius:20px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card);">
+            <div style="height:280px; overflow:hidden;">
+              <img src="assets/images/team/team-marcus.webp" alt="Marcus Thorne" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+            </div>
+            <div style="padding:24px;">
+              <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin-bottom:4px;">Marcus Thorne</h3>
+              <span style="color:#C49A52; font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:12px;">Founder &bull; Chief Expedition Officer</span>
+              <p style="color:var(--color-text-body); font-size:0.86rem; line-height:1.6;">Veteran mountaineer with 28 summit expeditions across the Rockies, Cascades, and Alaskan Range.</p>
+            </div>
+          </div>
+
+          <!-- Member 2 -->
+          <div class="team-card reveal-up" style="background:var(--color-bg-cream); border-radius:20px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card);">
+            <div style="height:280px; overflow:hidden;">
+              <img src="assets/images/team/team-elena.webp" alt="Elena Vance" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+            </div>
+            <div style="padding:24px;">
+              <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin-bottom:4px;">Elena Vance</h3>
+              <span style="color:#C49A52; font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:12px;">Lead Wilderness Guide &bull; Geologist</span>
+              <p style="color:var(--color-text-body); font-size:0.86rem; line-height:1.6;">AMGA certified guide and glaciologist specializing in alpine weather modeling and navigation.</p>
+            </div>
+          </div>
+
+          <!-- Member 3 -->
+          <div class="team-card reveal-up" style="background:var(--color-bg-cream); border-radius:20px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card);">
+            <div style="height:280px; overflow:hidden;">
+              <img src="assets/images/team/team-kai.webp" alt="Kai Tanaka" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+            </div>
+            <div style="padding:24px;">
+              <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin-bottom:4px;">Kai Tanaka</h3>
+              <span style="color:#C49A52; font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:12px;">Alpine Safety Director &bull; W-EMT</span>
+              <p style="color:var(--color-text-body); font-size:0.86rem; line-height:1.6;">Former mountain search-and-rescue team lead dedicated to wilderness emergency readiness.</p>
+            </div>
+          </div>
+
+          <!-- Member 4 -->
+          <div class="team-card reveal-up" style="background:var(--color-bg-cream); border-radius:20px; overflow:hidden; border:1px solid var(--color-border); box-shadow:var(--shadow-card);">
+            <div style="height:280px; overflow:hidden;">
+              <img src="assets/images/team/team-chloe.webp" alt="Chloe Moreau" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" />
+            </div>
+            <div style="padding:24px;">
+              <h3 style="font-family:var(--font-serif); font-size:1.25rem; color:var(--color-dark-green); margin-bottom:4px;">Chloe Moreau</h3>
+              <span style="color:#C49A52; font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:12px;">Trails Coordinator &bull; Botanist</span>
+              <p style="color:var(--color-text-body); font-size:0.86rem; line-height:1.6;">Forest ecologist overseeing our native tree reforestation and Leave No Trace education programs.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: OUR ACHIEVEMENTS & IMPACT (Animated Counters)
+         ========================================================================== -->
+    <section class="section" style="background:linear-gradient(135deg, #102A24 0%, #183D32 100%); color:#F7F5EF; padding:80px 0;">
+      <div class="container">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:32px; text-align:center;">
+          
+          <div class="reveal-up">
+            <div style="font-family:var(--font-hero); font-size:clamp(2.5rem, 4vw, 3.6rem); font-weight:800; color:#C49A52;" data-counter-target="14500" data-counter-suffix="+">
+              0
+            </div>
+            <span style="font-size:0.9rem; letter-spacing:0.08em; text-transform:uppercase; color:#E9E0CE; font-weight:600;">Adventures Completed</span>
+          </div>
+
+          <div class="reveal-up">
+            <div style="font-family:var(--font-hero); font-size:clamp(2.5rem, 4vw, 3.6rem); font-weight:800; color:#C49A52;" data-counter-target="85" data-counter-suffix="+">
+              0
+            </div>
+            <span style="font-size:0.9rem; letter-spacing:0.08em; text-transform:uppercase; color:#E9E0CE; font-weight:600;">Mountain Destinations</span>
+          </div>
+
+          <div class="reveal-up">
+            <div style="font-family:var(--font-hero); font-size:clamp(2.5rem, 4vw, 3.6rem); font-weight:800; color:#C49A52;" data-counter-target="48000" data-counter-suffix="+">
+              0
+            </div>
+            <span style="font-size:0.9rem; letter-spacing:0.08em; text-transform:uppercase; color:#E9E0CE; font-weight:600;">Happy Explorers</span>
+          </div>
+
+          <div class="reveal-up">
+            <div style="font-family:var(--font-hero); font-size:clamp(2.5rem, 4vw, 3.6rem); font-weight:800; color:#C49A52;" data-counter-target="12" data-counter-suffix="+ Years">
+              0
+            </div>
+            <span style="font-size:0.9rem; letter-spacing:0.08em; text-transform:uppercase; color:#E9E0CE; font-weight:600;">Wilderness Heritage</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: NATURE & SUSTAINABILITY (Eco-Friendly Ethos & Forest Layout)
+         ========================================================================== -->
+    <section class="section" style="background-color: var(--color-bg-white);">
+      <div class="container">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;" class="reveal-up">
+          
+          <div>
+            <span class="section-eyebrow" style="color:var(--color-gold);">1% FOR THE PLANET PARTNER</span>
+            <h2 class="section-title-serif" style="color:var(--color-dark-green); margin:12px 0 20px;">Nature &amp; Sustainability</h2>
+            <p style="color:var(--color-text-body); font-size:1.02rem; line-height:1.75; margin-bottom:18px;">
+              We believe a brand that draws its identity from the wild must contribute actively to its preservation. That is why 100% of our carbon footprint from guided expeditions and shipping logistics is measured, minimized, and permanently offset.
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; gap:14px;">
+                <span style="font-size:1.4rem;">🌱</span>
+                <div>
+                  <strong style="color:var(--color-dark-green);">10,000+ Native Trees Planted</strong>
+                  <p style="font-size:0.86rem; color:var(--color-text-body);">Restoring scorched forest tracts across the Western United States.</p>
+                </div>
+              </div>
+              <div style="display:flex; gap:14px;">
+                <span style="font-size:1.4rem;">♻️</span>
+                <div>
+                  <strong style="color:var(--color-dark-green);">Zero Single-Use Plastics</strong>
+                  <p style="font-size:0.86rem; color:var(--color-text-body);">All gear packaging and campsite meals utilize 100% compostable plant fibers.</p>
+                </div>
+              </div>
+              <div style="display:flex; gap:14px;">
+                <span style="font-size:1.4rem;">🔧</span>
+                <div>
+                  <strong style="color:var(--color-dark-green);">Lifetime Repair Guarantee</strong>
+                  <p style="font-size:0.86rem; color:var(--color-text-body);">Don't replace gear—repair it. Our Boulder workshop restitches and restores gear indefinitely.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="border-radius:24px; overflow:hidden; box-shadow:var(--shadow-lg);">
+            <img src="assets/images/sections/about-sustainability.webp" alt="Pristine Forest River Conservation" loading="lazy" style="width:100%; height:440px; object-fit:cover;" />
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 9: JOIN OUR ADVENTURE COMMUNITY (Inspiring CTA)
+         ========================================================================== -->
+    <section class="section" style="position:relative; background-color: var(--color-deep-forest); color:#F7F5EF; padding:90px 0; text-align:center; overflow:hidden;">
+      <div class="sunbeam-overlay"></div>
+      <div class="container" style="position:relative; z-index:2;">
+        <span class="section-eyebrow" style="color:#C49A52;">BECOME A TRAIL CLUB MEMBER</span>
+        <h2 class="section-title-serif" style="color:#ffffff; font-size:clamp(2rem, 4.5vw, 3.2rem); margin:14px auto 18px; max-width:760px;">
+          Join Our Adventure Community
+        </h2>
+        <p style="color:#E9E0CE; max-width:620px; margin:0 auto 34px; font-size:1.06rem; line-height:1.7;">
+          Unlock exclusive member permits, join secret wilderness weekend retreats, and receive field dispatches directly from our alpine scouts.
+        </p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="services.html" class="btn btn-primary" style="background:#C49A52; color:#102A24; border-color:#C49A52;">Explore Adventures</a>
+          <a href="contact.html" class="btn btn-outline" style="color:#ffffff; border-color:#ffffff;">Connect With Us</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Cart Drawer -->
-  <div class="cart-drawer-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
-    <div class="cart-drawer-header">
-      <h3>Your Trail Pack</h3>
-      <button type="button" class="cart-drawer-close" id="closeCartBtn" aria-label="Close cart">&times;</button>
-    </div>
-    <div class="free-shipping-bar">
-      <div class="free-ship-label" id="freeShippingText">Add <strong>$75.00</strong> more for <strong>FREE Shipping</strong></div>
-      <div class="free-ship-progress-track">
-        <div class="free-ship-progress-fill" id="freeShippingProgress"></div>
+  <!-- Site Footer -->
+  <footer class="site-footer" style="background:#102A24; color:#F7F5EF; padding:60px 0 30px; border-top:1px solid rgba(196,154,82,0.2);">
+    <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px; align-items:center;">
+      <div>
+        <span style="font-family:var(--font-serif); font-size:1.4rem; color:#C49A52; font-weight:700;">[STACKLY]</span>
+        <p style="color:#A7B89A; font-size:0.88rem; margin-top:6px;">High performance gear and guided wilderness expeditions.</p>
       </div>
-    </div>
-    <div class="cart-empty-state" id="cartEmptyState" style="display: none;">
-      <h4>Your pack is empty</h4>
-      <p>Equip yourself with tents, sleeping bags, and essential trail gear.</p>
-    </div>
-    <div class="cart-items-body" id="cartItemsList"></div>
-    <div class="cart-drawer-footer" id="cartDrawerFooter">
-      <div class="cart-coupon-row">
-        <input type="text" id="cartCouponInput" placeholder="Promo code (Try: ADVENTURE10)" />
-        <button type="button" class="btn btn-outline" id="applyCouponBtn">Apply</button>
+      <div style="display:flex; gap:24px;">
+        <a href="about.html" style="color:#C49A52; text-decoration:none;">About</a>
+        <a href="services.html" style="color:#E9E0CE; text-decoration:none;">Services</a>
+        <a href="blog.html" style="color:#E9E0CE; text-decoration:none;">Blog</a>
+        <a href="shop.html" style="color:#E9E0CE; text-decoration:none;">Shop</a>
+        <a href="contact.html" style="color:#E9E0CE; text-decoration:none;">Contact</a>
       </div>
-      <div class="cart-totals-list">
-        <div class="total-line"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
-        <div class="total-line discount-line" id="cartDiscountRow" style="display: none;"><span>Discount</span><span id="cartDiscount">-$0.00</span></div>
-        <div class="total-line"><span>Shipping</span><span id="cartShipping">FREE</span></div>
-        <div class="total-line final-total"><span>Estimated Total</span><span id="cartTotal">$0.00</span></div>
-      </div>
-      <button type="button" class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout &rarr;</button>
-    </div>
-  </aside>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <img src="assets/images/banners/footer-misty-forest.webp" alt="Misty pine forest landscape" class="footer-forest-bg" loading="lazy" />
-    <div class="footer-overlay-gradient"></div>
-    <div class="container footer-content-wrap">
-      <div class="footer-columns-grid">
-        <div class="footer-col">
-          <h3 class="footer-col-title">Explore</h3>
-          <ul class="footer-col-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="shop.html">Shop</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h3 class="footer-col-title">Contact</h3>
-          <ul class="footer-col-list">
-            <li><span>Boulder, Colorado 80302</span></li>
-            <li><a href="mailto:hello@stackly.com">[hello@stackly.com]</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h3 class="footer-col-title">Hours</h3>
-          <ul class="footer-col-list">
-            <li><span>[Mon &ndash; Fri: 08:00 &ndash; 18:00]</span></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h3 class="footer-col-title">Follow</h3>
-          <ul class="footer-col-list">
-            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-            <li><a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-brand-watermark">
-        <span class="footer-watermark-text">[STACKLY]</span>
-        <p class="footer-copyright-note">&copy; 2026 STACKLY Outdoor Co. All rights reserved.</p>
-      </div>
+      <p style="color:#A7B89A; font-size:0.8rem; width:100%; text-align:center; margin-top:20px; border-top:1px solid rgba(255,255,255,0.08); padding-top:20px;">
+        &copy; 2026 Stackly Outdoor Gear Co. &bull; Boulder, Colorado. All rights reserved.
+      </p>
     </div>
   </footer>
 
   <!-- Scripts -->
   <script src="js/products.js"></script>
   <script src="js/cart.js"></script>
-  <script src="js/dashboard-data.js"></script>
   <script src="js/auth.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/validation.js"></script>
   <script src="js/main.js"></script>
-
+  <script src="js/nature-effects.js"></script>
 </body>
 </html>

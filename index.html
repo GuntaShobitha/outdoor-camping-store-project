@@ -13,6 +13,8 @@
   <!-- Core Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/navbar-redesign.css" />
+  <link rel="stylesheet" href="css/nature-effects.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
@@ -36,46 +38,53 @@
   <header class="site-header" id="siteHeader">
     <div class="header-container">
       
-      <!-- Mobile Hamburger Button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <!-- Left Navigation -->
-      <nav class="header-nav-left" aria-label="Main Navigation Left">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="shop.html" class="nav-link">Services</a>
-      </nav>
-
-      <!-- Centered Brand Logo: [STACKLY] -->
+      <!-- Left: Logo -->
       <div class="header-brand">
-        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">[STACKLY]</a>
+        <a href="index.html" class="brand-logo" aria-label="Stackly Outdoor Home">
+          <svg class="brand-icon" viewBox="0 0 24 24">
+            <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z"/>
+          </svg>
+          <span>[STACKLY]</span>
+        </a>
       </div>
 
-      <!-- Right Navigation & Icons -->
-      <div class="header-nav-right">
-        <div class="header-links-right">
-          <a href="shop.html" class="nav-link">Shop</a>
-          <a href="contact.html" class="nav-link">Contact</a>
-          <a href="login.html" class="nav-link" title="Sign In or Register">Account</a>
-        </div>
+      <!-- Center: Navigation Links -->
+      <nav class="header-nav-center" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
 
-        <!-- Action Icons: Search, Wishlist, Cart -->
+      <!-- Right: Cart & Login Button -->
+      <div class="header-nav-right">
+        <!-- Live Search Trigger -->
         <button type="button" class="header-action-btn search-trigger-btn" aria-label="Search gear">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </button>
 
+        <!-- Wishlist -->
         <a href="shop.html?view=wishlist" class="header-action-btn" aria-label="Wishlist items">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
           <span class="count-badge wishlist-count-badge" style="display: none;">0</span>
         </a>
 
-        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Open shopping cart">
+        <!-- Shopping Cart Bag -->
+        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Shopping Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           <span class="count-badge cart-count-badge" style="display: none;">0</span>
+        </button>
+
+        <!-- Navbar Login Button (Always opens Login page) -->
+        <a href="login.html" class="nav-login-btn" id="navbarLoginBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Login</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile navigation">
+          <span></span><span></span><span></span>
         </button>
       </div>
 
@@ -92,11 +101,12 @@
     <nav class="mobile-nav-links">
       <a href="index.html" class="active"><span>Home</span> <span>&rarr;</span></a>
       <a href="about.html"><span>About Us</span> <span>&rarr;</span></a>
+      <a href="services.html"><span>Services &amp; Expeditions</span> <span>&rarr;</span></a>
+      <a href="blog.html"><span>Adventure Journal</span> <span>&rarr;</span></a>
       <a href="shop.html"><span>Shop Catalog</span> <span>&rarr;</span></a>
       <a href="customer-dashboard.html"><span>Customer Hub</span> <span>&rarr;</span></a>
-      <a href="admin-dashboard.html"><span>Admin Console</span> <span>&rarr;</span></a>
       <a href="contact.html"><span>Contact & Support</span> <span>&rarr;</span></a>
-      <a href="login.html" style="color:var(--color-gold);"><span>Account / Sign In</span> <span>&rarr;</span></a>
+      <a href="login.html" style="color:var(--color-gold-accent);"><span>Account / Sign In</span> <span>&rarr;</span></a>
     </nav>
     <div class="mobile-nav-footer">
       <p>🌲 Stackly Outdoor Gear Co.</p>
@@ -109,6 +119,9 @@
          HERO SECTION (Pixel-Perfect Match to Reference Image)
          ========================================================================== -->
     <section class="hero-section" id="hero">
+      <div class="nature-leaves-overlay">
+        <canvas id="heroLeavesCanvas" class="leaf-canvas"></canvas>
+      </div>
       <div class="hero-bg-wrapper">
         <img src="assets/images/banners/hero-lake-kayak.webp" alt="Backpacker overlooking tranquil mountain lake" class="hero-bg-img" />
         <div class="hero-gradient-overlay"></div>
@@ -449,7 +462,126 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION: CHECK OUT OUR PRODUCTS / VISIT SHOP CALLOUT
+         TRAIL RUNNER ANIMATION SECTION (Scroll-Bound Outdoor Adventure Experience)
+         ========================================================================== -->
+    <section class="trail-exploration-section" id="trailExplorationSection">
+      <div class="container">
+        <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+          <span class="section-eyebrow" style="color: var(--color-gold);">LIVE EXPEDITION TRACKER</span>
+          <h2 class="section-title-serif" style="color: #ffffff; font-size: clamp(2rem, 3.5vw, 3rem); margin: 10px 0 16px;">
+            Traverse the Continental Trail
+          </h2>
+          <p style="color: var(--color-warm-sand); font-size: 1.05rem; line-height: 1.6;">
+            Scroll through this section to propel our backcountry runner across 14.8 miles of alpine singletrack, ascending from pine forest valleys to jagged granite summits.
+          </p>
+        </div>
+
+        <div class="trail-runner-container">
+          <!-- Telemetry Bar -->
+          <div class="trail-telemetry-bar">
+            <div class="telemetry-tag">
+              <span class="pulse-trail-dot"></span>
+              <span>GPS Live Expedition Stream</span>
+            </div>
+            <div class="telemetry-stats-group">
+              <div class="telemetry-stat-item">
+                <span class="stat-label">Distance Covered</span>
+                <span class="stat-val" id="trailDistVal">0.0 MI</span>
+              </div>
+              <div class="telemetry-stat-item">
+                <span class="stat-label">Current Elevation</span>
+                <span class="stat-val" id="trailElevVal">5,280 FT</span>
+              </div>
+              <div class="telemetry-stat-item">
+                <span class="stat-label">Pace</span>
+                <span class="stat-val" id="trailPaceVal">6:12 /MI</span>
+              </div>
+              <div class="telemetry-stat-item">
+                <span class="stat-label">Terrain</span>
+                <span class="stat-val" style="color: var(--color-gold);">Singletrack Ridge</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trail Track Stage with SVG Path -->
+          <div class="trail-track-stage" id="trailTrackStage">
+            <!-- Topographic Line Background -->
+            <svg class="trail-topo-svg" viewBox="0 0 1000 220" preserveAspectRatio="none">
+              <path d="M0,180 Q250,90 500,160 T1000,110" fill="none" stroke="#C49A52" stroke-width="1" opacity="0.2"/>
+              <path d="M0,200 Q200,120 450,190 T1000,140" fill="none" stroke="#C49A52" stroke-width="1" opacity="0.15"/>
+              <path d="M0,215 Q300,140 600,200 T1000,170" fill="none" stroke="#C49A52" stroke-width="1" opacity="0.1"/>
+            </svg>
+
+            <!-- Winding Path -->
+            <svg class="trail-path-svg" viewBox="0 0 1000 220" preserveAspectRatio="none">
+              <path id="trailMainPath" class="trail-base-line" d="M 40 180 Q 220 50 420 160 T 750 80 T 960 140" />
+              <path id="trailProgressLine" class="trail-progress-line" d="M 40 180 Q 220 50 420 160 T 750 80 T 960 140" />
+            </svg>
+
+            <!-- Waypoint Markers -->
+            <div class="trail-waypoint" data-pct="0.0" style="left: 40px; top: 180px;">
+              <div class="waypoint-pin"></div>
+              <span class="waypoint-label">Trailhead (5,280')</span>
+            </div>
+
+            <div class="trail-waypoint" data-pct="0.32" style="left: 310px; top: 110px;">
+              <div class="waypoint-pin"></div>
+              <span class="waypoint-label">Pine Ridge (7,450')</span>
+            </div>
+
+            <div class="trail-waypoint" data-pct="0.65" style="left: 640px; top: 115px;">
+              <div class="waypoint-pin"></div>
+              <span class="waypoint-label">Emerald Tarn (9,800')</span>
+            </div>
+
+            <div class="trail-waypoint" data-pct="1.0" style="left: 960px; top: 140px;">
+              <div class="waypoint-pin"></div>
+              <span class="waypoint-label">Summit Col (12,450')</span>
+            </div>
+
+            <!-- Running Person Sprite Avatar -->
+            <div class="trail-runner-avatar" id="trailRunnerAvatar">
+              <svg class="runner-svg-sprite" viewBox="0 0 60 70">
+                <!-- Back Arm -->
+                <g class="runner-arm-back">
+                  <path d="M25,22 L15,32 L8,28" stroke="#795C43" stroke-width="4" stroke-linecap="round" fill="none"/>
+                </g>
+                <!-- Back Leg -->
+                <g class="runner-leg-back">
+                  <path d="M23,38 L14,52 L6,54" stroke="#102A24" stroke-width="5" stroke-linecap="round" fill="none"/>
+                </g>
+                <!-- Torso & Backpack -->
+                <g class="runner-body-bob">
+                  <path d="M16,22 C14,24 14,32 18,36 C20,38 23,38 23,35 Z" fill="#C49A52"/>
+                  <path d="M22,18 L28,20 L25,38 L19,37 Z" fill="#183D32"/>
+                  <circle cx="26" cy="12" r="6" fill="#E9E0CE"/>
+                  <path d="M22,9 Q28,7 33,10 L35,11" stroke="#C49A52" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </g>
+                <!-- Front Leg -->
+                <g class="runner-leg-front">
+                  <path d="M25,38 L36,48 L44,46" stroke="#183D32" stroke-width="5" stroke-linecap="round" fill="none"/>
+                  <path d="M44,46 L49,47 L47,49 Z" fill="#C49A52"/>
+                </g>
+                <!-- Front Arm -->
+                <g class="runner-arm-front">
+                  <path d="M25,22 L35,28 L42,20" stroke="#E9E0CE" stroke-width="4" stroke-linecap="round" fill="none"/>
+                  <rect x="33" y="26" width="3" height="4" fill="#102A24" rx="1"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Bottom Controls & Hints -->
+          <div class="trail-controls-bar">
+            <div class="trail-scroll-hint">
+              <span class="mouse-scroll-icon"><span class="mouse-scroll-wheel"></span></span>
+              <span>Scroll page up/down to control runner speed &amp; progress &bull; Click any waypoint to jump</span>
+            </div>
+            <a href="services.html" class="dash-btn dash-btn-primary dash-btn-sm" style="background:#C49A52; color:#102A24; text-decoration:none;">Book Guided Trail Run &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
          ========================================================================== -->
     <section class="shop-callout-section" id="shop-callout">
       <div class="container">
@@ -784,6 +916,7 @@
   <script src="js/search.js"></script>
   <script src="js/validation.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/nature-effects.js"></script>
 
 </body>
 </html>

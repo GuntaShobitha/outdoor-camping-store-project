@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="404 - Off the Trail. You have wandered into uncharted wilderness. STACKLY Outdoor & Camping." />
+  <meta name="theme-color" content="#102A24" />
+  <title>404 &mdash; Trail Not Found &bull; STACKLY Outdoor Co.</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c8963e'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z'/></svg>" />
+
+  <!-- Core & Nature Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nature-effects.css" />
+
+  <style>
+    /* ==========================================================================
+       404 PAGE - STRICT 100VH ZERO-OVERFLOW RESPONSIVE LAYOUT
+       Theme: Deep Forest Green (#183D32), Dark Evergreen (#102A24), Gold Accent (#C49A52)
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100vh;
+      height: 100dvh;
+      max-height: 100vh;
+      max-height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden !important;
+      background: radial-gradient(ellipse at 50% 30%, #183D32 0%, #102A24 60%, #0a1915 100%);
+      color: #F7F5EF;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* Ambient Background Topography & Light */
+    .bg-topo-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 50% 40%, rgba(196, 154, 82, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(100, 124, 80, 0.15) 0%, transparent 45%),
+        linear-gradient(180deg, rgba(16, 42, 36, 0.4) 0%, rgba(10, 25, 21, 0.85) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bg-mountain-silhouette {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: clamp(80px, 18vh, 180px);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.18;
+    }
+
+    /* Falling Leaves Canvas Layer */
+    .nature-leaves-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Main Container Structure */
+    .error-layout-wrapper {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      height: 100vh;
+      height: 100dvh;
+      max-height: 100vh;
+      max-height: 100dvh;
+      padding: clamp(12px, 2vh, 24px) clamp(16px, 3.5vw, 40px);
+      justify-content: space-between;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* --------------------------------------------------------------------------
+       TOP COMPACT HEADER
+       -------------------------------------------------------------------------- */
+    .error-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      height: clamp(40px, 6vh, 56px);
+      width: 100%;
+    }
+
+    .brand-logo-compact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-serif, 'Cinzel', serif);
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: #C49A52;
+      text-decoration: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .brand-logo-compact:hover {
+      transform: scale(1.02);
+      opacity: 0.95;
+    }
+
+    .brand-logo-compact svg {
+      width: clamp(18px, 2.5vw, 24px);
+      height: clamp(18px, 2.5vw, 24px);
+      stroke: #C49A52;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .header-trail-telemetry {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+      font-weight: 600;
+      color: #A7B89A;
+      background: rgba(16, 42, 36, 0.7);
+      border: 1px solid rgba(196, 154, 82, 0.3);
+      padding: 5px 12px;
+      border-radius: 9999px;
+      backdrop-filter: blur(6px);
+    }
+
+    .telemetry-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #C49A52;
+      box-shadow: 0 0 8px #C49A52;
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.45; }
+    }
+
+    /* --------------------------------------------------------------------------
+       CENTER CONTENT CARD
+       -------------------------------------------------------------------------- */
+    .error-center-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 clamp(8px, 2vw, 24px);
+      min-height: 0; /* Critical flexbox shrink rule */
+      box-sizing: border-box;
+    }
+
+    .error-card-inner {
+      max-width: 660px;
+      width: 100%;
+      background: rgba(16, 42, 36, 0.55);
+      border: 1px solid rgba(196, 154, 82, 0.28);
+      border-radius: clamp(16px, 2.5vw, 24px);
+      padding: clamp(18px, 3.2vh, 36px) clamp(18px, 4vw, 42px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      position: relative;
+    }
+
+    /* Compass Animation */
+    .compass-wrap {
+      margin-bottom: clamp(6px, 1.2vh, 14px);
+      display: inline-block;
+    }
+
+    .compass-svg {
+      width: clamp(48px, 7vh, 72px);
+      height: clamp(48px, 7vh, 72px);
+      filter: drop-shadow(0 4px 12px rgba(196, 154, 82, 0.3));
+    }
+
+    .compass-needle {
+      transform-origin: 50px 50px;
+      animation: needleDrift 7s ease-in-out infinite;
+    }
+
+    @keyframes needleDrift {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(24deg); }
+      45% { transform: rotate(-18deg); }
+      70% { transform: rotate(10deg); }
+      85% { transform: rotate(-6deg); }
+    }
+
+    /* Status Pill */
+    .off-trail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: clamp(0.6875rem, 1.2vw, 0.8125rem);
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #C49A52;
+      background: rgba(196, 154, 82, 0.12);
+      border: 1px solid rgba(196, 154, 82, 0.35);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      margin-bottom: clamp(6px, 1.2vh, 12px);
+    }
+
+    /* Huge 404 Headline with Nature Gradient */
+    .error-number {
+      font-family: var(--font-serif, 'Cinzel', serif);
+      font-size: clamp(3.6rem, 11vh, 6.8rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: 0.05em;
+      background: linear-gradient(180deg, #FFFFFF 20%, #E9E0CE 60%, #C49A52 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin-bottom: clamp(6px, 1.2vh, 12px);
+    }
+
+    /* Descriptive Headings */
+    .error-title {
+      font-family: var(--font-serif, 'Cinzel', serif);
+      font-size: clamp(1.15rem, 2.6vw, 1.75rem);
+      font-weight: 700;
+      color: #F7F5EF;
+      line-height: 1.25;
+      margin-bottom: clamp(6px, 1.2vh, 12px);
+    }
+
+    .error-desc {
+      font-size: clamp(0.8125rem, 1.4vw, 0.95rem);
+      color: #E9E0CE;
+      line-height: 1.55;
+      max-width: 520px;
+      margin: 0 auto clamp(14px, 2.8vh, 26px);
+      opacity: 0.92;
+    }
+
+    /* --------------------------------------------------------------------------
+       REQUIRED BUTTONS: GO BACK & BACK TO HOME
+       -------------------------------------------------------------------------- */
+    .error-actions-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(10px, 2vw, 18px);
+      flex-wrap: wrap;
+    }
+
+    .btn-404 {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: clamp(9px, 1.6vh, 13px) clamp(20px, 2.8vw, 28px);
+      border-radius: 9999px;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+      font-size: clamp(0.8125rem, 1.3vw, 0.9375rem);
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1.5px solid transparent;
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+
+    .btn-404 svg {
+      width: clamp(15px, 1.6vw, 18px);
+      height: clamp(15px, 1.6vw, 18px);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    /* Primary: Back to Home (Golden Accent) */
+    .btn-404-gold {
+      background: var(--color-gold, #C49A52);
+      color: #102A24 !important;
+      border-color: #C49A52;
+      box-shadow: 0 4px 20px rgba(196, 154, 82, 0.38);
+    }
+
+    .btn-404-gold:hover {
+      background: #dbb064;
+      border-color: #dbb064;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(196, 154, 82, 0.52);
+    }
+
+    .btn-404-gold:hover svg {
+      transform: scale(1.1);
+    }
+
+    /* Secondary: Go Back (Warm Sand / Moss Outline) */
+    .btn-404-outline {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(233, 224, 206, 0.4);
+      color: #E9E0CE !important;
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-404-outline:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: #C49A52;
+      color: #FFFFFF !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-404-outline:hover svg {
+      transform: translateX(-3px);
+    }
+
+    /* Alternative Quick Trail Shortcuts */
+    .error-quick-links {
+      margin-top: clamp(10px, 1.8vh, 18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 1.5vw, 18px);
+      flex-wrap: wrap;
+      font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+      color: #A7B89A;
+    }
+
+    .error-quick-links a {
+      color: #E9E0CE;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .error-quick-links a:hover {
+      color: #C49A52;
+      text-decoration: underline;
+    }
+
+    .quick-dot-sep {
+      opacity: 0.45;
+      font-size: 0.7rem;
+    }
+
+    /* --------------------------------------------------------------------------
+       BOTTOM COMPACT FOOTER
+       -------------------------------------------------------------------------- */
+    .error-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      height: clamp(32px, 4.5vh, 44px);
+      font-size: clamp(0.6875rem, 1.1vw, 0.8125rem);
+      color: #A7B89A;
+      width: 100%;
+      border-top: 1px solid rgba(167, 184, 154, 0.12);
+      padding-top: 6px;
+    }
+
+    .error-footer-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .error-footer-right a {
+      color: #A7B89A;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .error-footer-right a:hover {
+      color: #C49A52;
+    }
+
+    /* --------------------------------------------------------------------------
+       RESPONSIVE ADJUSTMENTS FOR SMALL HEIGHTS (Zero-Overflow Guarantee)
+       -------------------------------------------------------------------------- */
+    @media (max-height: 720px) {
+      .compass-wrap { display: none; }
+      .error-card-inner { padding: 16px 24px; }
+      .error-number { font-size: 3.8rem; margin-bottom: 4px; }
+      .error-title { font-size: 1.25rem; margin-bottom: 6px; }
+      .error-desc { font-size: 0.8125rem; margin-bottom: 14px; }
+      .error-actions-group { gap: 10px; }
+      .btn-404 { padding: 8px 18px; font-size: 0.8125rem; }
+      .error-quick-links { margin-top: 10px; font-size: 0.72rem; }
+    }
+
+    @media (max-height: 560px) {
+      .error-quick-links { display: none; }
+      .error-card-inner { padding: 12px 18px; }
+      .off-trail-badge { margin-bottom: 4px; padding: 2px 10px; font-size: 0.65rem; }
+      .error-number { font-size: 2.8rem; margin-bottom: 2px; }
+      .error-title { font-size: 1.05rem; margin-bottom: 4px; }
+      .error-desc { font-size: 0.75rem; margin-bottom: 10px; }
+      .btn-404 { padding: 6px 14px; font-size: 0.75rem; }
+      .error-footer { height: 26px; font-size: 0.65rem; padding-top: 2px; }
+      .header-trail-telemetry { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .error-card-inner { padding: 18px 14px; }
+      .error-actions-group {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+      }
+      .btn-404 {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 120px;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        gap: 6px;
+      }
+      .error-quick-links {
+        font-size: 0.7rem;
+        gap: 6px;
+      }
+      .quick-dot-sep { display: none; }
+      .header-trail-telemetry { display: none; }
+      .error-footer-right { display: none; }
+      .error-footer { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Overlays & Topography -->
+  <div class="bg-topo-overlay"></div>
+
+  <!-- Falling Nature Leaves Canvas Layer -->
+  <div class="nature-leaves-overlay" aria-hidden="true">
+    <canvas id="heroLeavesCanvas" class="leaf-canvas"></canvas>
+  </div>
+
+  <!-- Mountain Silhouette SVG along bottom edge -->
+  <svg class="bg-mountain-silhouette" viewBox="0 0 1440 240" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0 240L140 160L280 200L420 120L580 180L720 90L880 170L1040 110L1180 190L1320 130L1440 240H0Z" fill="#0A1915"/>
+    <path d="M0 240L180 180L340 220L520 150L680 210L860 130L1020 190L1200 140L1340 200L1440 240H0Z" fill="#183D32" opacity="0.4"/>
+  </svg>
+
+  <!-- Master Zero-Overflow Wrapper -->
+  <div class="error-layout-wrapper">
+    
+    <!-- Top Minimal Header -->
+    <header class="error-header">
+      <a href="index.html" class="brand-logo-compact" aria-label="Stackly Outdoor Home">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z"/>
+        </svg>
+        <span>[STACKLY]</span>
+      </a>
+
+      <div class="header-trail-telemetry">
+        <span class="telemetry-pulse"></span>
+        <span>40°00'54"N 105°16'14"W &bull; BOULDER HQ</span>
+      </div>
+    </header>
+
+    <!-- Center Error Content Stage -->
+    <main class="error-center-stage" role="main">
+      <div class="error-card-inner">
+        
+        <!-- Interactive Compass Accent -->
+        <div class="compass-wrap" aria-hidden="true">
+          <svg class="compass-svg" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="46" stroke="#C49A52" stroke-width="2" stroke-dasharray="3 3" opacity="0.7"/>
+            <circle cx="50" cy="50" r="40" stroke="#E9E0CE" stroke-width="1.5" opacity="0.3"/>
+            <circle cx="50" cy="50" r="4" fill="#C49A52"/>
+            <text x="50" y="17" fill="#C49A52" font-size="9" font-weight="800" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">N</text>
+            <text x="50" y="91" fill="#A7B89A" font-size="8" font-weight="700" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">S</text>
+            <text x="87" y="53" fill="#A7B89A" font-size="8" font-weight="700" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">E</text>
+            <text x="13" y="53" fill="#A7B89A" font-size="8" font-weight="700" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif">W</text>
+            <!-- Needle with gentle sway animation -->
+            <g class="compass-needle">
+              <polygon points="50,18 54,50 50,46" fill="#C49A52"/>
+              <polygon points="50,18 46,50 50,46" fill="#dbb064"/>
+              <polygon points="50,82 54,50 50,54" fill="#647C50"/>
+              <polygon points="50,82 46,50 50,54" fill="#795C43"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Wilderness Status Badge -->
+        <div>
+          <span class="off-trail-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            TRAIL NOT FOUND &bull; OFF-TRAIL
+          </span>
+        </div>
+
+        <!-- 404 Headline -->
+        <h1 class="error-number">404</h1>
+
+        <!-- Contextual Message -->
+        <h2 class="error-title">You've Wandered Off the Marked Trail</h2>
+        <p class="error-desc">
+          The backcountry waypoint or expedition route you are looking for does not exist, has shifted due to alpine weather, or has been reclaimed by the wilderness.
+        </p>
+
+        <!-- Mandatory Action Buttons: Go Back & Back to Home -->
+        <div class="error-actions-group">
+          <!-- Button 1: Go Back -->
+          <button type="button" class="btn-404 btn-404-outline" id="goBackBtn" onclick="handleGoBack()" aria-label="Go back to previous page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Go Back</span>
+          </button>
+
+          <!-- Button 2: Back to Home -->
+          <a href="index.html" class="btn-404 btn-404-gold" id="backToHomeBtn" aria-label="Return to basecamp home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Back to Home</span>
+          </a>
+        </div>
+
+        <!-- Alternative Navigation Shortcuts -->
+        <nav class="error-quick-links" aria-label="Quick Navigation">
+          <span>Need orientation?</span>
+          <a href="shop.html">Shop Equipment</a>
+          <span class="quick-dot-sep">&bull;</span>
+          <a href="services.html">Services &amp; Treks</a>
+          <span class="quick-dot-sep">&bull;</span>
+          <a href="blog.html">Field Journal</a>
+          <span class="quick-dot-sep">&bull;</span>
+          <a href="contact.html">Support Base</a>
+        </nav>
+
+      </div>
+    </main>
+
+    <!-- Bottom Compact Footer -->
+    <footer class="error-footer">
+      <div>
+        <span>Stackly Outdoor Co. &copy; 2026 &bull; Leave No Trace Certified</span>
+      </div>
+      <div class="error-footer-right">
+        <span>Signal Status: Re-routing</span>
+        <a href="contact.html">Contact Ranger HQ</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Nature Effects & Falling Leaves Script -->
+  <script src="js/nature-effects.js"></script>
+
+  <!-- Go Back Handler Script -->
+  <script>
+    /**
+     * Smart Backtrack Logic
+     * If browser history contains a prior page on the same origin, backtrack smoothly.
+     * Otherwise, fallback to the website home basecamp.
+     */
+    function handleGoBack() {
+      if (window.history && window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "index.html";
+      }
+    }
+
+    // Keyboard navigation accessibility (ESC key also navigates back to basecamp)
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+
+</body>
+</html>
