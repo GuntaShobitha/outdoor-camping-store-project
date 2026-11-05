@@ -219,6 +219,13 @@
     font-size: 1.75rem;
   }
 
+  .contact-info-card {
+    width: 90vw;
+  }
+  .contact-form-card {
+    width: 90vw;
+  }
+
   .section-subtitle {
     font-size: 0.9375rem;
   }

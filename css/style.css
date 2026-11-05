@@ -110,6 +110,35 @@ ul, ol {
   list-style: none;
 }
 
+.logo-img {
+  height: 35px;
+  filter: brightness(0) invert(1);
+  width: 120px;
+  background-size: cover;
+}
+
+.footer-logo {
+  height: 40px;
+  width: 140px;
+  background-size: cover;
+  filter: brightness(0) invert(1);
+}
+
+.logo-img-login {
+  height: 40px;
+  width: 140px;
+  background-size: cover;
+  filter: brightness(0) invert(0);
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  gap: 20px;
+}
+
 /* 4. Common Container & Section Structure */
 .container {
   width: 100%;
@@ -3067,4 +3096,39 @@ ul, ol {
 .map-section:hover .map-address {
   background: #1e1e22;
   color: var(--gold-light);
+}
+
+
+
+.footer-brand p {
+  font-size: 0.94rem;
+  color: #fff;
+  line-height: 1.7;
+  margin: 1.5rem 0 2rem;
+  max-width: 340px;
+}
+
+.footer-col h4 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.footer-links a {
+  font-size: 0.92rem;
+  color: #fff;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+  transform: translateX(4px);
 }

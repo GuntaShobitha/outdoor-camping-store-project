@@ -360,50 +360,50 @@ class AuthManager {
       const dashboardLabel = user.role === "admin" ? "Admin Console" : "My Dashboard";
       const roleBadge = user.role === "admin" ? "ADMIN" : "MEMBER";
 
-      userBtn.innerHTML = `
-        <div class="user-pill-dropdown-trigger" id="userPillTrigger" tabindex="0" role="button" aria-expanded="false" aria-label="User Account Menu">
-          <span class="user-avatar-circle">${firstName.charAt(0)}</span>
-          <span class="user-name-label">${firstName}</span>
-          <span class="user-badge-mini ${user.role}">${roleBadge}</span>
-          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
-        <div class="user-dropdown-menu" id="userDropdownMenu">
-          <div class="dropdown-header">
-            <strong>${user.name}</strong>
-            <span class="dropdown-email">${user.email}</span>
-            <span class="dropdown-role-pill">${user.roleLabel}</span>
-          </div>
-          <div class="dropdown-divider"></div>
-          <a href="${dashboardLink}" class="dropdown-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            ${dashboardLabel}
-          </a>
+      // userBtn.innerHTML = `
+      //   <div class="user-pill-dropdown-trigger" id="userPillTrigger" tabindex="0" role="button" aria-expanded="false" aria-label="User Account Menu">
+      //     <span class="user-avatar-circle">${firstName.charAt(0)}</span>
+      //     <span class="user-name-label">${firstName}</span>
+      //     <span class="user-badge-mini ${user.role}">${roleBadge}</span>
+      //     <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      //   </div>
+      //   <div class="user-dropdown-menu" id="userDropdownMenu">
+      //     <div class="dropdown-header">
+      //       <strong>${user.name}</strong>
+      //       <span class="dropdown-email">${user.email}</span>
+      //       <span class="dropdown-role-pill">${user.roleLabel}</span>
+      //     </div>
+      //     <div class="dropdown-divider"></div>
+      //     <a href="${dashboardLink}" class="dropdown-item">
+      //       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      //       ${dashboardLabel}
+      //     </a>
   
-          ${user.role === "admin" ? `
-            <a href="customer-dashboard.html" class="dropdown-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              Customer View
-            </a>
+      //     ${user.role === "admin" ? `
+      //       <a href="customer-dashboard.html" class="dropdown-item">
+      //         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      //         Customer View
+      //       </a>
     
-          ` : `
-            <a href="admin-dashboard.html" class="dropdown-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              Admin Portal
-            </a>
+      //     ` : `
+      //       <a href="admin-dashboard.html" class="dropdown-item">
+      //         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      //         Admin Portal
+      //       </a>
     
-          `}
-          <a href="shop.html?view=wishlist" class="dropdown-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            Saved Gear
-          </a>
+      //     `}
+      //     <a href="shop.html?view=wishlist" class="dropdown-item">
+      //       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      //       Saved Gear
+      //     </a>
   
-          <div class="dropdown-divider"></div>
-          <button type="button" class="dropdown-item logout-btn" id="headerLogoutBtn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-            Sign Out
-          </button>
-        </div>
-      `;
+      //     <div class="dropdown-divider"></div>
+      //     <button type="button" class="dropdown-item logout-btn" id="headerLogoutBtn">
+      //       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      //       Sign Out
+      //     </button>
+      //   </div>
+      // `;
 
       // Toggle dropdown listeners
       const trigger = document.getElementById("userPillTrigger");
