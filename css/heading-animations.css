@@ -1,0 +1,159 @@
+/* ==========================================================================
+   STACKLY OUTDOOR & CAMPING - EDITORIAL HEADING TEXT ANIMATIONS
+   Kinetic word reveals, smooth scroll entrances, gold accents and shimmers
+   ========================================================================== */
+
+/* 1. Base Heading Setup & Kinetic Masks */
+.heading-animated {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.heading-animated.heading-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 2. Word-by-Word Kinetic Reveal (For Major Titles) */
+.heading-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+  white-space: normal;
+}
+
+.heading-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(115%) rotate(2.5deg);
+  transform-origin: left bottom;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Space preservation between split words */
+.heading-space {
+  display: inline-block;
+  width: 0.28em;
+}
+
+/* In-View Stagger Trigger */
+.heading-animated.heading-in-view .heading-word {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+  transition-delay: calc(var(--word-idx, 0) * 0.045s);
+}
+
+/* 3. Hero & Above-the-fold Quick Entrance */
+.hero-heading-immediate.heading-in-view .heading-word {
+  transition-delay: calc(0.15s + var(--word-idx, 0) * 0.045s);
+}
+
+/* 4. Gold Accent Line Underline */
+.heading-accent-line {
+  display: block;
+  height: 2px;
+  width: 0;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, #C49A52 50%, transparent);
+  margin: 14px auto 0;
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s,
+              opacity 0.8s ease 0.35s,
+              box-shadow 0.8s ease 0.35s;
+  pointer-events: none;
+}
+
+/* Left-aligned variant */
+.heading-accent-line.line-left {
+  margin: 14px 0 0;
+  background: linear-gradient(90deg, #C49A52 0%, rgba(196, 154, 82, 0.2) 80%, transparent 100%);
+}
+
+.heading-animated.heading-in-view .heading-accent-line {
+  width: 64px;
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(196, 154, 82, 0.45);
+}
+
+/* 5. Gold Shimmer for Accent Keywords (e.g. <span>Wild & Free</span>) */
+.heading-animated span.gold-highlight,
+.auth-visual-title span,
+.heading-animated span.highlight {
+  background: linear-gradient(135deg, #C49A52 0%, #F7F5EF 45%, #C49A52 75%, #b0873d 100%);
+  background-size: 240% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: goldHeadingShimmer 5s ease-in-out infinite;
+}
+
+@keyframes goldHeadingShimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* 6. Eyebrows & Subtitles Staggered Cascade */
+.section-eyebrow,
+.cat-eyebrow,
+.hero-eyebrow,
+.adv-badge,
+.story-eyebrow {
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 7. Interactive Micro-Interactions on Heading Links */
+h1 a, h2 a, h3 a, h4 a,
+.product-title a,
+.cat-card-title a,
+.adventure-title a,
+.footer-col-title a {
+  position: relative;
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover,
+.product-title a:hover,
+.cat-card-title a:hover,
+.adventure-title a:hover {
+  color: var(--color-gold, #C49A52) !important;
+  transform: translateX(3px);
+}
+
+/* 8. Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .heading-animated,
+  .heading-word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .heading-word-mask {
+    overflow: visible !important;
+  }
+  .heading-accent-line {
+    width: 64px !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  .heading-animated span.gold-highlight,
+  .auth-visual-title span {
+    animation: none !important;
+    -webkit-text-fill-color: #C49A52 !important;
+  }
+}
