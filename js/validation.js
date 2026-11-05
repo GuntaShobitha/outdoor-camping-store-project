@@ -44,7 +44,7 @@ class FormValidator {
         
         // Show success
         if (window.stacklyCart && typeof window.stacklyCart.showToast === "function") {
-          window.stacklyCart.showToast(`✨ You're subscribed to Stackly Magazine! Check ${email} for your digital welcome issue.`, "success");
+          window.location.href='./404.html'
         } else {
           alert(`Subscribed! Check ${email} for your welcome edition.`);
         }
@@ -149,20 +149,21 @@ class FormValidator {
 
       if (isValid) {
         const ticketId = "EXP-" + Math.floor(10000 + Math.random() * 90000);
-        contactForm.innerHTML = `
-          <div class="contact-success-state">
-            <div class="success-icon-badge">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </div>
-            <h3>Backcountry Support Ticket Dispatched!</h3>
-            <p>Ticket Reference: <strong>#${ticketId}</strong></p>
-            <p>Thanks for reaching out, <strong>${nameInput.value.trim()}</strong>. One of our wilderness guides or customer support specialists will reply to <strong>${emailInput.value.trim()}</strong> within 4 business hours.</p>
-            <button class="btn btn-primary" onclick="location.reload()">Send Another Message</button>
-          </div>
-        `;
-        if (window.stacklyCart) {
-          window.stacklyCart.showToast("Inquiry received! Check your inbox for ticket confirmation.", "success");
-        }
+        // contactForm.innerHTML = `
+        //   <div class="contact-success-state">
+        //     <div class="success-icon-badge">
+        //       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        //     </div>
+        //     <h3>Backcountry Support Ticket Dispatched!</h3>
+        //     <p>Ticket Reference: <strong>#${ticketId}</strong></p>
+        //     <p>Thanks for reaching out, <strong>${nameInput.value.trim()}</strong>. One of our wilderness guides or customer support specialists will reply to <strong>${emailInput.value.trim()}</strong> within 4 business hours.</p>
+        //     <button class="btn btn-primary" onclick="location.reload()">Send Another Message</button>
+        //   </div>
+        // `;
+        // if (window.stacklyCart) {
+        //   window.stacklyCart.showToast("Inquiry received! Check your inbox for ticket confirmation.", "success");
+        // }
+        window.location.href='./404.html'
       }
     });
   }

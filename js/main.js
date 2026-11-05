@@ -353,7 +353,7 @@ class MainApp {
               </ul>
 
               <div class="adv-cta-actions">
-                <a href="shop.html" class="btn btn-primary">Equip This Trip in Shop</a>
+                <a href="./404.html" class="btn btn-primary">Equip This Trip in Shop</a>
                 <button type="button" class="btn btn-outline" id="advDismissBtn">Close Brief</button>
               </div>
             </div>
