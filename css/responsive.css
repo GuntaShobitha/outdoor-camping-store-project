@@ -378,4 +378,18 @@
     width: 38px;
     height: 38px;
   }
+
+  .trek-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 90vw;
+  }
+  .package-card, .blog-card  {
+    width: 90vw;
+  }
+
+  .section-title-serif  {
+    font-size: 1.75rem;
+  }
 }

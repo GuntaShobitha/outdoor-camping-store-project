@@ -215,14 +215,10 @@ class AuthManager {
     // Find user by email
     let user = users.find(u => u.email.toLowerCase() === cleanEmail);
 
+    // In this demo, accept any valid email + password combination.
+    // If the account already exists, treat the account as active on successful login.
     if (user) {
-      // Check password
-      if (user.password !== password) {
-        errors.password = "Incorrect password. Please try again.";
-        return { success: false, errors };
-      }
-
-      // Check account status
+      // Check account status only (do not reject based on mismatched stored password)
       if (user.status === "suspended") {
         errors.general = "This account has been temporarily suspended. Please contact Boulder HQ support.";
         return { success: false, errors };
@@ -234,39 +230,16 @@ class AuthManager {
         return { success: false, errors };
       }
 
-      // Update role if user explicitly chose customer
+      // Update the in-memory password so the latest password is used for this session.
+      // This lets the same email sign in again later with a different password.
+      user.password = password;
       this.setCurrentUser(user);
       const redirectUrl = user.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
       return { success: true, user, redirectUrl };
     } else {
-      // If user doesn't exist in pre-seeded list, create a new demo account smoothly!
-      // This ensures any valid email + 5-character password works instantly in this interactive demo
-      const displayName = cleanEmail.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-      const newUser = {
-        id: "usr-" + Date.now(),
-        name: displayName || "Outdoor Enthusiast",
-        email: cleanEmail,
-        password: password,
-        role: selectedRole === "admin" ? "admin" : "customer",
-        roleLabel: selectedRole === "admin" ? "Store Administrator" : "Customer / Adventurer",
-        title: selectedRole === "admin" ? "Store Administrator" : "Backcountry Explorer",
-        avatar: "assets/images/sections/avatar-1.webp",
-        registeredDate: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-        phone: "+1 (555) 012-3456",
-        location: "Boulder, CO",
-        status: "active",
-        trailPoints: 500,
-        tier: "Trail Scout",
-        ordersCount: 1,
-        totalSpent: 149.00
-      };
-
-      users.push(newUser);
-      this.saveUsers(users);
-      this.setCurrentUser(newUser);
-
-      const redirectUrl = newUser.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
-      return { success: true, user: newUser, redirectUrl };
+      // Do not create accounts automatically. Only allow login for emails that already exist.
+      errors.email = "No account found with this email address. Please register first.";
+      return { success: false, errors };
     }
   }
 
@@ -460,29 +433,29 @@ class AuthManager {
       const dashboardLink = user.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
       const dashboardLabel = user.role === "admin" ? "Admin Console" : "Customer Dashboard";
 
-      authLinksContainer.innerHTML = `
-        <div class="mobile-auth-user-chip">
-          <span class="mobile-chip-avatar">${user.name.charAt(0)}</span>
-          <div class="mobile-chip-info">
-            <strong>${user.name}</strong>
-            <small>${user.roleLabel}</small>
-          </div>
-        </div>
-        <div class="mobile-auth-nav-links">
-          <a href="${dashboardLink}" class="mobile-auth-link">
-            <span>📊 ${dashboardLabel}</span> <span>&rarr;</span></a>
+      // authLinksContainer.innerHTML = `
+      //   <div class="mobile-auth-user-chip">
+      //     <span class="mobile-chip-avatar">${user.name.charAt(0)}</span>
+      //     <div class="mobile-chip-info">
+      //       <strong>${user.name}</strong>
+      //       <small>${user.roleLabel}</small>
+      //     </div>
+      //   </div>
+      //   <div class="mobile-auth-nav-links">
+      //     <a href="${dashboardLink}" class="mobile-auth-link">
+      //       <span>📊 ${dashboardLabel}</span> <span>&rarr;</span></a>
   
-          <a href="admin-dashboard.html" class="mobile-auth-link">
-            <span>🛡️ Admin Portal</span> <span>&rarr;</span></a>
+      //     <a href="admin-dashboard.html" class="mobile-auth-link">
+      //       <span>🛡️ Admin Portal</span> <span>&rarr;</span></a>
   
-          <a href="customer-dashboard.html" class="mobile-auth-link">
-            <span>🌲 Customer Hub</span> <span>&rarr;</span></a>
+      //     <a href="customer-dashboard.html" class="mobile-auth-link">
+      //       <span>🌲 Customer Hub</span> <span>&rarr;</span></a>
   
-          <button type="button" class="mobile-logout-btn" id="mobileLogoutBtn">
-            <span>🚪 Sign Out</span>
-          </button>
-        </div>
-      `;
+      //     <button type="button" class="mobile-logout-btn" id="mobileLogoutBtn">
+      //       <span>🚪 Sign Out</span>
+      //     </button>
+      //   </div>
+      // `;
 
       const mLogout = document.getElementById("mobileLogoutBtn");
       if (mLogout) {

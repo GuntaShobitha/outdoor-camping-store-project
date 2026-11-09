@@ -1,6 +1,6 @@
 /**
  * STACKLY OUTDOOR - Shopping Cart Engine
- * Handles cart state, localStorage persistence, cart drawer, and checkout simulation
+ * Handles cart state, localStorage persistence, cart page rendering, and checkout simulation
  */
 
 const CART_STORAGE_KEY = "stackly_cart_items_v1";
@@ -28,7 +28,7 @@ class CartManager {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(this.items));
       this.updateBadges();
-      this.renderDrawer();
+      this.renderCartPage();
     } catch (e) {
       console.error("Failed to save cart to localStorage", e);
     }
@@ -51,7 +51,7 @@ class CartManager {
         localStorage.removeItem(COUPON_STORAGE_KEY);
       }
     } catch (e) {}
-    this.renderDrawer();
+    this.renderCartPage();
   }
 
   addItem(productId, quantity = 1, options = {}) {
@@ -78,7 +78,7 @@ class CartManager {
 
     this.saveCart();
     this.showToast(`Added "${product.name}" to your cart!`, "success");
-    this.openDrawer();
+    window.location.href = "cart.html";
   }
 
   removeItem(productId) {
@@ -145,9 +145,76 @@ class CartManager {
     return Math.max(0, this.getSubtotal() - this.getDiscount() + this.getShipping());
   }
 
+  renderCartPage() {
+    const cartPage = document.getElementById("cartPage");
+    if (!cartPage) return;
+
+    const itemsBody = document.getElementById("cartItemsBody");
+    const emptyState = document.getElementById("cartEmptyState");
+    const warningBox = document.getElementById("cartWarningBox");
+    const warningText = document.getElementById("cartWarningText");
+    const cartCount = document.getElementById("cartCount");
+    const cartSubtotalEl = document.getElementById("cartSubtotal");
+    const cartDiscountRow = document.getElementById("cartDiscountRow");
+    const cartDiscountEl = document.getElementById("cartDiscount");
+    const cartShippingEl = document.getElementById("cartShipping");
+    const cartTotalEl = document.getElementById("cartTotal");
+    const freeShippingProgress = document.getElementById("freeShippingProgress");
+    const freeShippingText = document.getElementById("freeShippingText");
+
+    if (emptyState) {
+      if (!this.items.length) {
+        emptyState.style.display = "block";
+        if (warningBox) warningBox.style.display = "none";
+        if (cartCount) cartCount.style.display = "none";
+        if (itemsBody) itemsBody.innerHTML = "";
+      } else {
+        emptyState.style.display = "none";
+      }
+    }
+
+    if (warningBox && warningText && !this._lastWarning) {
+      warningBox.style.display = "none";
+    }
+
+    if (cartCount) {
+      cartCount.textContent = this.getTotalCount();
+      cartCount.style.display = this.getTotalCount() > 0 ? "inline-flex" : "none";
+    }
+
+    const FREE_SHIPPING_THRESHOLD = 75.00;
+    const subtotal = this.getSubtotal();
+    const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
+    const progress = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
+
+    if (freeShippingProgress) freeShippingProgress.style.width = `${progress}%`;
+    if (freeShippingText) {
+      if (remaining <= 0) {
+        freeShippingText.innerHTML = `<span style="color:var(--color-primary-green);font-weight:700;">FREE Backcountry Shipping unlocked</span>`;
+      } else {
+        freeShippingText.innerHTML = `Add <strong>$${remaining.toFixed(2)}</strong> more for <strong>FREE Shipping</strong>`;
+      }
+    }
+
+    if (cartSubtotalEl) cartSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+    const discount = this.getDiscount();
+    if (cartDiscountRow && cartDiscountEl) {
+      if (discount > 0) {
+        cartDiscountRow.style.display = "flex";
+        cartDiscountEl.textContent = `-$${discount.toFixed(2)}`;
+      } else {
+        cartDiscountRow.style.display = "none";
+      }
+    }
+
+    const shipping = this.getShipping();
+    if (cartShippingEl) cartShippingEl.textContent = shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`;
+    if (cartTotalEl) cartTotalEl.textContent = `$${this.getTotal().toFixed(2)}`;
+  }
+
   initUI() {
     this.updateBadges();
-    this.renderDrawer();
     this.attachEventListeners();
   }
 
@@ -160,106 +227,7 @@ class CartManager {
     });
   }
 
-  openDrawer() {
-    const drawer = document.getElementById("cartDrawer");
-    const overlay = document.getElementById("cartOverlay");
-    if (drawer && overlay) {
-      drawer.classList.add("active");
-      overlay.classList.add("active");
-      document.body.classList.add("no-scroll");
-    }
-  }
 
-  closeDrawer() {
-    const drawer = document.getElementById("cartDrawer");
-    const overlay = document.getElementById("cartOverlay");
-    if (drawer && overlay) {
-      drawer.classList.remove("active");
-      overlay.classList.remove("active");
-      document.body.classList.remove("no-scroll");
-    }
-  }
-
-  renderDrawer() {
-    const listEl = document.getElementById("cartItemsList");
-    const subtotalEl = document.getElementById("cartSubtotal");
-    const shippingEl = document.getElementById("cartShipping");
-    const discountRow = document.getElementById("cartDiscountRow");
-    const discountEl = document.getElementById("cartDiscount");
-    const totalEl = document.getElementById("cartTotal");
-    const freeShippingProgress = document.getElementById("freeShippingProgress");
-    const freeShippingText = document.getElementById("freeShippingText");
-    const emptyState = document.getElementById("cartEmptyState");
-    const footerEl = document.getElementById("cartDrawerFooter");
-
-    if (!listEl) return;
-
-    if (this.items.length === 0) {
-      listEl.innerHTML = "";
-      if (emptyState) emptyState.style.display = "flex";
-      if (footerEl) footerEl.style.display = "none";
-      if (freeShippingText) freeShippingText.textContent = `Add $${FREE_SHIPPING_THRESHOLD.toFixed(2)} for free shipping!`;
-      if (freeShippingProgress) freeShippingProgress.style.width = "0%";
-      return;
-    }
-
-    if (emptyState) emptyState.style.display = "none";
-    if (footerEl) footerEl.style.display = "block";
-
-    // Free shipping bar calculation
-    const subtotal = this.getSubtotal();
-    const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
-    const progress = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
-
-    if (freeShippingProgress) freeShippingProgress.style.width = `${progress}%`;
-    if (freeShippingText) {
-      if (remaining <= 0) {
-        freeShippingText.innerHTML = `<span class="free-ship-unlocked">🎉 You unlocked FREE Backcountry Shipping!</span>`;
-      } else {
-        freeShippingText.innerHTML = `Add <strong>$${remaining.toFixed(2)}</strong> more for <strong>FREE Shipping</strong>`;
-      }
-    }
-
-    // Render items
-    listEl.innerHTML = this.items.map(item => `
-      <div class="cart-item" data-id="${item.id}">
-        <img src="${item.image}" alt="${item.name}" class="cart-item-img" />
-        <div class="cart-item-details">
-          <div class="cart-item-cat">${item.category || "Gear"}</div>
-          <h4 class="cart-item-title">${item.name}</h4>
-          <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-          <div class="cart-item-qty-row">
-            <div class="qty-stepper">
-              <button type="button" class="qty-btn dec-btn" onclick="window.stacklyCart.updateQuantity('${item.id}', -1)" aria-label="Decrease quantity">−</button>
-              <span class="qty-val">${item.quantity}</span>
-              <button type="button" class="qty-btn inc-btn" onclick="window.stacklyCart.updateQuantity('${item.id}', 1)" aria-label="Increase quantity">+</button>
-            </div>
-            <button type="button" class="cart-item-remove" onclick="window.stacklyCart.removeItem('${item.id}')" aria-label="Remove item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-              Remove
-            </button>
-          </div>
-        </div>
-      </div>
-    `).join("");
-
-    if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-    
-    const shipping = this.getShipping();
-    if (shippingEl) shippingEl.textContent = shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`;
-
-    const discount = this.getDiscount();
-    if (discountRow && discountEl) {
-      if (discount > 0) {
-        discountRow.style.display = "flex";
-        discountEl.textContent = `-$${discount.toFixed(2)}`;
-      } else {
-        discountRow.style.display = "none";
-      }
-    }
-
-    if (totalEl) totalEl.textContent = `$${this.getTotal().toFixed(2)}`;
-  }
 
   applyCouponCode(code) {
     if (!code) return;
@@ -315,20 +283,27 @@ class CartManager {
   }
 
   attachEventListeners() {
-    // Open drawer buttons
+    // Cart trigger always goes to the cart page. On cart.html itself, stay on the page and scroll to cart.
     document.querySelectorAll(".cart-trigger-btn").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        this.openDrawer();
+      btn.addEventListener("click", () => {
+        const cartPage = document.getElementById("cartPage");
+        if (cartPage) {
+          // Already on cart.html: ensure cart is visible.
+          cartPage.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (typeof window.stacklyCart.renderCartPage === "function") {
+            try { window.stacklyCart.renderCartPage(); } catch {}
+          }
+          if (typeof window.stacklyCart.updateBadges === "function") {
+            try { window.stacklyCart.updateBadges(); } catch {}
+          }
+          return;
+        }
+
+        window.location.href = "cart.html";
       });
     });
 
-    // Close drawer buttons
-    const closeBtn = document.getElementById("closeCartBtn");
-    if (closeBtn) closeBtn.addEventListener("click", () => this.closeDrawer());
 
-    const overlay = document.getElementById("cartOverlay");
-    if (overlay) overlay.addEventListener("click", () => this.closeDrawer());
 
     // Coupon form
     const couponBtn = document.getElementById("applyCouponBtn");
@@ -356,7 +331,7 @@ class CartManager {
       this.showToast("Your cart is empty!", "info");
       return;
     }
-    this.closeDrawer();
+    // No longer uses a drawer; cart lives on cart.html.
 
     let modal = document.getElementById("checkoutModal");
     if (!modal) {

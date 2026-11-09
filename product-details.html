@@ -303,10 +303,10 @@
         </a>
 
         <!-- Shopping Cart Bag -->
-        <button type="button" class="header-action-btn cart-trigger-btn" aria-label="Shopping Cart">
+        <a href="cart.html" class="header-action-btn cart-trigger-btn" aria-label="Shopping Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           <span class="count-badge cart-count-badge" style="display: none;">0</span>
-        </button>
+        </a>
 
         <!-- Navbar Login Button (Always opens Login page) -->
         <a href="login.html" class="nav-login-btn" id="navbarLoginBtn">
@@ -490,38 +490,7 @@
     </div>
   </main>
 
-  <!-- Cart Drawer -->
-  <div class="cart-drawer-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
-    <div class="cart-drawer-header">
-      <h3>Your Trail Pack</h3>
-      <button type="button" class="cart-drawer-close" id="closeCartBtn" aria-label="Close cart">&times;</button>
-    </div>
-    <div class="free-shipping-bar">
-      <div class="free-ship-label" id="freeShippingText">Add <strong>$75.00</strong> more for <strong>FREE Shipping</strong></div>
-      <div class="free-ship-progress-track">
-        <div class="free-ship-progress-fill" id="freeShippingProgress"></div>
-      </div>
-    </div>
-    <div class="cart-empty-state" id="cartEmptyState" style="display: none;">
-      <h4>Your pack is empty</h4>
-      <p>Equip yourself with tents, sleeping bags, and essential trail gear.</p>
-    </div>
-    <div class="cart-items-body" id="cartItemsList"></div>
-    <div class="cart-drawer-footer" id="cartDrawerFooter">
-      <div class="cart-coupon-row">
-        <input type="text" id="cartCouponInput" placeholder="Promo code (Try: ADVENTURE10)" />
-        <button type="button" class="btn btn-outline" id="applyCouponBtn">Apply</button>
-      </div>
-      <div class="cart-totals-list">
-        <div class="total-line"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
-        <div class="total-line discount-line" id="cartDiscountRow" style="display: none;"><span>Discount</span><span id="cartDiscount">-$0.00</span></div>
-        <div class="total-line"><span>Shipping</span><span id="cartShipping">FREE</span></div>
-        <div class="total-line final-total"><span>Estimated Total</span><span id="cartTotal">$0.00</span></div>
-      </div>
-      <button type="button" class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout &rarr;</button>
-    </div>
-  </aside>
+  <!-- Cart View is now on cart.html. No drawer is rendered on this page. -->
 
   <!-- Footer -->
   <footer class="site-footer">
