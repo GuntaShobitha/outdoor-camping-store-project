@@ -146,7 +146,7 @@
         </div>
       </a>
 
-      <span class="dash-nav-category-title">Quick Portals</span>
+      <!-- <span class="dash-nav-category-title">Quick Portals</span> -->
 
       <!-- <a href="services.html" class="dash-nav-link">
         <div class="dash-nav-link-left">
@@ -218,7 +218,7 @@
                 <span style="color:#C49A52; font-size:0.75rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase;">
                    BACKCOUNTRY HQ &bull; BOULDER, COLORADO
                 </span>
-                <h2 style="font-family:var(--font-serif); font-size:2rem; color:#ffffff; margin:8px 0 10px;" id="dashUserGreeting">
+                <h2 style="font-family:var(--font-serif); color:#ffffff; margin:8px 0 10px;" id="dashUserGreeting">
                   Welcome back, Alex!
                 </h2>
                 <p style="color:#E9E0CE; max-width:600px; font-size:0.95rem; line-height:1.6; margin-bottom:20px;">
@@ -497,12 +497,12 @@
 
         <!-- Emergency Backcountry Contact (Section I Requirement) -->
         <div class="dash-sub-section">
-          <div class="dash-panel" style="border-left:4px solid #ef4444;">
-            <h4 style="color:#b91c1c; margin-bottom:12px;"> Emergency Backcountry Contact</h4>
+          <div class="dash-panel profile-emergency-panel">
+            <h4 class="profile-section-head" style="color:#b91c1c; margin-bottom:12px;">Emergency Backcountry Contact</h4>
             <p style="font-size:0.85rem; color:var(--color-text-body); margin-bottom:16px;">
               Required for all wilderness permits. Our guides access this information in the event of an alpine rescue.
             </p>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+            <div class="profile-form-grid profile-emergency-grid">
               <div class="form-field-group">
                 <label class="field-label">Contact Name</label>
                 <input type="text" value="Sarah Rivers" class="auth-input" />
@@ -522,8 +522,8 @@
         <!-- Password Change (Section I Requirement) -->
         <div class="dash-sub-section">
           <div class="dash-panel">
-            <h4 style="margin-bottom:12px;">Change Password</h4>
-            <form id="custChangePasswordForm" style="max-width:440px;">
+            <h4 class="profile-section-head" style="margin-bottom:12px;">Change Password</h4>
+            <form id="custChangePasswordForm" class="profile-form-grid profile-pwd-form">
               <div class="form-field-group">
                 <label class="field-label">Current Password</label>
                 <input type="password" id="currentPassInput" class="auth-input" placeholder="••••••••" required />

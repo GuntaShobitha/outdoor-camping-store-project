@@ -433,6 +433,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  overflow-x: auto;
 }
 
 /* 5. KPI METRIC STAT CARDS */
@@ -1061,6 +1062,33 @@
   gap: 20px;
 }
 
+/* Explorer Profile form sections */
+.profile-section-head {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.profile-full-width {
+  grid-column: 1 / -1;
+}
+
+.profile-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
 .voucher-card {
   background: #ffffff;
   border: 1px solid var(--color-border);
@@ -1339,36 +1367,110 @@
 
 /* 4. Mobile Phones (320px - 767px) */
 @media (max-width: 767px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .dash-layout {
+    overflow-x: hidden;
+    position: static;
+  }
+
+  .dash-sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+    max-width: 85vw;
+  }
+
+  .dash-breadcrumb-wrap {
+    display: none;
+  }
+  .dash-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .dash-main {
+    margin-left: 0;
+    width: 100%;
+  }
+
   .dash-header {
     padding: 0 16px;
     height: 70px;
+    width: 100%;
   }
+
   .dash-search-box {
-    display: none; /* Hide top search on tiny mobile viewports to preserve title and buttons */
+    display: none;
   }
+
   .dash-content-body {
     padding: 20px 14px;
+    width: 100%;
   }
+
   .kpi-grid {
     grid-template-columns: 1fr;
   }
+
   .customer-welcome-banner {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
     padding: 24px 18px;
   }
+
+  .dash-panel {
+    width: 90vw;
+  }
+
   .welcome-tier-box {
     width: 100%;
     min-width: unset;
   }
+
   .welcome-title {
     font-size: 1.45rem;
   }
+
   .cards-collection-grid, .vouchers-grid {
     grid-template-columns: 1fr;
   }
+
   .dash-panel {
     padding: 18px 14px;
+  }
+
+  /* Profile form responsive layout */
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-full-width {
+    grid-column: auto;
+  }
+
+  .profile-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-form-actions .dash-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dash-panel[style*="border-left:4px"],
+  .dash-panel[style*="border-left: 4px"] {
+    border-left-width: 4px;
+  }
+
+  .profile-signature-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-signature-pill {
+    width: 100%;
   }
 }
