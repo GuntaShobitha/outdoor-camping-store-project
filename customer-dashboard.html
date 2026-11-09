@@ -227,7 +227,7 @@
 
                 <!-- Quick Navigation Buttons -->
                 <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                  <a href="services.html" class="dash-btn dash-btn-primary dash-btn-sm">+ Book New Adventure</a>
+                  <a href="./404.html" class="dash-btn dash-btn-primary dash-btn-sm">+ Book New Adventure</a>
                   <a href="#destinations" class="dash-btn dash-btn-outline dash-btn-sm" onclick="document.querySelector('[data-tab=destinations]').click();">Saved Destinations</a>
                   <a href="#profile" class="dash-btn dash-btn-outline dash-btn-sm" onclick="document.querySelector('[data-tab=profile]').click();">Profile Settings</a>
                 </div>
@@ -294,7 +294,7 @@
               <h3>Upcoming Expeditions &amp; Treks</h3>
               <p>Active wilderness permits and scheduled guided expeditions.</p>
             </div>
-            <a href="services.html" class="dash-btn dash-btn-outline dash-btn-sm">+ Find New Trek</a>
+            <a href="./404.html" class="dash-btn dash-btn-outline dash-btn-sm">+ Find New Trek</a>
           </div>
 
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;" id="dashUpcomingAdventuresGrid">
@@ -372,7 +372,7 @@
               <h3>Saved Outdoor Destinations</h3>
               <p>Pristine mountain lakes, old-growth forests, and rugged ridges on your bucket list.</p>
             </div>
-            <button type="button" class="dash-btn dash-btn-primary dash-btn-sm" onclick="alert('Destination Explorer opened! Choose from 85+ surveyed routes.')">+ Explore More Destinations</button>
+            <button type="button" class="dash-btn dash-btn-primary dash-btn-sm" onclick="window.location.href='./404.html'">+ Explore More Destinations</button>
           </div>
 
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px;" id="dashDestinationsGrid">
@@ -391,7 +391,7 @@
               <h3>My Adventure Wishlist</h3>
               <p>Backcountry equipment and expedition packages saved for future trips.</p>
             </div>
-            <a href="shop.html" class="dash-btn dash-btn-primary dash-btn-sm">+ Find More Gear</a>
+            <a href="./404.html" class="dash-btn dash-btn-primary dash-btn-sm">+ Find More Gear</a>
           </div>
 
           <div class="cards-collection-grid" id="customerWishlistGrid">
@@ -410,7 +410,7 @@
               <h3>Wilderness Notifications</h3>
               <p>Permit confirmations, mountain weather alerts, and trail advisories.</p>
             </div>
-            <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="alert('All notifications marked as read.');">Mark All as Read</button>
+            <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.location.href='./404.html'">Mark All as Read</button>
           </div>
 
           <div id="dashNotificationsList">
@@ -463,7 +463,7 @@
           <div class="dash-panel">
             <h3 style="margin-bottom:16px;">Explorer Profile Information</h3>
             <form id="custEditProfileForm">
-              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div style="display:grid; grid-template-columns:repeat(1, 1fr); gap:16px;">
                 <div class="form-field-group">
                   <label class="field-label">Full Name *</label>
                   <input type="text" id="profileFullName" value="Alex Rivers" required class="auth-input" />
@@ -474,7 +474,7 @@
                 </div>
               </div>
 
-              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div style="display:grid; grid-template-columns:repeat(1, 1fr); gap:16px;">
                 <div class="form-field-group">
                   <label class="field-label">Primary Trail Basecamp (City, State)</label>
                   <input type="text" id="profileLocation" value="Boulder, Colorado" class="auth-input" />

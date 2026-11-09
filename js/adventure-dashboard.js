@@ -372,7 +372,7 @@ class AdventureDashboardEngine {
         </div>
         <div style="margin-top:16px; display:flex; gap:10px;">
           <button type="button" class="dash-btn dash-btn-primary dash-btn-sm view-adv-details-btn" data-id="${b.id}" style="flex:1;">View Details</button>
-          <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="alert('Permit #${b.permitNumber} downloaded to your device.')">Permit 📄</button>
+          <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.location.href='./404.html'">Permit</button>
         </div>
       </div>
     `).join("");
@@ -487,7 +487,7 @@ class AdventureDashboardEngine {
 
       <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #eee; padding-top:16px;">
         <span style="font-size:1.1rem; font-weight:800; color:var(--color-dark-green);">Total Paid: $${booking.price.toFixed(2)}</span>
-        <button type="button" class="dash-btn dash-btn-primary dash-btn-sm" onclick="alert('Digital itinerary packet downloaded!')">Download Itinerary Slip 📄</button>
+        <button type="button" class="dash-btn dash-btn-primary dash-btn-sm" onclick="window.location.href='./404.html'">Download Itinerary Slip</button>
       </div>
     `;
 
@@ -520,7 +520,7 @@ class AdventureDashboardEngine {
           </div>
         </div>
         <div style="padding:0 18px 18px;">
-          <button type="button" class="dash-btn dash-btn-primary dash-btn-sm plan-trip-btn" data-dest="${d.name}" style="width:100%;">Plan Trip &rarr;</button>
+          <button type="button" class="dash-btn dash-btn-primary dash-btn-sm" onclick="window.location.href='./404.html'" style="width:100%;">Plan Trip &rarr;</button>
         </div>
       </div>
     `).join("");
@@ -552,7 +552,7 @@ class AdventureDashboardEngine {
         </div>
         <div style="padding:0 16px 16px; display:flex; justify-content:space-between; align-items:center;">
           <strong style="color:var(--color-dark-green);">${r.price}</strong>
-          <a href="services.html" class="dash-btn dash-btn-outline dash-btn-sm">Explore</a>
+          <a href="./404.html" class="dash-btn dash-btn-outline dash-btn-sm">Explore</a>
         </div>
       </div>
     `).join("");
@@ -617,7 +617,7 @@ class AdventureDashboardEngine {
           }
         }
 
-        alert("Profile information updated successfully!");
+        window.location.href='./404.html';
         this.renderWelcomeBanner();
       });
     }
@@ -639,7 +639,7 @@ class AdventureDashboardEngine {
         }
 
         if (newPass.length < 5) {
-          alert("New password must be at least 5 characters long.");
+         window.location.href='./404.html';
           return;
         }
 

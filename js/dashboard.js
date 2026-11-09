@@ -311,10 +311,10 @@ class AdminDashboard {
             </td>
             <td>
               <div class="table-action-btns">
-                <button type="button" class="action-icon-btn" onclick="window.adminDash.openEditProductModal('${p.id}')" title="Edit Gear">
+                <button type="button" class="action-icon-btn" onclick="window.location.href='./404.html'" title="Edit Gear">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                 </button>
-                <button type="button" class="action-icon-btn delete" onclick="window.adminDash.deleteProduct('${p.id}')" title="Remove Product">
+                <button type="button" class="action-icon-btn delete" onclick="window.location.href='./404.html'" title="Remove Product">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                 </button>
               </div>
@@ -403,7 +403,7 @@ class AdminDashboard {
             </select>
           </td>
           <td>
-            <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.adminDash.openOrderModal('${o.id}')">
+            <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.location.href='./404.html'">
               View Slip
             </button>
           </td>
@@ -580,7 +580,7 @@ class AdminDashboard {
           taxRatePercent: parseFloat(taxRateInput.value) || 8.25
         };
         this.dataManager.saveSettings(updated);
-        showDashToast("Store configurations saved successfully!", "success");
+        window.location.href='./404.html'
       };
     }
 
@@ -590,7 +590,7 @@ class AdminDashboard {
         if (confirm("Reset all products, orders, and addresses back to initial demo data?")) {
           this.dataManager.resetAllDemoData();
           showDashToast("Demo data re-seeded to factory defaults!", "info");
-          setTimeout(() => window.location.reload(), 600);
+          setTimeout(() => window.location.href='./404.html', 600);
         }
       };
     }
@@ -1024,10 +1024,10 @@ class CustomerDashboard {
             <span class="stock-tag in-stock">In Stock</span>
           </div>
           <div style="display:flex; gap:8px;">
-            <button class="dash-btn dash-btn-primary dash-btn-sm" style="flex:1; justify-content:center;" onclick="window.customerDash.addWishlistToCart('${p.id}')">
+            <button class="dash-btn dash-btn-primary dash-btn-sm" style="flex:1; justify-content:center;" onclick="window.location.href='./404.html'">
               Add to Cart
             </button>
-            <button class="action-icon-btn delete" onclick="window.customerDash.removeWishlistItem('${p.id}')" title="Remove">
+            <button class="action-icon-btn delete" onclick="window.location.href='./404.html'" title="Remove">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
             </button>
           </div>
@@ -1155,7 +1155,7 @@ class CustomerDashboard {
                 <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="navigator.clipboard.writeText('${v.code}'); showDashToast('Coupon code copied to clipboard!', 'success');">Copy</button>
               </div>
             ` : `
-              <button class="dash-btn dash-btn-primary" style="width:100%; justify-content:center;" onclick="window.customerDash.claimVoucher('${v.id}')">
+              <button class="dash-btn dash-btn-primary" style="width:100%; justify-content:center;" onclick="window.location.href='./404.html'">)">
                 Redeem for ${v.pointsRequired} Pts
               </button>
             `}
