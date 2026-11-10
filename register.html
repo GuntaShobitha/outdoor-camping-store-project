@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -148,7 +148,7 @@
           <!-- Full Name -->
           <div class="form-field-group">
             <label for="regName" class="field-label">
-              <span>Full Name <span class="required-dot">*</span></span>
+              <span>Full Name</span>
             </label>
             <div class="field-input-wrapper">
               <span class="field-icon">
@@ -350,8 +350,7 @@
 
       // --- Real-time Validation Listeners ---
       nameInput.addEventListener("input", () => {
-        const check = window.stacklyAuth.validateName(nameInput.value);
-        if (check.isValid) clearFieldError(nameInput, nameError);
+        clearFieldError(nameInput, nameError);
         hideAlert();
       });
 
@@ -361,12 +360,13 @@
         hideAlert();
       });
 
-      // Real-time password strength & min 5 chars validator
+      // Real-time password strength validator
       passwordInput.addEventListener("input", () => {
         const val = passwordInput.value;
         const len = val.length;
 
         if (len > 0) {
+          clearFieldError(passwordInput, passwordError);
           strengthContainer.classList.add("visible");
           charCountText.textContent = `${len}/5 chars`;
 
@@ -376,13 +376,11 @@
             strengthText.textContent = "Too short (needs 5+)";
             strengthText.style.color = "#e02424";
           } else if (len >= 5 && len < 8) {
-            clearFieldError(passwordInput, passwordError);
             strengthBarFill.style.width = "70%";
             strengthBarFill.style.backgroundColor = "#d97706";
             strengthText.textContent = "Good";
             strengthText.style.color = "#d97706";
           } else {
-            clearFieldError(passwordInput, passwordError);
             strengthBarFill.style.width = "100%";
             strengthBarFill.style.backgroundColor = "#16a34a";
             strengthText.textContent = "Strong Trail Grade";
@@ -409,9 +407,7 @@
       });
 
       termsCheck.addEventListener("change", () => {
-        if (termsCheck.checked) {
-          clearFieldError(null, termsError);
-        }
+        clearFieldError(null, termsError);
         hideAlert();
       });
 
@@ -424,7 +420,7 @@
         eyeIconClosed.style.display = isPassword ? "block" : "none";
       });
 
-      // --- Form Submission with Complete JS Validation ---
+      // --- Form Submission with JS Validation ---
       registerForm.addEventListener("submit", (e) => {
         e.preventDefault();
         hideAlert();
@@ -433,21 +429,16 @@
         const email = emailInput.value.trim();
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
-        const agreedTerms = termsCheck.checked;
+        const agreedTerms = termsCheck ? termsCheck.checked : true;
         const selectedRole = roleAdmin.checked ? "admin" : "customer";
 
         let hasError = false;
 
-        // 1. Name Check
-        const nameCheck = window.stacklyAuth.validateName(name);
-        if (!nameCheck.isValid) {
-          showFieldError(nameInput, nameError, nameCheck.message);
-          hasError = true;
-        } else {
-          clearFieldError(nameInput, nameError);
-        }
+        // Clear non-mandatory field errors
+        clearFieldError(nameInput, nameError);
+        clearFieldError(null, termsError);
 
-        // 2. Email Format Check
+        // 1. Email Format Check
         const emailCheck = window.stacklyAuth.validateEmail(email);
         if (!emailCheck.isValid) {
           showFieldError(emailInput, emailError, emailCheck.message);
@@ -456,30 +447,23 @@
           clearFieldError(emailInput, emailError);
         }
 
-        // 3. Password Check (Must be >= 5 chars)
-        const passwordCheck = window.stacklyAuth.validatePassword(password);
-        if (!passwordCheck.isValid) {
-          showFieldError(passwordInput, passwordError, passwordCheck.message);
+        // 2. Password Check
+        if (!password) {
+          showFieldError(passwordInput, passwordError, "Please enter your password.");
           hasError = true;
         } else {
           clearFieldError(passwordInput, passwordError);
         }
 
-        // 4. Confirm Password Check
-        const confirmCheck = window.stacklyAuth.validateConfirmPassword(password, confirmPassword);
-        if (!confirmCheck.isValid) {
-          showFieldError(confirmPasswordInput, confirmPasswordError, confirmCheck.message);
+        // 3. Confirm Password Match Check
+        if (!confirmPassword) {
+          showFieldError(confirmPasswordInput, confirmPasswordError, "Please confirm your password.");
+          hasError = true;
+        } else if (password !== confirmPassword) {
+          showFieldError(confirmPasswordInput, confirmPasswordError, "Passwords do not match.");
           hasError = true;
         } else {
           clearFieldError(confirmPasswordInput, confirmPasswordError);
-        }
-
-        // 5. Terms Check
-        if (!agreedTerms) {
-          showFieldError(null, termsError, "Please agree to the Trail Club Terms to proceed.");
-          hasError = true;
-        } else {
-          clearFieldError(null, termsError);
         }
 
         if (hasError) return;
@@ -508,7 +492,8 @@
             if (regResult.errors.confirmPassword) showFieldError(confirmPasswordInput, confirmPasswordError, regResult.errors.confirmPassword);
             if (regResult.errors.terms) showFieldError(null, termsError, regResult.errors.terms);
           } else {
-            showAlert(`Welcome to Stackly, ${name}! Your account is ready with 200 welcome points. Entering portal...`, "success");
+            const displayName = (regResult.user && regResult.user.name) || name || "Adventurer";
+            showAlert(`Welcome to Stackly, ${displayName}! Your account is ready with 200 welcome points. Entering portal...`, "success");
             submitBtn.innerHTML = `<span>Welcome aboard! Redirecting...</span>`;
 
             setTimeout(() => {

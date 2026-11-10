@@ -1,4 +1,4 @@
-﻿/**
+/**
  * STACKLY OUTDOOR & CAMPING - Authentication & Session Engine
  * Handles user accounts, role-based authorization (Admin / Customer),
  * client-side JavaScript validation (email format, 5+ character password),
@@ -164,20 +164,10 @@ class AuthManager {
     if (!raw) {
       return { isValid: false, message: "Please enter your password." };
     }
-    if (raw.length < 5) {
-      return { isValid: false, message: "Password must be at least 5 characters long." };
-    }
     return { isValid: true, message: "" };
   }
 
   validateName(name) {
-    const trimmed = (name || "").trim();
-    if (!trimmed) {
-      return { isValid: false, message: "Please enter your full name." };
-    }
-    if (trimmed.length < 2) {
-      return { isValid: false, message: "Full name must be at least 2 characters." };
-    }
     return { isValid: true, message: "" };
   }
 
@@ -263,62 +253,81 @@ class AuthManager {
   register({ name, email, password, confirmPassword, role = "customer", agreedTerms = false }) {
     const errors = {};
 
-    const nameCheck = this.validateName(name);
-    if (!nameCheck.isValid) errors.name = nameCheck.message;
+    const cleanEmail = (email || "").trim().toLowerCase();
+    const cleanPassword = password || "";
 
-    const emailCheck = this.validateEmail(email);
-    if (!emailCheck.isValid) errors.email = emailCheck.message;
+    const emailCheck = this.validateEmail(cleanEmail);
+    if (!emailCheck.isValid) {
+      errors.email = emailCheck.message;
+    }
 
-    const passwordCheck = this.validatePassword(password);
-    if (!passwordCheck.isValid) errors.password = passwordCheck.message;
+    if (!cleanPassword) {
+      errors.password = "Please enter your password.";
+    }
 
-    const confirmCheck = this.validateConfirmPassword(password, confirmPassword);
-    if (!confirmCheck.isValid) errors.confirmPassword = confirmCheck.message;
-
-    if (!agreedTerms) {
-      errors.terms = "You must agree to the Stackly Trail Club Terms & Privacy Policy to create an account.";
+    const confirmCheck = this.validateConfirmPassword(cleanPassword, confirmPassword);
+    if (!confirmCheck.isValid) {
+      errors.confirmPassword = confirmCheck.message;
     }
 
     if (Object.keys(errors).length > 0) {
       return { success: false, errors };
     }
 
-    const users = this.getUsers();
-    const cleanEmail = email.trim().toLowerCase();
+    // Role handling: accept any email & password with any user type (user / admin)
+    // No database check or already-registered restriction required.
+    const isRoleAdmin = role === "admin";
+    const roleVal = isRoleAdmin ? "admin" : "customer";
+    const roleLabel = isRoleAdmin ? "Store Administrator" : "Customer / Adventurer";
 
-    // Check if email already registered
-    const exists = users.find(u => u.email.toLowerCase() === cleanEmail);
-    if (exists) {
-      errors.email = "An account with this email address already exists. Please sign in instead.";
-      return { success: false, errors };
+    let displayName = (name || "").trim();
+    if (!displayName) {
+      let namePart = cleanEmail.split("@")[0].replace(/[._-]/g, " ");
+      displayName = namePart.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+      if (!displayName.trim()) displayName = isRoleAdmin ? "Store Administrator" : "Backcountry Explorer";
     }
 
-    const newUser = {
-      id: "usr-" + Date.now(),
-      name: name.trim(),
-      email: cleanEmail,
-      password: password,
-      role: role === "admin" ? "admin" : "customer",
-      roleLabel: role === "admin" ? "Store Administrator" : "Customer / Adventurer",
-      title: role === "admin" ? "Store Administrator" : "Trail Scout (Tier 1)",
-      avatar: "assets/images/sections/avatar-2.webp",
-      registeredDate: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-      phone: "+1 (555) 234-5678",
-      location: "United States",
-      status: "active",
-      trailPoints: 200, // Welcome bonus points!
-      tier: "Trail Scout",
-      ordersCount: 0,
-      totalSpent: 0.00,
-      favoriteActivity: "Hiking & Camping"
-    };
+    const users = this.getUsers();
+    let existingUser = users.find(u => u.email && u.email.toLowerCase() === cleanEmail);
+    let registeredUser;
 
-    users.push(newUser);
-    this.saveUsers(users);
-    this.setCurrentUser(newUser);
+    if (existingUser) {
+      existingUser.password = cleanPassword;
+      existingUser.role = roleVal;
+      existingUser.roleLabel = roleLabel;
+      if ((name || "").trim()) {
+        existingUser.name = displayName;
+      }
+      existingUser.status = "active";
+      this.saveUsers(users);
+      registeredUser = existingUser;
+    } else {
+      registeredUser = {
+        id: "usr-" + Date.now(),
+        name: displayName,
+        email: cleanEmail,
+        password: cleanPassword,
+        role: roleVal,
+        roleLabel: roleLabel,
+        title: isRoleAdmin ? "Store Administrator" : "Trail Scout (Tier 1)",
+        avatar: isRoleAdmin ? "assets/images/sections/avatar-1.webp" : "assets/images/sections/avatar-2.webp",
+        registeredDate: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+        phone: "+1 (555) 234-5678",
+        location: "United States",
+        status: "active",
+        trailPoints: 200, // Welcome bonus points!
+        tier: "Trail Scout",
+        ordersCount: 0,
+        totalSpent: 0.00,
+        favoriteActivity: "Hiking & Camping"
+      };
+      users.push(registeredUser);
+      this.saveUsers(users);
+    }
 
-    const redirectUrl = newUser.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
-    return { success: true, user: newUser, redirectUrl };
+    this.setCurrentUser(registeredUser);
+    const redirectUrl = registeredUser.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
+    return { success: true, user: registeredUser, redirectUrl };
   }
 
   // --- Dynamic Header State & Dropdown Management ---
