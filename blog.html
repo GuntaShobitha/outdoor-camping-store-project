@@ -628,9 +628,7 @@
             return;
           }
 
-          feedback.style.display = "block";
-          feedback.style.color = "#4ade80";
-          feedback.textContent = "Welcome to the Trail Club! Check your inbox for your first field report.";
+          window.location.href = "404.html";
           if (window.stacklyCart && typeof window.stacklyCart.showToast === "function") {
             window.stacklyCart.showToast("Subscribed! Welcome to Backcountry Chronicles.", "success");
           }

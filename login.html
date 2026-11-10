@@ -375,7 +375,7 @@
         e.preventDefault();
         const email = emailInput.value.trim();
         if (!email) {
-          showFieldError(emailInput, emailError, "Please enter your email above first to receive reset instructions.");
+          window.location.href = "./404.html";
           emailInput.focus();
           return;
         }
