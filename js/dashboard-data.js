@@ -264,8 +264,48 @@ const DEFAULT_VOUCHERS = [
   },
   {
     id: "vouch-03",
-    code: "FREECAMPMUG",
-    title: "Complimentary Titanium Camp Mug",
+    code: "AGTYYHHH",
+    title: "Complimentary ANY URGENT GEAR ITEM",
+    pointsRequired: 1200,
+    discountAmount: 24.00,
+    minSpend: 0.00,
+    redeemed: false,
+    expiryDate: "Dec 31, 2026"
+  },
+  {
+    id: "vouch-04",
+    code: "GOBOULT",
+    title: "getting of more boult Mug",
+    pointsRequired: 1200,
+    discountAmount: 24.00,
+    minSpend: 0.00,
+    redeemed: false,
+    expiryDate: "Dec 31, 2026"
+  },
+  {
+    id: "vouch-05",
+    code: "BUSS20",
+    title: "Getting busy Titanium Camp Mug",
+    pointsRequired: 1200,
+    discountAmount: 24.00,
+    minSpend: 0.00,
+    redeemed: false,
+    expiryDate: "Dec 31, 2026"
+  },
+  {
+    id: "vouch-06",
+    code: "ANY2778",
+    title: "Changing behaviour bgtt",
+    pointsRequired: 1200,
+    discountAmount: 24.00,
+    minSpend: 0.00,
+    redeemed: false,
+    expiryDate: "Dec 31, 2026"
+  },
+  {
+    id: "vouch-07",
+    code: "LAPTOPGGT",
+    title: "Gali valugu gulabi valaga",
     pointsRequired: 1200,
     discountAmount: 24.00,
     minSpend: 0.00,

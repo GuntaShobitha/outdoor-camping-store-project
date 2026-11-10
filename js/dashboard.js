@@ -573,11 +573,11 @@ class AdminDashboard {
     const freeShipInput = document.getElementById("setFreeShipping");
     const taxRateInput = document.getElementById("setTaxRate");
 
-    if (storeNameInput) storeNameInput.value = settings.storeName;
-    if (supportEmailInput) supportEmailInput.value = settings.supportEmail;
-    if (phoneInput) phoneInput.value = settings.phone;
-    if (freeShipInput) freeShipInput.value = settings.freeShippingThreshold;
-    if (taxRateInput) taxRateInput.value = settings.taxRatePercent;
+    // if (storeNameInput) storeNameInput.value = settings.storeName;
+    // if (supportEmailInput) supportEmailInput.value = settings.supportEmail;
+    // if (phoneInput) phoneInput.value = settings.phone;
+    // if (freeShipInput) freeShipInput.value = settings.freeShippingThreshold;
+    // if (taxRateInput) taxRateInput.value = settings.taxRatePercent;
 
     const saveBtn = document.getElementById("saveSettingsBtn");
     if (saveBtn) {
