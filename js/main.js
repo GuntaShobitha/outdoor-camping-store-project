@@ -247,9 +247,7 @@ class MainApp {
             <button type="button" class="btn btn-primary btn-add-qv" onclick="const q=parseInt(document.getElementById('qvQtyInput').value); window.stacklyCart.addItem('${prod.id}', q); document.getElementById('quickViewModal').classList.remove('active'); document.body.classList.remove('no-scroll');">
               Add to Pack ($${prod.price.toFixed(2)})
             </button>
-            <button type="button" class="wishlist-toggle-btn ${isFav ? 'active' : ''}" data-id="${prod.id}" aria-label="Toggle wishlist">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            </button>
+            
           </div>
 
           <div class="qv-view-full-wrap">

@@ -438,29 +438,66 @@ class AdventureDashboardEngine {
     }
 
     listEl.innerHTML = list.map(b => `
-      <div class="dash-panel" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px; margin-bottom:14px;">
-        <div style="display:flex; gap:16px; align-items:center;">
-          <div style="width:70px; height:70px; border-radius:12px; overflow:hidden; flex-shrink:0;">
-            <img src="${b.image}" alt="${b.title}" style="width:100%; height:100%; object-fit:cover;" />
-          </div>
-          <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span class="order-badge ${b.status === 'Confirmed' ? 'delivered' : b.status === 'Completed' ? 'delivered' : 'cancelled'}" style="font-size:0.7rem;">${b.status}</span>
-              <span style="font-size:0.75rem; color:var(--color-text-muted);">${b.type} &bull; Permit #${b.permitNumber}</span>
-            </div>
-            <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--color-dark-green); margin:4px 0 2px;">${b.title}</h4>
-            <p style="font-size:0.84rem; color:var(--color-text-body);"><span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle; color:var(--color-gold); margin-right:4px;">location_on</span> ${b.destination} &bull; <span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle; color:var(--color-primary-green); margin-right:2px;">calendar_today</span> ${b.dates}</p>
-          </div>
-        </div>
+     <div class="dash-panel booking-card">
 
-        <div style="display:flex; align-items:center; gap:12px;">
-          <div style="text-align:right;">
-            <strong style="color:var(--color-dark-green); font-size:1.1rem;">$${b.price.toFixed(2)}</strong>
-            <span style="display:block; font-size:0.75rem; color:var(--color-text-muted);">${b.participants} participants</span>
-          </div>
-          <button type="button" class="dash-btn dash-btn-outline dash-btn-sm view-adv-details-btn" data-id="${b.id}">View Details</button>
-        </div>
-      </div>
+  <!-- Booking Image -->
+  <div class="booking-image">
+    <img src="${b.image}" alt="${b.title}" />
+  </div>
+
+  <!-- Booking Information -->
+  <div class="booking-info">
+
+    <div class="booking-meta">
+      <span class="order-badge ${
+        b.status === 'Confirmed' || b.status === 'Completed'
+          ? 'delivered'
+          : 'cancelled'
+      }">
+        ${b.status}
+      </span>
+
+      <span class="booking-reference">
+        ${b.type} &bull; Permit #${b.permitNumber}
+      </span>
+    </div>
+
+    <h4 class="booking-title">${b.title}</h4>
+
+    <p class="booking-location">
+      <span class="material-symbols-outlined location-icon">
+        location_on
+      </span>
+      ${b.destination}
+
+      <span class="booking-separator">&bull;</span>
+
+      <span class="material-symbols-outlined calendar-icon">
+        calendar_today
+      </span>
+      ${b.dates}
+    </p>
+
+  </div>
+
+  <!-- Booking Price & Action -->
+  <div class="booking-actions">
+
+    <div class="booking-price">
+      <strong>$${b.price.toFixed(2)}</strong>
+      <span>${b.participants} participants</span>
+    </div>
+
+    <button
+      type="button"
+      class="dash-btn dash-btn-outline dash-btn-sm view-adv-details-btn"
+      data-id="${b.id}">
+      View Details
+    </button>
+
+  </div>
+
+</div>
     `).join("");
 
     this.bindBookingDetailButtons();
@@ -603,7 +640,7 @@ class AdventureDashboardEngine {
     const activities = this.getActivities();
     list.innerHTML = activities.map(a => `
       <div style="display:flex; align-items:flex-start; gap:14px; padding:12px 0; border-bottom:1px solid rgba(0,0,0,0.06);">
-        <span style="font-size:1.25rem;">${a.icon}</span>
+        
         <div style="flex:1;">
           <strong style="display:block; font-size:0.88rem; color:var(--color-dark-green);">${a.title}</strong>
           <small style="color:var(--color-text-muted); font-size:0.75rem;">${a.time}</small>

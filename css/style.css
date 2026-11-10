@@ -1349,6 +1349,7 @@ ul, ol {
 .product-price-row {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   margin-top: auto;
   padding-top: 12px;
