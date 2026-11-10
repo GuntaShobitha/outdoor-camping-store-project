@@ -1,4 +1,4 @@
-/**
+﻿/**
  * STACKLY OUTDOOR - Shopping Cart Engine
  * Handles cart state, localStorage persistence, cart page rendering, and checkout simulation
  */
@@ -497,8 +497,8 @@ class CartManager {
             <p class="order-num">Order Confirmation: <strong>#${orderId}</strong></p>
             <p class="order-msg">Thank you, <strong>${fName}</strong>. A receipt and carbon-neutral tracking link have been dispatched to <strong>${email}</strong>.</p>
             <div class="order-next-steps">
-              <p>🌱 Packed in 100% biodegradable trail packaging.</p>
-              <p>🛡️ Covered by the Stackly Lifetime Trail Warranty.</p>
+              <p><span class="material-symbols-outlined" style="font-size:1.15rem; vertical-align:middle; color:#22c55e; margin-right:6px;">eco</span> Packed in 100% biodegradable trail packaging.</p>
+              <p><span class="material-symbols-outlined" style="font-size:1.15rem; vertical-align:middle; color:var(--color-gold); margin-right:6px;">verified_user</span> Covered by the Stackly Lifetime Trail Warranty.</p>
             </div>
             <button class="btn btn-primary" onclick="document.getElementById('checkoutModal').classList.remove('active'); document.body.classList.remove('no-scroll'); window.stacklyCart.clearCart();">Return to Store</button>
           </div>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="css/preloader.css" />
   <link rel="stylesheet" href="css/auth.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </head>
 <body class="auth-page-body">
 
@@ -74,16 +76,16 @@
             
             <div class="auth-features-list">
               <div class="auth-feature-item">
-                <!-- <span class="auth-feature-icon">🛡️</span> -->
+                <span class="material-symbols-outlined" style="color:var(--color-gold); font-size:1.3rem;">verified_user</span>
                 <span>Lifetime Trail Warranty on all registered gear</span>
               </div>
               <div class="auth-feature-item">
-                <!-- <span class="auth-feature-icon">📦</span> -->
-                <span>Instant dispatch tracking & delivery updates</span>
+                <span class="material-symbols-outlined" style="color:var(--color-gold); font-size:1.3rem;">local_shipping</span>
+                <span>Instant dispatch tracking &amp; delivery updates</span>
               </div>
               <div class="auth-feature-item">
-                <!-- <span class="auth-feature-icon">🧭</span> -->
-                <span>Member-exclusive expedition drops & vouchers</span>
+                <span class="material-symbols-outlined" style="color:var(--color-gold); font-size:1.3rem;">explore</span>
+                <span>Member-exclusive expedition drops &amp; vouchers</span>
               </div>
             </div>
           </div>
@@ -121,18 +123,18 @@
               <label class="role-card-radio">
                 <input type="radio" name="authRole" value="customer" checked id="roleCustomer" />
                 <div class="role-card-inner">
-                  <!-- <span class="role-card-icon">🌲</span> -->
-                  <span class="role-card-title">Customer / Adventurer</span>
-                  <span class="role-card-sub">Orders, Tracking & Rewards</span>
+                  <span class="material-symbols-outlined" style="color:var(--color-primary-green); font-size:1.4rem; margin-bottom:4px;">person</span>
+                  <span class="role-card-title">User (Customer / Adventurer)</span>
+                  <span class="role-card-sub">Expedition Orders, Tracking &amp; Rewards</span>
                 </div>
               </label>
 
               <label class="role-card-radio">
                 <input type="radio" name="authRole" value="admin" id="roleAdmin" />
                 <div class="role-card-inner">
-                  <!-- <span class="role-card-icon">🛡️</span> -->
-                  <span class="role-card-title">Store Administrator</span>
-                  <span class="role-card-sub">Catalog, Sales & Orders</span>
+                  <span class="material-symbols-outlined" style="color:var(--color-primary-green); font-size:1.4rem; margin-bottom:4px;">admin_panel_settings</span>
+                  <span class="role-card-title">Admin (Store Administrator)</span>
+                  <span class="role-card-sub">Gear Catalog, Sales &amp; Store Console</span>
                 </div>
               </label>
 
@@ -231,7 +233,7 @@
         <!-- Switch to Register -->
         <div class="auth-switch-prompt">
           <span>New to Stackly?</span>
-          <a href="register.html">Create an Account &rarr;</a>
+          <a href="register.html">Create an Account <span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle;">arrow_forward</span></a>
         </div>
 
       </div>
@@ -268,7 +270,7 @@
       // Check if user is already logged in
       if (window.stacklyAuth && window.stacklyAuth.isLoggedIn()) {
         const u = window.stacklyAuth.currentUser;
-        showAlert(`Currently signed in as ${u.name} (${u.roleLabel}). You may sign in with another account below or <a href="${u.role === 'admin' ? 'admin-dashboard.html' : 'customer-dashboard.html'}" style="color:var(--color-gold);text-decoration:underline;margin-left:6px;font-weight:700;">Open Dashboard &rarr;</a>`, "info");
+        showAlert(`Currently signed in as ${u.name} (${u.roleLabel}). You may sign in with another account below or <a href="${u.role === 'admin' ? 'admin-dashboard.html' : 'customer-dashboard.html'}" style="color:var(--color-gold);text-decoration:underline;margin-left:6px;font-weight:700;">Open Dashboard <span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle;">arrow_forward</span></a>`, "info");
 
 
 
@@ -378,68 +380,55 @@
         showAlert(`Password reset instructions simulated! A link has been sent to ${email}.`, "success");
       });
 
-      // --- Form Submission Handler (Strict pure JS validation) ---
+      // --- Form Submission Handler: Works for any email & password with user / admin ---
       loginForm.addEventListener("submit", (e) => {
-        e.preventDefault(); // Stop native submission & default browser tooltips
+        e.preventDefault();
         hideAlert();
 
         const email = emailInput.value.trim();
         const password = passwordInput.value;
         const selectedRole = roleAdmin.checked ? "admin" : "customer";
 
-        let hasError = false;
-
-        // 1. Email format check
-        const emailValidation = window.stacklyAuth.validateEmail(email);
-        if (!emailValidation.isValid) {
-          showFieldError(emailInput, emailError, emailValidation.message);
-          hasError = true;
+        if (!email) {
+          showFieldError(emailInput, emailError, "Please enter your email address.");
+          emailInput.focus();
+          return;
         } else {
           clearFieldError(emailInput, emailError);
         }
 
-        // 2. Password 5+ chars check
-        const passwordValidation = window.stacklyAuth.validatePassword(password);
-        if (!passwordValidation.isValid) {
-          showFieldError(passwordInput, passwordError, passwordValidation.message);
-          hasError = true;
+        if (!password) {
+          showFieldError(passwordInput, passwordError, "Please enter your password.");
+          passwordInput.focus();
+          return;
         } else {
           clearFieldError(passwordInput, passwordError);
         }
 
-        if (hasError) return;
-
-        // 3. Process Authentication
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span>Checking credentials...</span>`;
-
+        submitBtn.innerHTML = `<span>Signing In...</span>`;
 
         setTimeout(() => {
           const authResult = window.stacklyAuth.login(email, password, selectedRole);
 
           if (!authResult.success) {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `<span>Sign In to Backcountry</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+            submitBtn.innerHTML = `<span>Sign In to Backcountry</span> <span class="material-symbols-outlined">arrow_forward</span>`;
 
-            if (authResult.errors.email) {
-              showFieldError(emailInput, emailError, authResult.errors.email);
-            }
-            if (authResult.errors.password) {
-              showFieldError(passwordInput, passwordError, authResult.errors.password);
-            }
-            if (authResult.errors.general) {
-              showAlert(authResult.errors.general, "error");
+            if (authResult.errors) {
+              if (authResult.errors.email) showFieldError(emailInput, emailError, authResult.errors.email);
+              if (authResult.errors.password) showFieldError(passwordInput, passwordError, authResult.errors.password);
+              if (authResult.errors.general) showAlert(authResult.errors.general, "error");
             }
           } else {
-            showAlert(`Success! Welcome, ${authResult.user.name}. Opening ${authResult.user.role === 'admin' ? 'Admin Console' : 'Backcountry Dashboard'}...`, "success");
+            showAlert(`Success! Welcome, ${authResult.user.name || authResult.user.email}. Opening ${authResult.user.role === 'admin' ? 'Admin Console' : 'Dashboard'}...`, "success");
             submitBtn.innerHTML = `<span>Redirecting...</span>`;
 
-    
             setTimeout(() => {
               window.location.href = authResult.redirectUrl;
-            }, 800);
+            }, 500);
           }
-        }, 400);
+        }, 250);
       });
 
     });

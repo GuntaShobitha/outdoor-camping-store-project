@@ -1,4 +1,4 @@
-/**
+﻿/**
  * STACKLY OUTDOOR - Form Validation & Client Verification
  */
 
@@ -94,7 +94,7 @@ class FormValidator {
         this.clearError(emailInput, errorMsg);
         
         if (window.stacklyCart && typeof window.stacklyCart.showToast === "function") {
-          window.stacklyCart.showToast("🌲 Welcome to the Stackly Trail Club! Your 10% coupon code is: ADVENTURE10", "success");
+          window.stacklyCart.showToast("Welcome to the Stackly Trail Club! Your 10% coupon code is: ADVENTURE10", "success");
         }
 
         emailInput.value = "";

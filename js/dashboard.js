@@ -1,4 +1,4 @@
-/**
+﻿/**
  * STACKLY OUTDOOR & CAMPING - Master Dashboard Interactive Controller
  * Powers both Admin Dashboard and Customer Dashboard with real-world functionality,
  * dynamic DOM rendering, localStorage persistence, modal controllers, and pure JS validation.
@@ -146,14 +146,26 @@ class AdminDashboard {
   }
 
   renderHeaderUserInfo() {
-    const user = this.currentUser || { name: "Marcus Thorne", roleLabel: "Store Administrator" };
+    const user = this.currentUser || (window.stacklyAuth ? window.stacklyAuth.currentUser : null) || { 
+      name: "Marcus Thorne", 
+      email: "admin@stackly.com", 
+      roleLabel: "Store Administrator" 
+    };
     const nameEl = document.getElementById("adminUserName");
+    const emailEl = document.getElementById("adminUserEmail");
     const roleEl = document.getElementById("adminUserRole");
     const avatarEl = document.getElementById("adminUserAvatar");
 
-    if (nameEl) nameEl.textContent = user.name;
-    if (roleEl) roleEl.textContent = user.roleLabel || "Store Administrator";
-    if (avatarEl) avatarEl.textContent = user.name.charAt(0);
+    if (nameEl) nameEl.textContent = user.name || user.email;
+    if (emailEl) {
+      emailEl.textContent = user.email || "admin@stackly.com";
+      emailEl.title = user.email || "admin@stackly.com";
+    }
+    if (roleEl) roleEl.textContent = user.roleLabel || (user.role === "admin" ? "Store Administrator" : "User");
+    if (avatarEl) {
+      const initial = (user.email || user.name || "A").charAt(0).toUpperCase();
+      avatarEl.textContent = initial;
+    }
 
     const logoutBtn = document.getElementById("adminLogoutBtn");
     if (logoutBtn) {
@@ -234,7 +246,7 @@ class AdminDashboard {
         restockList.innerHTML = lowStockItems.map(p => `
           <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--color-border);">
             <div>
-              <strong style="font-size: 0.84rem; color: #991b1b;">⚠️ ${p.name}</strong>
+              <strong style="font-size: 0.84rem; color: #991b1b;"><span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle; color:#ef4444; margin-right:4px;">warning</span> ${p.name}</strong>
               <div style="font-size: 0.72rem; color: var(--color-text-muted);">Current inventory: ${p.stockCount} units remaining</div>
             </div>
             <button class="dash-btn dash-btn-primary dash-btn-sm" onclick="window.adminDash.quickRestock('${p.id}', 10)">
@@ -307,7 +319,7 @@ class AdminDashboard {
             </td>
             <td><span class="stock-tag ${stockTagClass}">${stockLabel}</span></td>
             <td>
-              <span style="font-size:0.75rem; color:var(--color-gold-hover);">★ ${p.rating || 5.0} (${p.reviewCount || 1})</span>
+              <span style="font-size:0.75rem; color:var(--color-gold-hover);"><span class="material-symbols-outlined" style="font-size:0.95rem; vertical-align:middle; color:var(--color-gold); margin-right:2px;">star</span> ${p.rating || 5.0} (${p.reviewCount || 1})</span>
             </td>
             <td>
               <div class="table-action-btns">
@@ -875,7 +887,7 @@ class CustomerDashboard {
         container.innerHTML = `
           <div style="text-align:center; padding:40px; background:#ffffff; border-radius:12px; border:1px solid var(--color-border);">
             <p style="color:var(--color-text-muted); margin-bottom:14px;">You haven't placed any backcountry gear orders yet.</p>
-            <a href="shop.html" class="dash-btn dash-btn-primary">Explore Outdoor Gear &rarr;</a>
+            <a href="shop.html" class="dash-btn dash-btn-primary">Explore Outdoor Gear <span class="material-symbols-outlined">arrow_forward</span></a>
           </div>
         `;
         return;
@@ -908,7 +920,7 @@ class CustomerDashboard {
 
           <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid var(--color-border); font-size:0.8rem;">
             <span style="color:var(--color-text-muted);">
-              🚚 Carrier: <strong>${o.courier || 'FedEx'}</strong> &bull; Tracking: <code style="background:#eef4f0; padding:2px 6px; border-radius:4px;">${o.trackingNumber || 'Pending'}</code>
+              <span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle; margin-right:4px;">local_shipping</span> Carrier: <strong>${o.courier || 'FedEx'}</strong> &bull; Tracking: <code style="background:#eef4f0; padding:2px 6px; border-radius:4px;">${o.trackingNumber || 'Pending'}</code>
             </span>
             <button class="dash-btn dash-btn-primary dash-btn-sm" onclick="window.customerDash.reorderItems('${o.id}')">
               Re-Order All Items
@@ -1008,7 +1020,7 @@ class CustomerDashboard {
         container.innerHTML = `
           <div style="grid-column: 1 / -1; text-align:center; padding:40px; background:#ffffff; border-radius:12px; border:1px solid var(--color-border);">
             <p style="color:var(--color-text-muted); margin-bottom:14px;">Your saved gear trail bag is empty.</p>
-            <a href="shop.html" class="dash-btn dash-btn-primary">Browse Catalog &rarr;</a>
+            <a href="shop.html" class="dash-btn dash-btn-primary">Browse Catalog <span class="material-symbols-outlined">arrow_forward</span></a>
           </div>
         `;
         return;
@@ -1087,7 +1099,7 @@ class CustomerDashboard {
             <span class="card-label-badge ${c.isDefault ? 'default-tag' : ''}">
               ${c.isDefault ? 'Default Card' : c.cardBrand}
             </span>
-            <span style="font-size:1.2rem;">💳</span>
+            <span class="material-symbols-outlined" style="font-size:1.4rem; color:var(--color-gold);">credit_card</span>
           </div>
           <div class="card-middle-content">
             <strong>•••• •••• •••• ${c.last4}</strong>

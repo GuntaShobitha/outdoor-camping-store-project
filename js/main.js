@@ -1,4 +1,4 @@
-/**
+﻿/**
  * STACKLY OUTDOOR - Main Interactive Application Script
  * Sticky header, Mobile Nav, Modals, Wishlist, Tabs, and Scroll Animations
  */
@@ -213,7 +213,7 @@ class MainApp {
           <h2 class="qv-title">${prod.name}</h2>
           
           <div class="qv-rating-row">
-            <span class="stars-val">★★★★★</span>
+            <span class="stars-val"><span class="material-symbols-outlined star-icon">star</span><span class="material-symbols-outlined star-icon">star</span><span class="material-symbols-outlined star-icon">star</span><span class="material-symbols-outlined star-icon">star</span><span class="material-symbols-outlined star-icon">star</span></span>
             <span class="score-text"><strong>${prod.rating}</strong> / 5.0</span>
             <span class="count-text">(${prod.reviewCount} backcountry reviews)</span>
           </div>
@@ -254,7 +254,7 @@ class MainApp {
 
           <div class="qv-view-full-wrap">
             <a href="product-details.html?id=${prod.id}" class="qv-full-link">
-              View Complete Specs & Customer Field Reviews &rarr;
+              View Complete Specs & Customer Field Reviews <span class="material-symbols-outlined">arrow_forward</span>
             </a>
           </div>
         </div>
@@ -329,16 +329,16 @@ class MainApp {
               <span class="adv-badge">Trail Expedition Brief</span>
               <h3>${guide.title}</h3>
               <div class="adv-meta-pills">
-                <span>⛰️ <strong>Elevation:</strong> ${guide.elevation}</span>
-                <span>🥾 <strong>Difficulty:</strong> ${guide.difficulty}</span>
-                <span>⏱️ <strong>Duration:</strong> ${guide.duration}</span>
+                <span><span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle; color:var(--color-primary-green); margin-right:4px;">landscape</span> <strong>Elevation:</strong> ${guide.elevation}</span>
+                <span><span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle; color:var(--color-primary-green); margin-right:4px;">hiking</span> <strong>Difficulty:</strong> ${guide.difficulty}</span>
+                <span><span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle; color:var(--color-primary-green); margin-right:4px;">timer</span> <strong>Duration:</strong> ${guide.duration}</span>
               </div>
             </div>
             <div class="adv-modal-body">
               <p class="adv-desc-lead">${guide.desc}</p>
               
               <div class="adv-tip-box">
-                <strong>💡 Backcountry Ranger Tip:</strong>
+                <strong><span class="material-symbols-outlined" style="font-size:1.1rem; vertical-align:middle; color:var(--color-gold); margin-right:4px;">tips_and_updates</span> Backcountry Ranger Tip:</strong>
                 <p>${guide.tip}</p>
               </div>
 
@@ -433,7 +433,7 @@ class MainApp {
             <a href="product-details.html?id=${p.id}">${p.name}</a>
           </h3>
           <div class="product-rating-line">
-            <span class="stars">★★★★★</span>
+            <span class="stars"><span class="material-symbols-outlined star-icon">star</span><span class="material-symbols-outlined star-icon">star</span><span class="material-symbols-outlined star-icon">star</span><span class="material-symbols-outlined star-icon">star</span><span class="material-symbols-outlined star-icon">star</span></span>
             <span class="score">${p.rating}</span>
             <span class="count">(${p.reviewCount})</span>
           </div>

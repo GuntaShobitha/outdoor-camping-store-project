@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="css/preloader.css" />
   <link rel="stylesheet" href="css/auth.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </head>
 <body class="auth-page-body">
 
@@ -77,19 +79,20 @@
             
             <div class="auth-features-list">
               <div class="auth-feature-item">
-                <!-- <span class="auth-feature-icon">✨</span> -->
+                <span class="material-symbols-outlined" style="color:var(--color-gold); font-size:1.3rem;">stars</span>
                 <span>200 Welcome Trail Points automatically credited</span>
               </div>
               <div class="auth-feature-item">
-                <!-- <span class="auth-feature-icon">⛺</span> -->
+                <span class="material-symbols-outlined" style="color:var(--color-gold); font-size:1.3rem;">camping</span>
                 <span>Personalized outdoor equipment recommendations</span>
               </div>
               <div class="auth-feature-item">
-                <!-- <span class="auth-feature-icon">🧭</span> -->
-                <span>Expedited warranty claims & express checkout</span>
+                <span class="material-symbols-outlined" style="color:var(--color-gold); font-size:1.3rem;">explore</span>
+                <span>Expedited warranty claims &amp; express checkout</span>
               </div>
             </div>
           </div>
+        </div>
         </div>
 
         <div class="auth-visual-footer">
@@ -124,18 +127,18 @@
               <label class="role-card-radio">
                 <input type="radio" name="authRole" value="customer" checked id="roleCustomer" />
                 <div class="role-card-inner">
-                  <!-- <span class="role-card-icon">🌲</span> -->
-                  <span class="role-card-title">Customer / Adventurer</span>
-                  <span class="role-card-sub">Order Gear & Earn Points</span>
+                  <span class="material-symbols-outlined" style="color:var(--color-primary-green); font-size:1.4rem; margin-bottom:4px;">person</span>
+                  <span class="role-card-title">User (Customer / Adventurer)</span>
+                  <span class="role-card-sub">Order Gear &amp; Earn Points</span>
                 </div>
               </label>
 
               <label class="role-card-radio">
                 <input type="radio" name="authRole" value="admin" id="roleAdmin" />
                 <div class="role-card-inner">
-                  <!-- <span class="role-card-icon">🛡️</span> -->
-                  <span class="role-card-title">Store Administrator</span>
-                  <span class="role-card-sub">Manage Store & Inventory</span>
+                  <span class="material-symbols-outlined" style="color:var(--color-primary-green); font-size:1.4rem; margin-bottom:4px;">admin_panel_settings</span>
+                  <span class="role-card-title">Admin (Store Administrator)</span>
+                  <span class="role-card-sub">Manage Store &amp; Inventory</span>
                 </div>
               </label>
 
@@ -281,7 +284,7 @@
         <!-- Switch to Login -->
         <div class="auth-switch-prompt">
           <span>Already have an account?</span>
-          <a href="login.html">Sign In Here &rarr;</a>
+          <a href="login.html">Sign In Here <span class="material-symbols-outlined" style="font-size:1rem; vertical-align:middle;">arrow_forward</span></a>
         </div>
 
       </div>
@@ -506,7 +509,7 @@
             if (regResult.errors.confirmPassword) showFieldError(confirmPasswordInput, confirmPasswordError, regResult.errors.confirmPassword);
             if (regResult.errors.terms) showFieldError(null, termsError, regResult.errors.terms);
           } else {
-            showAlert(`✨ Welcome to Stackly, ${name}! Your account is ready with 200 welcome points. Entering portal...`, "success");
+            showAlert(`Welcome to Stackly, ${name}! Your account is ready with 200 welcome points. Entering portal...`, "success");
             submitBtn.innerHTML = `<span>Welcome aboard! Redirecting...</span>`;
 
             setTimeout(() => {

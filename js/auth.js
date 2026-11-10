@@ -1,4 +1,4 @@
-/**
+﻿/**
  * STACKLY OUTDOOR & CAMPING - Authentication & Session Engine
  * Handles user accounts, role-based authorization (Admin / Customer),
  * client-side JavaScript validation (email format, 5+ character password),
@@ -195,52 +195,68 @@ class AuthManager {
   login(email, password, selectedRole = "customer") {
     const errors = {};
 
-    const emailCheck = this.validateEmail(email);
-    if (!emailCheck.isValid) {
-      errors.email = emailCheck.message;
-    }
+    const cleanEmail = (email || "").trim().toLowerCase();
+    const cleanPassword = (password || "").trim();
 
-    const passwordCheck = this.validatePassword(password);
-    if (!passwordCheck.isValid) {
-      errors.password = passwordCheck.message;
+    if (!cleanEmail) {
+      errors.email = "Please enter an email address.";
+    }
+    if (!cleanPassword) {
+      errors.password = "Please enter your password.";
     }
 
     if (Object.keys(errors).length > 0) {
       return { success: false, errors };
     }
 
+    // Role handling: accept any email & password with any user type (user / admin)
+    // No database check or external check required.
+    const isRoleAdmin = selectedRole === "admin";
+    const role = isRoleAdmin ? "admin" : "customer";
+    const roleLabel = isRoleAdmin ? "Store Administrator" : "Customer / Adventurer";
+
     const users = this.getUsers();
-    const cleanEmail = email.trim().toLowerCase();
+    let existingUser = users.find(u => u.email && u.email.toLowerCase() === cleanEmail);
 
-    // Find user by email
-    let user = users.find(u => u.email.toLowerCase() === cleanEmail);
-
-    // In this demo, accept any valid email + password combination.
-    // If the account already exists, treat the account as active on successful login.
-    if (user) {
-      // Check account status only (do not reject based on mismatched stored password)
-      if (user.status === "suspended") {
-        errors.general = "This account has been temporarily suspended. Please contact Boulder HQ support.";
-        return { success: false, errors };
-      }
-
-      // Check role compatibility
-      if (selectedRole === "admin" && user.role !== "admin") {
-        errors.general = `The account "${user.email}" does not have Administrator privileges. Please select "Customer / Adventurer" role, or sign in with admin@stackly.com.`;
-        return { success: false, errors };
-      }
-
-      // Update the in-memory password so the latest password is used for this session.
-      // This lets the same email sign in again later with a different password.
-      user.password = password;
-      this.setCurrentUser(user);
-      const redirectUrl = user.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
-      return { success: true, user, redirectUrl };
+    let loggedInUser;
+    if (existingUser) {
+      existingUser.password = cleanPassword;
+      existingUser.role = role;
+      existingUser.roleLabel = roleLabel;
+      existingUser.status = "active";
+      this.saveUsers(users);
+      loggedInUser = existingUser;
     } else {
-      // Do not create accounts automatically. Only allow login for emails that already exist.
-      errors.email = "No account found with this email address. Please register first.";
-      return { success: false, errors };
+      let namePart = cleanEmail.split("@")[0].replace(/[._-]/g, " ");
+      let formattedName = namePart.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+      if (!formattedName.trim()) formattedName = isRoleAdmin ? "Store Administrator" : "Backcountry Explorer";
+
+      loggedInUser = {
+        id: "usr-" + Date.now(),
+        name: formattedName,
+        email: cleanEmail,
+        password: cleanPassword,
+        role: role,
+        roleLabel: roleLabel,
+        title: isRoleAdmin ? "Store Administrator" : "Summit Explorer (Tier 3)",
+        avatar: isRoleAdmin ? "assets/images/sections/avatar-1.webp" : "assets/images/sections/avatar-2.webp",
+        registeredDate: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+        phone: "+1 (303) 555-0192",
+        location: "Boulder, CO",
+        status: "active",
+        trailPoints: 1450,
+        tier: "Summit Explorer",
+        ordersCount: 3,
+        totalSpent: 420.00,
+        favoriteActivity: "Alpine Backpacking"
+      };
+      users.push(loggedInUser);
+      this.saveUsers(users);
     }
+
+    this.setCurrentUser(loggedInUser);
+    const redirectUrl = isRoleAdmin ? "admin-dashboard.html" : "customer-dashboard.html";
+    return { success: true, user: loggedInUser, redirectUrl };
   }
 
   // --- Registration Action with Pure JS Validation ---
@@ -461,20 +477,20 @@ class AuthManager {
       if (mLogout) {
         mLogout.addEventListener("click", () => this.logout());
       }
-    } else {
+        } else {
       authLinksContainer.innerHTML = `
         <div class="mobile-auth-nav-links">
           <a href="login.html" class="mobile-auth-link highlight">
-            <span>🔑 Sign In</span> <span>&rarr;</span></a>
+            <span><span class="material-symbols-outlined" style="margin-right:6px;">login</span> Sign In</span> <span class="material-symbols-outlined">arrow_forward</span></a>
   
           <a href="register.html" class="mobile-auth-link">
-            <span>✨ Create Account</span> <span>&rarr;</span></a>
+            <span><span class="material-symbols-outlined" style="margin-right:6px;">person_add</span> Create Account</span> <span class="material-symbols-outlined">arrow_forward</span></a>
   
           <a href="customer-dashboard.html" class="mobile-auth-link">
-            <span>🌲 Customer Dashboard (Demo)</span> <span>&rarr;</span></a>
+            <span><span class="material-symbols-outlined" style="margin-right:6px;">explore</span> Customer Dashboard</span> <span class="material-symbols-outlined">arrow_forward</span></a>
   
           <a href="admin-dashboard.html" class="mobile-auth-link">
-            <span>🛡️ Admin Dashboard (Demo)</span> <span>&rarr;</span></a>
+            <span><span class="material-symbols-outlined" style="margin-right:6px;">admin_panel_settings</span> Admin Dashboard</span> <span class="material-symbols-outlined">arrow_forward</span></a>
   
         </div>
       `;
