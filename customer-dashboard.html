@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -108,6 +108,7 @@
           </span>
           <span>Gear Wishlist</span>
         </div>
+        <span class="dash-nav-badge" id="custWishlistBadge">6</span>
       </a>
 
       <a href="#notifications" class="dash-nav-link" data-tab="notifications" data-title="Wilderness Notifications &amp; Alerts">
@@ -139,7 +140,7 @@
           </span>
           <span>Trail Rewards</span>
         </div>
-        <span class="dash-nav-badge gold">1,450 pts</span>
+        <span class="dash-nav-badge gold" id="custRewardsBadge">1,450 pts</span>
       </a>
 
       <a href="#profile" class="dash-nav-link" data-tab="profile" data-title="Explorer Profile &amp; Emergency Contacts">
@@ -404,19 +405,143 @@
            TAB 4: ADVENTURE WISHLIST (Section F: Saved Gear & Packages)
            ========================================================================== -->
       <section class="dash-tab-pane" id="tab-wishlist">
+        
+        <!-- Wishlist Header & Quick Actions -->
         <div class="dash-sub-section">
           <div class="dash-sub-header">
             <div class="dash-sub-title-wrap">
-              <h3>My Adventure Wishlist</h3>
-              <p>Backcountry equipment and expedition packages saved for future trips.</p>
+              <h3>My Adventure Gear Wishlist</h3>
+              <p>Plan, organize, and pack high-performance backcountry equipment for upcoming alpine trips.</p>
             </div>
-            <a href="./404.html" class="dash-btn dash-btn-primary dash-btn-sm">+ Find More Gear</a>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a href="./404.html" class="dash-btn dash-btn-primary dash-btn-sm">+ Explore Camp Shop</a>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.location.href='./404.html'">
+                <span class="material-symbols-outlined" style="font-size:1.1rem; margin-right:4px;">shopping_bag</span> Move In-Stock to Cart
+              </button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.location.href='./404.html'">
+                <span class="material-symbols-outlined" style="font-size:1.1rem; margin-right:4px;">share</span> Share List
+              </button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.location.href='./404.html'">
+                <span class="material-symbols-outlined" style="font-size:1.1rem; margin-right:4px;">print</span> Print
+              </button>
+            </div>
           </div>
 
+          <!-- Wishlist KPI Strip / Pack Metrics -->
+          <div class="kpi-cards-grid" style="grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); margin-bottom:24px;">
+            <div class="kpi-card">
+              <div class="kpi-card-header">
+                <span class="kpi-title">Saved Gear Items</span>
+                <div class="kpi-card-icon green">
+                  <span class="material-symbols-outlined">bookmark</span>
+                </div>
+              </div>
+              <div class="kpi-value" id="wishlistKpiCount">6</div>
+              <div class="kpi-card-sub"><span class="kpi-badge up">Ready to Pack</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-header">
+                <span class="kpi-title">Estimated Base Weight</span>
+                <div class="kpi-card-icon gold">
+                  <span class="material-symbols-outlined">scale</span>
+                </div>
+              </div>
+              <div class="kpi-value" id="wishlistKpiWeight">5.82 kg</div>
+              <div class="kpi-card-sub"><span class="kpi-badge info">~12.8 lbs Ultralight</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-header">
+                <span class="kpi-title">Total Wishlist Value</span>
+                <div class="kpi-card-icon blue">
+                  <span class="material-symbols-outlined">payments</span>
+                </div>
+              </div>
+              <div class="kpi-value" id="wishlistKpiValue">$1,098.00</div>
+              <div class="kpi-card-sub"><span class="kpi-badge up">Save $124 on Bundles</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-header">
+                <span class="kpi-title">3-Season Readiness</span>
+                <div class="kpi-card-icon green">
+                  <span class="material-symbols-outlined">hiking</span>
+                </div>
+              </div>
+              <div class="kpi-value" id="wishlistKpiReadiness">82%</div>
+              <div class="kpi-card-sub"><span class="kpi-badge up">Shelter &amp; Sleep Ready</span></div>
+            </div>
+          </div>
+
+          <!-- Wishlist Filter & Controls -->
+          <div class="dash-panel" style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; padding:16px 20px;">
+            <div style="display:flex; gap:8px; flex-wrap:wrap;" id="wishlistCategoryFilters">
+              <button type="button" class="dash-btn dash-btn-primary dash-btn-sm wishlist-cat-btn" data-cat="all">All Gear</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm wishlist-cat-btn" data-cat="tents">Shelter &amp; Tents</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm wishlist-cat-btn" data-cat="sleeping">Sleep Systems</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm wishlist-cat-btn" data-cat="packs">Packs &amp; Trekking</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm wishlist-cat-btn" data-cat="cooking">Stoves &amp; Cooking</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm wishlist-cat-btn" data-cat="lighting">Lighting &amp; Power</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:0.82rem; color:var(--color-text-muted);">Sort by:</span>
+              <select id="wishlistSortSelect" class="auth-input" style="padding:6px 12px; font-size:0.82rem; width:auto;">
+                <option value="default">Priority Order</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="weight">Trail Weight (Lightest)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Main Wishlist Items Grid -->
           <div class="cards-collection-grid" id="customerWishlistGrid">
-            <!-- Rendered via JS -->
+            <!-- Dynamically rendered via JS -->
           </div>
         </div>
+
+        <!-- Expedition Pack Checklist Planner -->
+        <div class="dash-sub-section" style="margin-top:36px;">
+          <div class="dash-panel pack-checklist-panel">
+            <div class="dash-sub-header" style="border-bottom:1px solid var(--color-border); padding-bottom:16px; margin-bottom:18px;">
+              <div class="dash-sub-title-wrap">
+                <h3 style="display:flex; align-items:center; gap:8px;">
+                  <span class="material-symbols-outlined" style="color:var(--color-primary-green);">backpack</span>
+                  Backcountry Expedition Pack Checklist
+                </h3>
+                <p>Track essential gear items across your pack to ensure complete alpine trail readiness before setting out.</p>
+              </div>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span class="checklist-progress-text" id="checklistProgressSummary">9 / 12 Items Prepared (75%)</span>
+                <button type="button" class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.customerDash.resetChecklist()">Reset Checks</button>
+              </div>
+            </div>
+
+            <div class="checklist-progress-bar-wrap" style="height:8px; background:#e2e8f0; border-radius:4px; overflow:hidden; margin-bottom:20px;">
+              <div id="checklistProgressBar" style="height:100%; width:75%; background:linear-gradient(90deg, var(--color-primary-green), var(--color-gold)); transition:width 0.3s ease;"></div>
+            </div>
+
+            <div class="pack-checklist-grid" id="packChecklistContainer">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Frequently Paired / Recommended Gear Additions -->
+        <div class="dash-sub-section" style="margin-top:36px;">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Frequently Paired with Your Saved Gear</h3>
+              <p>Top-rated field essentials recommended by alpine guides to complement your current wishlist.</p>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px;" id="wishlistRecommendedGrid">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
       </section>
 
       <!-- ==========================================================================
@@ -458,18 +583,152 @@
       </section>
 
       <!-- ==========================================================================
-           TAB 7: TRAIL REWARDS (Preserved Existing Functionality)
+           TAB 7: TRAIL REWARDS & LOYALTY CLUB
            ========================================================================== -->
       <section class="dash-tab-pane" id="tab-rewards">
+        
+        <!-- Member Loyalty Status Hero Banner -->
         <div class="dash-sub-section">
-          <div class="dash-panel">
-            <h3>Trail Club Loyalty &amp; Rewards</h3>
-            <p style="margin-bottom:20px; color:var(--color-text-body);">Redeem your trail points for gear discount vouchers and guided trek discounts.</p>
-            <div class="cards-collection-grid" id="customerVouchersGrid">
-              <!-- Rendered via JS -->
+          <div class="trail-rewards-hero-card">
+            <div class="rewards-hero-content">
+              <div class="rewards-hero-header">
+                <span class="rewards-tier-badge">
+                  <span class="material-symbols-outlined" style="font-size:1.1rem; color:var(--color-gold);">military_tech</span>
+                  SUMMIT EXPLORER &bull; TIER 3 OF 4
+                </span>
+                <span class="rewards-member-id">Member #STK-88419</span>
+              </div>
+
+              <div class="rewards-points-headline">
+                <div class="points-number-block">
+                  <strong class="points-val" id="rewardsHeroPoints">1,450</strong>
+                  <span class="points-unit">Available Trail Points</span>
+                </div>
+                <div class="points-worth-tag">
+                  <span class="material-symbols-outlined" style="font-size:1.1rem; color:var(--color-gold);">monetization_on</span>
+                  Estimated Reward Value: <strong>~$95.00</strong>
+                </div>
+              </div>
+
+              <!-- Tier Progress Bar -->
+              <div class="rewards-tier-track-box">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:0.84rem;">
+                  <span><strong>Summit Explorer</strong> (1,000 pts)</span>
+                  <span style="color:var(--color-gold); font-weight:700;" id="rewardsNextTierHint">350 pts to Alpine Legend Tier</span>
+                  <span><strong>Alpine Legend</strong> (1,800 pts)</span>
+                </div>
+                <div class="tier-progress-track">
+                  <div class="tier-progress-fill" id="rewardsHeroProgressBar" style="width:78%;"></div>
+                </div>
+                <p class="tier-hint" style="margin-top:6px;">
+                  Unlocks at Alpine Legend: <strong>Lifetime Free Gear Seam Repairs</strong> + <strong>20% Off Guided Expeditions</strong> + <strong>Free Annual Camp Gear Tune-Up</strong>.
+                </p>
+              </div>
+
+              <!-- Active Tier Perks Strip -->
+              <div class="rewards-perks-strip">
+                <div class="perk-pill">
+                  <span class="material-symbols-outlined">local_shipping</span> Free Expedited Ground Shipping
+                </div>
+                <div class="perk-pill">
+                  <span class="material-symbols-outlined">cake</span> 10% Off Birthday Backcountry Voucher
+                </div>
+                <div class="perk-pill">
+                  <span class="material-symbols-outlined">confirmation_number</span> Priority Campsite Permit Booking
+                </div>
+                <div class="perk-pill">
+                  <span class="material-symbols-outlined">savings</span> Earn 1 Trail Pt per $1 Spent
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- Rewards Category Filter & Catalog -->
+        <div class="dash-sub-section" style="margin-top:28px;">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Redeem Trail Points</h3>
+              <p>Turn your backcountry mileage into instant gear vouchers, complimentary equipment gifts, and guided trek passes.</p>
+            </div>
+            <a href="#trailMissionsSection" class="dash-btn dash-btn-outline dash-btn-sm" onclick="document.getElementById('trailMissionsSection').scrollIntoView({behavior:'smooth'}); return false;">
+              + How to Earn More Points
+            </a>
+          </div>
+
+          <!-- Category Filter Bar -->
+          <div class="dash-panel" style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; padding:14px 18px;">
+            <div style="display:flex; gap:8px; flex-wrap:wrap;" id="rewardsCategoryFilters">
+              <button type="button" class="dash-btn dash-btn-primary dash-btn-sm reward-filter-btn" data-cat="all">All Rewards (8)</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm reward-filter-btn" data-cat="gear_discount">Store Vouchers (2)</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm reward-filter-btn" data-cat="free_gift">Free Gear Gifts (2)</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm reward-filter-btn" data-cat="expedition_pass">Trek &amp; Park Passes (3)</button>
+              <button type="button" class="dash-btn dash-btn-outline dash-btn-sm reward-filter-btn" data-cat="gear_service">Lab Care Services (1)</button>
+            </div>
+            <div style="font-size:0.82rem; color:var(--color-text-muted);">
+              Points are deducted only upon redemption. Promo codes never expire.
+            </div>
+          </div>
+
+          <!-- Vouchers Cards Grid -->
+          <div class="cards-collection-grid" id="customerVouchersGrid">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+        <!-- Trail Missions & Quests (How to Earn Points) -->
+        <div class="dash-sub-section" id="trailMissionsSection" style="margin-top:36px;">
+          <div class="dash-sub-header">
+            <div class="dash-sub-title-wrap">
+              <h3>Trail Missions &amp; Quests</h3>
+              <p>Complete eco-stewardship goals, submit gear field reports, and refer companions to boost your points.</p>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;" id="trailMissionsGrid">
+            <!-- Dynamically rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Explorer Badges & Achievements Showcase -->
+        <div class="dash-sub-section" style="margin-top:36px;">
+          <div class="dash-panel">
+            <div class="dash-sub-header" style="border-bottom:1px solid var(--color-border); padding-bottom:14px; margin-bottom:18px;">
+              <div class="dash-sub-title-wrap">
+                <h3 style="display:flex; align-items:center; gap:8px;">
+                  <span class="material-symbols-outlined" style="color:var(--color-gold);">verified</span>
+                  Trail Explorer Badges &amp; Outdoor Achievements
+                </h3>
+                <p>Commemorate your wilderness milestones, summits bagged, and low-impact stewardship.</p>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;" id="trailBadgesGrid">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Rewards Wallet (Claimed Codes) -->
+        <div class="dash-sub-section" style="margin-top:36px;">
+          <div class="dash-panel" style="background:#faf8f5;">
+            <div class="dash-sub-header" style="margin-bottom:16px;">
+              <div class="dash-sub-title-wrap">
+                <h3 style="display:flex; align-items:center; gap:8px;">
+                  <span class="material-symbols-outlined" style="color:var(--color-primary-green);">wallet</span>
+                  My Unlocked Rewards Wallet
+                </h3>
+                <p>Copy your redeemed coupon codes and apply them at checkout or during trip bookings.</p>
+              </div>
+              <a href="shop.html" class="dash-btn dash-btn-primary dash-btn-sm">Shop Store with Code &rarr;</a>
+            </div>
+
+            <div id="customerClaimedWallet">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- ==========================================================================
