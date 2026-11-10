@@ -244,71 +244,121 @@ const DEFAULT_SETTINGS = {
 const DEFAULT_VOUCHERS = [
   {
     id: "vouch-01",
-    code: "TRAIL10-SUMMIT",
-    title: "$10 Off Any Gear Purchase",
+    code: "SUMMIT10-EXP",
+    title: "$10 Backcountry Store Credit",
+    category: "gear_discount",
+    categoryLabel: "Store Voucher",
     pointsRequired: 500,
     discountAmount: 10.00,
     minSpend: 50.00,
+    image: "assets/images/products/prod-flask.webp",
+    badge: "Popular",
+    description: "Save $10 on all outdoor equipment, tents, hydration flasks, and technical backcountry essentials.",
     redeemed: false,
     expiryDate: "Dec 31, 2026"
   },
   {
     id: "vouch-02",
     code: "ALPINEREWARD25",
-    title: "$25 Off Any Gear Purchase",
+    title: "$25 High-Altitude Gear Voucher",
+    category: "gear_discount",
+    categoryLabel: "Store Voucher",
     pointsRequired: 1000,
     discountAmount: 25.00,
     minSpend: 100.00,
+    image: "assets/images/products/prod-lantern.webp",
+    badge: "Top Choice",
+    description: "Take $25 off premium alpine backpacks, 4-season sleep systems, and expedition lighting.",
     redeemed: false,
     expiryDate: "Dec 31, 2026"
   },
   {
     id: "vouch-03",
-    code: "AGTYYHHH",
-    title: "Complimentary ANY URGENT GEAR ITEM",
+    code: "FREE-FLASK-RIDGE",
+    title: "Complimentary Backcountry Thermal Flask (1L)",
+    category: "free_gift",
+    categoryLabel: "Free Gear Gift",
     pointsRequired: 1200,
-    discountAmount: 24.00,
+    discountAmount: 42.00,
     minSpend: 0.00,
+    image: "assets/images/products/prod-flask.webp",
+    badge: "Physical Gear",
+    description: "Double-wall vacuum insulated stainless steel flask. Keeps camp beverages steaming hot for 24 hours.",
     redeemed: false,
     expiryDate: "Dec 31, 2026"
   },
   {
     id: "vouch-04",
-    code: "GOBOULT",
-    title: "getting of more boult Mug",
-    pointsRequired: 1200,
-    discountAmount: 24.00,
+    code: "TITANIUM-STOVE-GIFT",
+    title: "Complimentary Ultralight Titanium Camp Stove",
+    category: "free_gift",
+    categoryLabel: "Free Gear Gift",
+    pointsRequired: 1400,
+    discountAmount: 79.00,
     minSpend: 0.00,
+    image: "assets/images/products/prod-stove.webp",
+    badge: "Ultralight Essential",
+    description: "Featherlight 2.8 oz titanium pocket stove with built-in piezo igniter and wind-resistant burner head.",
     redeemed: false,
     expiryDate: "Dec 31, 2026"
   },
   {
     id: "vouch-05",
-    code: "BUSS20",
-    title: "Getting busy Titanium Camp Mug",
-    pointsRequired: 1200,
-    discountAmount: 24.00,
+    code: "FOREST-CAMP-PASS",
+    title: "Free 2-Night Forest Campsite Permit Pass",
+    category: "expedition_pass",
+    categoryLabel: "Campsite Pass",
+    pointsRequired: 750,
+    discountAmount: 60.00,
     minSpend: 0.00,
+    image: "assets/images/services/service-forest-camping.webp",
+    badge: "Wilderness Pass",
+    description: "Waives campsite reservation and backcountry permit fees for 2 nights at participating wilderness parks.",
     redeemed: false,
     expiryDate: "Dec 31, 2026"
   },
   {
     id: "vouch-06",
-    code: "ANY2778",
-    title: "Changing behaviour bgtt",
-    pointsRequired: 1200,
-    discountAmount: 24.00,
+    code: "GEAR-SEAM-CARE",
+    title: "Complimentary Tent Waterproofing & Seam Tune-Up",
+    category: "gear_service",
+    categoryLabel: "Lab Service",
+    pointsRequired: 600,
+    discountAmount: 45.00,
     minSpend: 0.00,
+    image: "assets/images/services/service-equipment-rentals.webp",
+    badge: "Eco Lab Care",
+    description: "Full ultrasonic fabric wash, silicone seam re-sealing, and fluorocarbon-free eco DWR restoration.",
     redeemed: false,
     expiryDate: "Dec 31, 2026"
   },
   {
     id: "vouch-07",
-    code: "LAPTOPGGT",
-    title: "Gali valugu gulabi valaga",
-    pointsRequired: 1200,
-    discountAmount: 24.00,
+    code: "ALPINE50-GUIDED",
+    title: "50% Off Guided Rocky Mountain Alpine Trek",
+    category: "expedition_pass",
+    categoryLabel: "Expedition Perk",
+    pointsRequired: 1800,
+    discountAmount: 290.00,
     minSpend: 0.00,
+    image: "assets/images/services/service-mountain-trekking.webp",
+    badge: "VIP Experience",
+    description: "Half-price voucher for our 4-day guided high-altitude ridge expedition with certified mountain guides.",
+    redeemed: false,
+    expiryDate: "Dec 31, 2026"
+  },
+  {
+    id: "vouch-08",
+    code: "WILDLIFE-VIP-PASS",
+    title: "VIP Guided Wildlife Tracking Safari Pass",
+    category: "expedition_pass",
+    categoryLabel: "Expedition Perk",
+    pointsRequired: 1600,
+    discountAmount: 120.00,
+    minSpend: 0.00,
+    image: "assets/images/services/service-wildlife-tracking.webp",
+    badge: "Nature Tour",
+    description: "Full-day wilderness tracking excursion through Rocky Mountain backcountry with lead wildlife biologist.",
     redeemed: false,
     expiryDate: "Dec 31, 2026"
   }
@@ -340,12 +390,56 @@ class DashboardDataManager {
       if (!localStorage.getItem(DASHBOARD_SETTINGS_KEY)) {
         localStorage.setItem(DASHBOARD_SETTINGS_KEY, JSON.stringify(DEFAULT_SETTINGS));
       }
-      if (!localStorage.getItem(DASHBOARD_VOUCHERS_KEY)) {
+      const existingVouchers = localStorage.getItem(DASHBOARD_VOUCHERS_KEY);
+      if (!existingVouchers || existingVouchers.includes("Gali valugu") || existingVouchers.includes("Changing behaviour") || !existingVouchers.includes("vouch-08")) {
         localStorage.setItem(DASHBOARD_VOUCHERS_KEY, JSON.stringify(DEFAULT_VOUCHERS));
+      }
+      if (!localStorage.getItem("stackly_wishlist_items_v1")) {
+        localStorage.setItem("stackly_wishlist_items_v1", JSON.stringify(["prod-1", "prod-2", "prod-3", "prod-5", "prod-4", "prod-11"]));
       }
     } catch (e) {
       console.warn("Storage initialization warning:", e);
     }
+  }
+
+  // --- Wishlist API ---
+  getWishlist() {
+    try {
+      const data = localStorage.getItem("stackly_wishlist_items_v1");
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+      const initial = ["prod-1", "prod-2", "prod-3", "prod-5", "prod-4", "prod-11"];
+      localStorage.setItem("stackly_wishlist_items_v1", JSON.stringify(initial));
+      return initial;
+    } catch (e) {
+      return ["prod-1", "prod-2", "prod-3", "prod-5", "prod-4", "prod-11"];
+    }
+  }
+
+  saveWishlist(list) {
+    try {
+      localStorage.setItem("stackly_wishlist_items_v1", JSON.stringify(list));
+      if (window.stacklyApp) {
+        window.stacklyApp.wishlist = list;
+        if (typeof window.stacklyApp.updateWishlistUI === "function") window.stacklyApp.updateWishlistUI();
+      }
+    } catch (e) {}
+  }
+
+  toggleWishlist(productId) {
+    let list = this.getWishlist();
+    const idx = list.indexOf(productId);
+    let added = false;
+    if (idx > -1) {
+      list.splice(idx, 1);
+    } else {
+      list.push(productId);
+      added = true;
+    }
+    this.saveWishlist(list);
+    return { list, added };
   }
 
   // --- Orders API ---

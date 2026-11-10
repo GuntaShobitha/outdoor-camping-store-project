@@ -1,4 +1,4 @@
-﻿/**
+/**
  * STACKLY OUTDOOR & CAMPING - Master Dashboard Interactive Controller
  * Powers both Admin Dashboard and Customer Dashboard with real-world functionality,
  * dynamic DOM rendering, localStorage persistence, modal controllers, and pure JS validation.
@@ -735,6 +735,9 @@ class CustomerDashboard {
     this.authManager = window.stacklyAuth;
     this.currentUser = this.authManager ? this.authManager.currentUser : null;
     this.activeTab = "overview";
+    this.wishlistCategory = "all";
+    this.wishlistSort = "default";
+    this.rewardsCategory = "all";
     this.init();
   }
 
@@ -809,6 +812,13 @@ class CustomerDashboard {
         if (targetTab === "profile") this.renderProfileTab();
       });
     });
+
+    // Check initial URL hash (e.g. customer-dashboard.html#wishlist or #rewards)
+    const initialHash = window.location.hash.replace("#", "");
+    if (initialHash) {
+      const targetLink = document.querySelector(`.dash-nav-link[data-tab="${initialHash}"]`);
+      if (targetLink) targetLink.click();
+    }
   }
 
   renderCustomerHeader() {
@@ -1009,56 +1019,458 @@ class CustomerDashboard {
   }
 
   // --- TAB 3: WISHLIST & SAVED GEAR ---
-  renderWishlistTab() {
-    const container = document.getElementById("customerWishlistGrid");
-    const rawIds = (window.stacklyApp && window.stacklyApp.wishlist) ? window.stacklyApp.wishlist : ["prod-1", "prod-3", "prod-5"];
-    
-    if (container) {
-      const prods = rawIds.map(id => this.dataManager.getProductById(id)).filter(Boolean);
-      
-      if (prods.length === 0) {
-        container.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align:center; padding:40px; background:#ffffff; border-radius:12px; border:1px solid var(--color-border);">
-            <p style="color:var(--color-text-muted); margin-bottom:14px;">Your saved gear trail bag is empty.</p>
-            <a href="shop.html" class="dash-btn dash-btn-primary">Browse Catalog <span class="material-symbols-outlined">arrow_forward</span></a>
-          </div>
-        `;
-        return;
-      }
+  getWishlistIds() {
+    if (this.dataManager && typeof this.dataManager.getWishlist === "function") {
+      return this.dataManager.getWishlist();
+    }
+    const stored = localStorage.getItem("stackly_wishlist_items_v1");
+    if (stored) {
+      try {
+        const p = JSON.parse(stored);
+        if (Array.isArray(p) && p.length > 0) return p;
+      } catch (e) {}
+    }
+    return ["prod-1", "prod-2", "prod-3", "prod-5", "prod-4", "prod-11"];
+  }
 
-      container.innerHTML = prods.map(p => `
-        <div class="dash-panel" style="padding:16px; position:relative;">
-          <img src="${p.image}" alt="${p.name}" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:12px; background:var(--color-bg-cream);" />
-          <span class="card-label-badge" style="margin-bottom:6px;">${p.categoryLabel}</span>
-          <strong style="font-size:0.9rem; display:block; margin-bottom:6px; color:var(--color-text-dark);">${p.name}</strong>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-            <strong style="font-size:1.1rem; color:var(--color-primary-green);">$${p.price.toFixed(2)}</strong>
-            <span class="stock-tag in-stock">In Stock</span>
+  saveWishlistIds(ids) {
+    if (this.dataManager && typeof this.dataManager.saveWishlist === "function") {
+      this.dataManager.saveWishlist(ids);
+    } else {
+      localStorage.setItem("stackly_wishlist_items_v1", JSON.stringify(ids));
+    }
+    if (window.stacklyApp) {
+      window.stacklyApp.wishlist = ids;
+      if (typeof window.stacklyApp.updateWishlistUI === "function") window.stacklyApp.updateWishlistUI();
+    }
+  }
+
+  renderWishlistTab() {
+    const rawIds = this.getWishlistIds();
+    const prods = rawIds.map(id => this.dataManager.getProductById(id)).filter(Boolean);
+
+    // 1. Update KPI Analytics
+    this.updateWishlistKpis(prods);
+
+    // 2. Setup Category Filters & Sorter
+    this.setupWishlistControls();
+
+    // 3. Render Items Grid
+    this.renderWishlistGrid(prods);
+
+    // 4. Render Pack Checklist Planner
+    this.renderPackChecklist();
+
+    // 5. Render Recommended Additions
+    this.renderWishlistRecommended(rawIds);
+  }
+
+  updateWishlistKpis(prods) {
+    const rawIds = this.getWishlistIds();
+    const countEl = document.getElementById("wishlistKpiCount");
+    const weightEl = document.getElementById("wishlistKpiWeight");
+    const valueEl = document.getElementById("wishlistKpiValue");
+    const readinessEl = document.getElementById("wishlistKpiReadiness");
+    const sidebarBadge = document.getElementById("custWishlistBadge");
+    const overviewStat = document.getElementById("statWishlistCount");
+
+    if (countEl) countEl.textContent = prods.length;
+    if (sidebarBadge) sidebarBadge.textContent = prods.length;
+    if (overviewStat) overviewStat.textContent = prods.length;
+
+    // Weight calculation
+    const weightMap = {
+      "prod-1": 1.18, "prod-2": 0.92, "prod-3": 1.75, "prod-4": 0.31,
+      "prod-5": 0.08, "prod-6": 0.58, "prod-7": 0.42, "prod-8": 0.12,
+      "prod-9": 0.28, "prod-10": 0.85, "prod-11": 0.65, "prod-12": 1.10
+    };
+    let totalKg = 0;
+    prods.forEach(p => {
+      totalKg += weightMap[p.id] || 0.75;
+    });
+    const totalLbs = (totalKg * 2.20462).toFixed(1);
+    if (weightEl) weightEl.textContent = `${totalKg.toFixed(2)} kg`;
+
+    // Value calculation
+    const totalVal = prods.reduce((sum, p) => sum + (parseFloat(p.price) || 0), 0);
+    if (valueEl) valueEl.textContent = `$${totalVal.toFixed(2)}`;
+
+    // Readiness calculation (Shelter, Sleep, Pack, Cooking, Lighting)
+    const cats = new Set(prods.map(p => p.category));
+    let covered = 0;
+    if (cats.has("tents") || cats.has("shelter") || rawIds.includes("prod-1") || rawIds.includes("prod-11")) covered++;
+    if (cats.has("sleeping") || rawIds.includes("prod-2")) covered++;
+    if (cats.has("packs") || rawIds.includes("prod-3")) covered++;
+    if (cats.has("cooking") || rawIds.includes("prod-5") || rawIds.includes("prod-7")) covered++;
+    if (cats.has("lighting") || cats.has("power") || rawIds.includes("prod-4") || rawIds.includes("prod-9")) covered++;
+
+    const readinessPct = Math.min(100, Math.round((covered / 5) * 100));
+    if (readinessEl) readinessEl.textContent = `${readinessPct}%`;
+  }
+
+  setupWishlistControls() {
+    const filterBtns = document.querySelectorAll(".wishlist-cat-btn");
+    filterBtns.forEach(btn => {
+      btn.onclick = () => {
+        filterBtns.forEach(b => {
+          b.classList.remove("dash-btn-primary");
+          b.classList.add("dash-btn-outline");
+        });
+        btn.classList.remove("dash-btn-outline");
+        btn.classList.add("dash-btn-primary");
+        this.wishlistCategory = btn.getAttribute("data-cat") || "all";
+        const rawIds = this.getWishlistIds();
+        const prods = rawIds.map(id => this.dataManager.getProductById(id)).filter(Boolean);
+        this.renderWishlistGrid(prods);
+      };
+    });
+
+    const sortSelect = document.getElementById("wishlistSortSelect");
+    if (sortSelect) {
+      sortSelect.onchange = (e) => {
+        this.wishlistSort = e.target.value;
+        const rawIds = this.getWishlistIds();
+        const prods = rawIds.map(id => this.dataManager.getProductById(id)).filter(Boolean);
+        this.renderWishlistGrid(prods);
+      };
+    }
+  }
+
+  renderWishlistGrid(prods) {
+    const container = document.getElementById("customerWishlistGrid");
+    if (!container) return;
+
+    let filtered = [...prods];
+    if (this.wishlistCategory !== "all") {
+      filtered = filtered.filter(p => {
+        if (this.wishlistCategory === "tents") return p.category === "tents" || p.category === "shelter" || p.id === "prod-1" || p.id === "prod-11";
+        if (this.wishlistCategory === "sleeping") return p.category === "sleeping" || p.id === "prod-2";
+        if (this.wishlistCategory === "packs") return p.category === "packs" || p.id === "prod-3";
+        if (this.wishlistCategory === "cooking") return p.category === "cooking" || p.id === "prod-5" || p.id === "prod-7";
+        if (this.wishlistCategory === "lighting") return p.category === "lighting" || p.category === "power" || p.id === "prod-4" || p.id === "prod-6" || p.id === "prod-9";
+        return p.category === this.wishlistCategory;
+      });
+    }
+
+    // Sort
+    const weightMap = {
+      "prod-1": 1.18, "prod-2": 0.92, "prod-3": 1.75, "prod-4": 0.31,
+      "prod-5": 0.08, "prod-6": 0.58, "prod-7": 0.42, "prod-8": 0.12,
+      "prod-9": 0.28, "prod-10": 0.85, "prod-11": 0.65, "prod-12": 1.10
+    };
+
+    if (this.wishlistSort === "price-low") {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (this.wishlistSort === "price-high") {
+      filtered.sort((a, b) => b.price - a.price);
+    } else if (this.wishlistSort === "weight") {
+      filtered.sort((a, b) => (weightMap[a.id] || 0.7) - (weightMap[b.id] || 0.7));
+    }
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align:center; padding:48px 24px; background:#ffffff; border-radius:12px; border:1px solid var(--color-border);">
+          <span class="material-symbols-outlined" style="font-size:3rem; color:var(--color-gold); margin-bottom:12px;">backpack</span>
+          <h4 style="font-family:var(--font-serif); font-size:1.2rem; color:var(--color-text-dark); margin-bottom:8px;">No Saved Gear in This Category</h4>
+          <p style="color:var(--color-text-muted); margin-bottom:18px; max-width:440px; margin-left:auto; margin-right:auto;">
+            Explore our outdoor store catalog to discover ultralight shelters, sleeping bags, stoves, and packs for your next adventure.
+          </p>
+          <a href="shop.html" class="dash-btn dash-btn-primary">Browse Gear Catalog <span class="material-symbols-outlined">arrow_forward</span></a>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filtered.map(p => {
+      const weight = weightMap[p.id] ? `${weightMap[p.id]} kg` : "0.75 kg";
+      const isEssential = p.id === "prod-1" || p.id === "prod-2";
+      const isHigh = p.id === "prod-3" || p.id === "prod-5";
+      const priorityTag = isEssential ? "Essential Gear" : (isHigh ? "High Priority" : "Trip Wishlist");
+      const priorityClass = isEssential ? "essential" : (isHigh ? "high" : "");
+
+      const specSummary = p.specs ? Object.entries(p.specs).slice(0, 2).map(([k, v]) => `${k}: ${v}`).join(" &bull; ") : p.shortDesc;
+
+      return `
+        <div class="wishlist-gear-card">
+          <div>
+            <div class="wishlist-img-box">
+              <img src="${p.image}" alt="${p.name}" loading="lazy" />
+              <span class="wishlist-priority-badge ${priorityClass}">${priorityTag}</span>
+              <span class="wishlist-weight-chip">
+                <span class="material-symbols-outlined" style="font-size:0.85rem;">scale</span> ${weight}
+              </span>
+            </div>
+
+            <div class="wishlist-gear-meta">
+              <span class="wishlist-cat-label">${p.categoryLabel || "Backcountry Equipment"}</span>
+              <h4 class="wishlist-gear-title" title="${p.name}">${p.name}</h4>
+              <p class="wishlist-specs-snippet">${specSummary}</p>
+            </div>
           </div>
-          <div style="display:flex; gap:8px;">
-            <button class="dash-btn dash-btn-primary dash-btn-sm" style="flex:1; justify-content:center;" onclick="window.location.href='./404.html'">
-              Add to Cart
-            </button>
-            <button class="action-icon-btn delete" onclick="window.location.href='./404.html'" title="Remove">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-            </button>
+
+          <div>
+            <div class="wishlist-pricing-row">
+              <div>
+                <span class="wishlist-price-val">$${p.price.toFixed(2)}</span>
+                ${p.originalPrice ? `<span class="wishlist-original-price">$${p.originalPrice.toFixed(2)}</span>` : ""}
+              </div>
+              <span class="stock-pill in-stock">&bull; In Stock</span>
+            </div>
+
+            <div class="wishlist-card-actions">
+              <button class="dash-btn dash-btn-primary dash-btn-sm" style="flex:1; justify-content:center;" onclick="window.customerDash.addWishlistToCart('${p.id}')">
+                <span class="material-symbols-outlined" style="font-size:1rem; margin-right:4px;">shopping_bag</span> Add to Cart
+              </button>
+              <button class="action-icon-btn delete" onclick="window.customerDash.removeWishlistItem('${p.id}')" title="Remove from Wishlist">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
           </div>
         </div>
-      `).join("");
-    }
+      `;
+    }).join("");
   }
 
   addWishlistToCart(productId) {
+    const product = this.dataManager.getProductById(productId);
+    if (!product) return;
+
     if (window.stacklyCart) {
-      window.stacklyCart.addItem(productId, 1);
+      const existing = window.stacklyCart.items.find(i => i.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        window.stacklyCart.items.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1
+        });
+      }
+      window.stacklyCart.saveCart();
+      if (typeof window.stacklyCart.updateBadges === "function") window.stacklyCart.updateBadges();
     }
+    showDashToast(`Added "${product.name}" to your expedition cart!`, "success");
+  }
+
+  moveAllWishlistToCart() {
+    const rawIds = this.getWishlistIds();
+    const prods = rawIds.map(id => this.dataManager.getProductById(id)).filter(Boolean);
+    if (prods.length === 0) {
+      showDashToast("Your wishlist is empty.", "info");
+      return;
+    }
+    let addedCount = 0;
+    prods.forEach(p => {
+      if (p.inStock) {
+        if (window.stacklyCart) {
+          const existing = window.stacklyCart.items.find(i => i.id === p.id);
+          if (existing) {
+            existing.quantity += 1;
+          } else {
+            window.stacklyCart.items.push({
+              id: p.id,
+              name: p.name,
+              price: p.price,
+              image: p.image,
+              quantity: 1
+            });
+          }
+          addedCount++;
+        }
+      }
+    });
+    if (window.stacklyCart) {
+      window.stacklyCart.saveCart();
+      if (typeof window.stacklyCart.updateBadges === "function") window.stacklyCart.updateBadges();
+    }
+    showDashToast(`Moved ${addedCount} wishlist items to your cart!`, "success");
   }
 
   removeWishlistItem(productId) {
-    if (window.stacklyApp) {
-      window.stacklyApp.toggleWishlist(productId);
+    let list = this.getWishlistIds();
+    const idx = list.indexOf(productId);
+    if (idx > -1) {
+      list.splice(idx, 1);
+      this.saveWishlistIds(list);
+      showDashToast("Item removed from your adventure wishlist.", "info");
+      this.renderWishlistTab();
     }
-    this.renderWishlistTab();
+  }
+
+  shareWishlist() {
+    const shareUrl = `${window.location.origin}${window.location.pathname}?view=wishlist&expedition=rockies-2026`;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        showDashToast("Wishlist link copied to clipboard! Share with your trail crew.", "success");
+      }).catch(() => {
+        showDashToast(`Wishlist link: ${shareUrl}`, "info");
+      });
+    } else {
+      showDashToast(`Wishlist link: ${shareUrl}`, "info");
+    }
+  }
+
+  // --- Pack Checklist Planner ---
+  renderPackChecklist() {
+    const container = document.getElementById("packChecklistContainer");
+    if (!container) return;
+
+    const defaultChecklist = [
+      { id: "chk-1", cat: "Shelter & Bivouac", name: "Summit Ridge 2P Ultralight Tent", tag: "Wishlisted", tagClass: "wishlist", defaultChecked: false },
+      { id: "chk-2", cat: "Shelter & Bivouac", name: "Waterproof Ground Footprint & DAC Stakes", tag: "Packed", tagClass: "packed", defaultChecked: true },
+      { id: "chk-3", cat: "Shelter & Bivouac", name: "High-Wind Reflective Guylines (4x)", tag: "Packed", tagClass: "packed", defaultChecked: true },
+      
+      { id: "chk-4", cat: "Sleep System", name: "Sub-Zero 850-Fill Down Sleeping Bag", tag: "Wishlisted", tagClass: "wishlist", defaultChecked: false },
+      { id: "chk-5", cat: "Sleep System", name: "Insulated R-Value 4.8 Sleeping Pad", tag: "Packed", tagClass: "packed", defaultChecked: true },
+      { id: "chk-6", cat: "Sleep System", name: "Ultralight Inflatable Camp Pillow", tag: "Packed", tagClass: "packed", defaultChecked: true },
+
+      { id: "chk-7", cat: "Cookware & Hydration", name: "Titanium Ultralight Camp Stove", tag: "Wishlisted", tagClass: "wishlist", defaultChecked: false },
+      { id: "chk-8", cat: "Cookware & Hydration", name: "Backcountry Thermal Flask (1L)", tag: "Wishlisted", tagClass: "wishlist", defaultChecked: false },
+      { id: "chk-9", cat: "Cookware & Hydration", name: "Micro-Filtration 0.1 Micron Squeeze Filter", tag: "Need", tagClass: "need", defaultChecked: false },
+
+      { id: "chk-10", cat: "Navigation & Safety", name: "Trailblazer Tactical Compass", tag: "Wishlisted", tagClass: "wishlist", defaultChecked: false },
+      { id: "chk-11", cat: "Navigation & Safety", name: "Beacon 500 Lumen Solar Camping Lantern", tag: "Wishlisted", tagClass: "wishlist", defaultChecked: false },
+      { id: "chk-12", cat: "Navigation & Safety", name: "Wilderness Trauma Medical Kit", tag: "Packed", tagClass: "packed", defaultChecked: true }
+    ];
+
+    let savedState = {};
+    try {
+      const s = localStorage.getItem("stackly_pack_checklist_v1");
+      if (s) savedState = JSON.parse(s);
+    } catch (e) {}
+
+    const categories = ["Shelter & Bivouac", "Sleep System", "Cookware & Hydration", "Navigation & Safety"];
+    const catIcons = {
+      "Shelter & Bivouac": "cabin",
+      "Sleep System": "bed",
+      "Cookware & Hydration": "skillet",
+      "Navigation & Safety": "explore"
+    };
+
+    let totalItems = defaultChecklist.length;
+    let checkedItems = 0;
+
+    const html = categories.map(cat => {
+      const items = defaultChecklist.filter(item => item.cat === cat);
+      const itemsHtml = items.map(item => {
+        const isChecked = typeof savedState[item.id] !== "undefined" ? savedState[item.id] : item.defaultChecked;
+        if (isChecked) checkedItems++;
+        return `
+          <div class="checklist-row ${isChecked ? 'checked' : ''}" onclick="window.customerDash.toggleChecklistItem('${item.id}')">
+            <div class="checklist-left">
+              <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''} onclick="event.stopPropagation(); window.customerDash.toggleChecklistItem('${item.id}')" />
+              <span>${item.name}</span>
+            </div>
+            <span class="checklist-tag ${item.tagClass}">${item.tag}</span>
+          </div>
+        `;
+      }).join("");
+
+      return `
+        <div class="checklist-cat-card">
+          <div class="checklist-cat-header">
+            <span class="checklist-cat-title">
+              <span class="material-symbols-outlined" style="font-size:1.1rem; color:var(--color-primary-green);">${catIcons[cat] || 'check'}</span>
+              ${cat}
+            </span>
+            <span style="font-size:0.75rem; color:var(--color-text-muted);">${items.length} Items</span>
+          </div>
+          <div class="checklist-items-list">
+            ${itemsHtml}
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    container.innerHTML = html;
+
+    // Progress updates
+    const pct = Math.round((checkedItems / totalItems) * 100);
+    const summaryEl = document.getElementById("checklistProgressSummary");
+    const barEl = document.getElementById("checklistProgressBar");
+    if (summaryEl) summaryEl.textContent = `${checkedItems} / ${totalItems} Items Prepared (${pct}%)`;
+    if (barEl) barEl.style.width = `${pct}%`;
+  }
+
+  toggleChecklistItem(id) {
+    let savedState = {};
+    try {
+      const s = localStorage.getItem("stackly_pack_checklist_v1");
+      if (s) savedState = JSON.parse(s);
+    } catch (e) {}
+
+    const cur = typeof savedState[id] !== "undefined" ? savedState[id] : false;
+    savedState[id] = !cur;
+    localStorage.setItem("stackly_pack_checklist_v1", JSON.stringify(savedState));
+    this.renderPackChecklist();
+  }
+
+  resetChecklist() {
+    localStorage.removeItem("stackly_pack_checklist_v1");
+    showDashToast("Expedition checklist reset to default pack values.", "info");
+    this.renderPackChecklist();
+  }
+
+  // --- Recommended Additions ---
+  renderWishlistRecommended(wishlistIds) {
+    const container = document.getElementById("wishlistRecommendedGrid");
+    if (!container) return;
+
+    const recommendedList = [
+      { id: "prod-6", reason: "Pair with Beacon Lantern for infinite solar energy off-grid." },
+      { id: "prod-8", reason: "Essential navigation backup when electronics lose battery in cold cols." },
+      { id: "prod-7", reason: "Keeps 1L of water steaming hot through sub-zero alpine bivouacs." },
+      { id: "prod-10", reason: "High-carbon steel for basecamp fire prep and shelter construction." }
+    ];
+
+    const unadded = recommendedList
+      .filter(item => !wishlistIds.includes(item.id))
+      .map(item => ({ ...this.dataManager.getProductById(item.id), reason: item.reason }))
+      .filter(p => p && p.id);
+
+    if (unadded.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column:1/-1; text-align:center; padding:24px; background:#ffffff; border-radius:8px; border:1px solid var(--color-border); font-size:0.85rem; color:var(--color-text-muted);">
+          You have added all recommended field essentials to your saved gear list!
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = unadded.map(p => `
+      <div class="recommended-gear-card">
+        <div>
+          <div class="rec-img-box">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" />
+          </div>
+          <span style="font-size:0.7rem; font-weight:700; color:var(--color-primary-green); text-transform:uppercase;">${p.categoryLabel}</span>
+          <strong style="display:block; font-size:0.95rem; color:var(--color-text-dark); margin:4px 0 6px;">${p.name}</strong>
+          <p style="font-size:0.78rem; color:var(--color-text-muted); line-height:1.4; margin-bottom:12px;">${p.reason}</p>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <strong style="color:var(--color-primary-green); font-size:1.1rem;">$${p.price.toFixed(2)}</strong>
+            <span class="stock-pill in-stock">&bull; In Stock</span>
+          </div>
+          <button class="dash-btn dash-btn-outline dash-btn-sm" style="width:100%; justify-content:center;" onclick="window.customerDash.addRecommendedToWishlist('${p.id}')">
+            <span class="material-symbols-outlined" style="font-size:1rem; margin-right:4px;">bookmark_add</span> + Add to Wishlist
+          </button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  addRecommendedToWishlist(productId) {
+    let list = this.getWishlistIds();
+    if (!list.includes(productId)) {
+      list.push(productId);
+      this.saveWishlistIds(list);
+      const prod = this.dataManager.getProductById(productId);
+      showDashToast(`Added "${prod ? prod.name : 'Item'}" to your adventure wishlist!`, "success");
+      this.renderWishlistTab();
+    }
   }
 
   // --- TAB 4: SAVED ADDRESSES & PAYMENT METHODS ---
@@ -1139,55 +1551,371 @@ class CustomerDashboard {
     }
   }
 
-  // --- TAB 5: TRAIL CLUB & REWARDS ---
+  // --- TAB 7: TRAIL CLUB & REWARDS ---
   renderRewardsTab() {
-    const user = this.currentUser || { trailPoints: 1450 };
+    const user = this.currentUser || { id: "usr-cust-01", name: "Alex Rivers", trailPoints: 1450, tier: "Summit Explorer" };
+    const points = user.trailPoints || 1450;
     const vouchers = this.dataManager.getVouchers();
+
+    // 1. Update Points Displays Across Dashboard
+    const heroPoints = document.getElementById("rewardsHeroPoints");
+    const headerPoints = document.getElementById("rewardsPointsBalance");
+    const sidebarBadge = document.getElementById("custRewardsBadge");
+    const overviewPoints = document.getElementById("custPointsVal");
+    const progressBar = document.getElementById("rewardsHeroProgressBar");
+    const nextTierHint = document.getElementById("rewardsNextTierHint");
+
+    if (heroPoints) heroPoints.textContent = points.toLocaleString();
+    if (headerPoints) headerPoints.textContent = `${points.toLocaleString()} Points`;
+    if (sidebarBadge) sidebarBadge.textContent = `${points.toLocaleString()} pts`;
+    if (overviewPoints) overviewPoints.textContent = `${points.toLocaleString()} pts`;
+
+    // Alpine Legend tier is at 1,800 points
+    const remainingToNext = Math.max(0, 1800 - points);
+    if (nextTierHint) {
+      nextTierHint.textContent = remainingToNext > 0 
+        ? `${remainingToNext.toLocaleString()} pts to Alpine Legend Tier`
+        : "Alpine Legend Tier Achieved!";
+    }
+    if (progressBar) {
+      const pct = Math.min(100, Math.max(15, Math.round((points / 1800) * 100)));
+      progressBar.style.width = `${pct}%`;
+    }
+
+    // 2. Setup Category Filters
+    this.setupRewardsControls();
+
+    // 3. Render Vouchers Grid
+    this.renderVouchersGrid(vouchers, points);
+
+    // 4. Render Trail Missions (Ways to Earn)
+    this.renderTrailMissions();
+
+    // 5. Render Badges & Achievements
+    this.renderTrailBadges(points);
+
+    // 6. Render Claimed Rewards Wallet
+    this.renderClaimedWallet(vouchers);
+  }
+
+  setupRewardsControls() {
+    const filterBtns = document.querySelectorAll(".reward-filter-btn");
+    filterBtns.forEach(btn => {
+      btn.onclick = () => {
+        filterBtns.forEach(b => {
+          b.classList.remove("dash-btn-primary");
+          b.classList.add("dash-btn-outline");
+        });
+        btn.classList.remove("dash-btn-outline");
+        btn.classList.add("dash-btn-primary");
+        this.rewardsCategory = btn.getAttribute("data-cat") || "all";
+        const vouchers = this.dataManager.getVouchers();
+        const user = this.currentUser || { trailPoints: 1450 };
+        this.renderVouchersGrid(vouchers, user.trailPoints || 1450);
+      };
+    });
+  }
+
+  renderVouchersGrid(vouchers, points) {
     const container = document.getElementById("customerVouchersGrid");
-    const pointsDisplay = document.getElementById("rewardsPointsBalance");
+    if (!container) return;
 
-    if (pointsDisplay) pointsDisplay.textContent = `${user.trailPoints || 1450} Points`;
+    let filtered = [...vouchers];
+    if (this.rewardsCategory !== "all") {
+      filtered = filtered.filter(v => v.category === this.rewardsCategory);
+    }
 
-    if (container) {
-      container.innerHTML = vouchers.map(v => `
-        <div class="voucher-card ${v.redeemed ? 'redeemed' : ''}">
-          <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <span class="card-label-badge">${v.pointsRequired} Trail Points</span>
-              ${v.redeemed ? `<span class="status-pill delivered">Redeemed</span>` : `<span class="status-pill processing">Available</span>`}
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align:center; padding:36px; background:#ffffff; border-radius:10px; border:1px solid var(--color-border); color:var(--color-text-muted);">
+          No rewards found in this category.
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filtered.map(v => {
+      const canAfford = points >= v.pointsRequired;
+      const isRedeemed = !!v.redeemed;
+
+      return `
+        <div class="reward-voucher-card">
+          <div class="reward-card-media">
+            <img src="${v.image || 'assets/images/products/prod-flask.webp'}" alt="${v.title}" loading="lazy" />
+            <span class="reward-badge-overlay">${v.badge || 'Trail Reward'}</span>
+            <span class="reward-cost-overlay">
+              <span class="material-symbols-outlined" style="font-size:0.9rem;">stars</span> ${v.pointsRequired} Pts
+            </span>
+          </div>
+
+          <div class="reward-card-body">
+            <div>
+              <span class="reward-category-tag">${v.categoryLabel || 'Member Reward'}</span>
+              <h4 class="reward-card-title">${v.title}</h4>
+              <p class="reward-card-desc">${v.description}</p>
             </div>
-            <strong style="font-size:1.05rem; display:block; color:var(--color-text-dark);">${v.title}</strong>
-            <p style="font-size:0.8rem; color:var(--color-text-muted); margin-top:4px;">Min. spend: $${v.minSpend.toFixed(2)} &bull; Valid thru ${v.expiryDate}</p>
+
+            <div>
+              <div class="reward-card-meta">
+                ${v.minSpend > 0 ? `Min. spend: $${v.minSpend.toFixed(2)} &bull; ` : ""}Valid thru ${v.expiryDate}
+              </div>
+
+              ${isRedeemed ? `
+                <div class="reward-redeemed-box">
+                  <span class="wallet-voucher-code" style="font-size:0.85rem; padding:4px 8px;">${v.code}</span>
+                  <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.customerDash.copyVoucherCode('${v.code}')">Copy</button>
+                </div>
+              ` : (canAfford ? `
+                <button class="dash-btn dash-btn-primary" style="width:100%; justify-content:center;" onclick="window.customerDash.claimVoucher('${v.id}')">
+                  Redeem for ${v.pointsRequired} Pts
+                </button>
+              ` : `
+                <button class="dash-btn dash-btn-outline" style="width:100%; justify-content:center; opacity:0.6; cursor:not-allowed;" title="Earn ${v.pointsRequired - points} more points to redeem">
+                  Need ${v.pointsRequired - points} More Pts
+                </button>
+              `)}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  claimVoucher(voucherId) {
+    const user = this.currentUser || { id: "usr-cust-01", name: "Alex Rivers", trailPoints: 1450 };
+    const res = this.dataManager.redeemVoucher(voucherId, user);
+
+    if (res.success) {
+      if (this.currentUser) this.currentUser.trailPoints = res.newPoints;
+      showDashToast(`Reward unlocked! Your promo code is: ${res.voucher.code}`, "success");
+      this.renderRewardsTab();
+      this.renderOverviewTab();
+      this.renderCustomerHeader();
+    } else {
+      showDashToast(res.message, "error");
+    }
+  }
+
+  copyVoucherCode(code) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(code).then(() => {
+        showDashToast(`Coupon code "${code}" copied to clipboard!`, "success");
+      }).catch(() => {
+        showDashToast(`Promo Code: ${code}`, "info");
+      });
+    } else {
+      showDashToast(`Promo Code: ${code}`, "info");
+    }
+  }
+
+  renderTrailMissions() {
+    const container = document.getElementById("trailMissionsGrid");
+    if (!container) return;
+
+    let completed = [];
+    try {
+      const s = localStorage.getItem("stackly_completed_missions_v1");
+      if (s) completed = JSON.parse(s);
+    } catch (e) {}
+
+    const missions = [
+      {
+        id: "miss-photo",
+        icon: "photo_camera",
+        title: "Summit Photo & Field Report",
+        desc: "Upload a photo of your Stackly tent, stove, or pack on the mountain trail.",
+        pts: "+150 Pts",
+        btnText: "Submit Field Photo",
+        btnAction: "window.customerDash.completeTrailMission('miss-photo')"
+      },
+      {
+        id: "miss-review",
+        icon: "rate_review",
+        title: "Verified Field Gear Review",
+        desc: "Help fellow backpackers by reviewing the durability of your purchased gear.",
+        pts: "+100 Pts",
+        btnText: "Write Gear Review",
+        btnAction: "window.customerDash.completeTrailMission('miss-review')"
+      },
+      {
+        id: "miss-pledge",
+        icon: "forest",
+        title: "Leave No Trace Stewardship Pledge",
+        desc: "Commit to outdoor conservation and sustainable low-impact camping principles.",
+        pts: "+150 Pts",
+        btnText: "Sign Eco Pledge",
+        btnAction: "window.customerDash.completeTrailMission('miss-pledge')"
+      },
+      {
+        id: "miss-miles",
+        icon: "hiking",
+        title: "Trail Mile Tracker (Log 25 Miles)",
+        desc: "Sync your backcountry GPS trail log or log manual wilderness mileage.",
+        pts: "+200 Pts",
+        btnText: "Log Trail Miles",
+        btnAction: "window.customerDash.completeTrailMission('miss-miles')"
+      },
+      {
+        id: "miss-refer",
+        icon: "group_add",
+        title: "Invite an Expedition Partner",
+        desc: "Give a fellow hiker $20 off their first order, earn 300 points when they shop.",
+        pts: "+300 Pts",
+        btnText: "Copy Invite Link",
+        btnAction: "window.customerDash.completeTrailMission('miss-refer')"
+      }
+    ];
+
+    container.innerHTML = missions.map(m => {
+      const isDone = completed.includes(m.id);
+      return `
+        <div class="trail-mission-card">
+          <div>
+            <div class="mission-top-row">
+              <div class="mission-icon-box">
+                <span class="material-symbols-outlined">${m.icon}</span>
+              </div>
+              <span class="mission-points-tag">${m.pts}</span>
+            </div>
+            <strong style="font-size:0.95rem; color:var(--color-text-dark); display:block; margin:12px 0 6px;">${m.title}</strong>
+            <p style="font-size:0.8rem; color:var(--color-text-body); line-height:1.45;">${m.desc}</p>
           </div>
 
           <div>
-            ${v.redeemed ? `
-              <div style="display:flex; align-items:center; justify-content:space-between; background:#f0fdf4; padding:8px 12px; border-radius:6px; border:1px solid #bbf7d0;">
-                <span class="voucher-code-badge">${v.code}</span>
-                <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="navigator.clipboard.writeText('${v.code}'); showDashToast('Coupon code copied to clipboard!', 'success');">Copy</button>
+            ${isDone ? `
+              <div style="display:flex; align-items:center; gap:6px; color:#065f46; font-size:0.8rem; font-weight:700; background:#ecfdf5; padding:8px 12px; border-radius:6px; border:1px solid #a7f3d0;">
+                <span class="material-symbols-outlined" style="font-size:1rem;">check_circle</span> Completed &bull; Points Awarded
               </div>
             ` : `
-              <button class="dash-btn dash-btn-primary" style="width:100%; justify-content:center;" onclick="window.location.href='./404.html'">)">
-                Redeem for ${v.pointsRequired} Pts
+              <button class="dash-btn dash-btn-outline dash-btn-sm" style="width:100%; justify-content:center;" onclick="${m.btnAction}">
+                ${m.btnText}
               </button>
             `}
           </div>
         </div>
-      `).join("");
-    }
+      `;
+    }).join("");
   }
 
-  claimVoucher(voucherId) {
-    const user = this.currentUser || { id: "usr-cust-01", trailPoints: 1450 };
-    const res = this.dataManager.redeemVoucher(voucherId, user);
+  completeTrailMission(missionId) {
+    const user = this.currentUser || { id: "usr-cust-01", name: "Alex Rivers", trailPoints: 1450 };
+    let pointsToAdd = 0;
+    let msg = "";
 
-    if (res.success) {
-      showDashToast(`Voucher unlocked! Promo code: ${res.voucher.code}`, "success");
-      this.renderRewardsTab();
-      this.renderOverviewTab();
-    } else {
-      showDashToast(res.message, "error");
+    let completed = [];
+    try {
+      const s = localStorage.getItem("stackly_completed_missions_v1");
+      if (s) completed = JSON.parse(s);
+    } catch (e) {}
+
+    if (completed.includes(missionId)) {
+      showDashToast("You have already claimed points for this trail mission!", "info");
+      return;
     }
+
+    if (missionId === "miss-pledge") {
+      pointsToAdd = 150;
+      msg = "Leave No Trace Stewardship Pledge signed! +150 Trail Points awarded.";
+    } else if (missionId === "miss-miles") {
+      pointsToAdd = 200;
+      msg = "25 Backcountry Trail Miles verified! +200 Trail Points awarded.";
+    } else if (missionId === "miss-review") {
+      pointsToAdd = 100;
+      msg = "Field gear review verified! +100 Trail Points awarded.";
+    } else if (missionId === "miss-photo") {
+      pointsToAdd = 150;
+      msg = "Summit photo accepted for community trail gallery! +150 Trail Points awarded.";
+    } else if (missionId === "miss-refer") {
+      const link = `${window.location.origin}${window.location.pathname}?ref=ALEX-RIVERS-TRAIL`;
+      navigator.clipboard.writeText(link);
+      showDashToast(`Referral link copied to clipboard! Share with your trail crew.`, "success");
+      return;
+    }
+
+    user.trailPoints = (user.trailPoints || 1450) + pointsToAdd;
+    completed.push(missionId);
+    localStorage.setItem("stackly_completed_missions_v1", JSON.stringify(completed));
+
+    if (window.stacklyAuth) {
+      window.stacklyAuth.setCurrentUser(user);
+      const users = window.stacklyAuth.getUsers();
+      const uIdx = users.findIndex(u => u.id === user.id);
+      if (uIdx > -1) {
+        users[uIdx].trailPoints = user.trailPoints;
+        window.stacklyAuth.saveUsers(users);
+      }
+    }
+
+    showDashToast(msg, "success");
+    this.renderRewardsTab();
+    this.renderOverviewTab();
+    this.renderCustomerHeader();
+  }
+
+  renderTrailBadges(points) {
+    const container = document.getElementById("trailBadgesGrid");
+    if (!container) return;
+
+    let completed = [];
+    try {
+      const s = localStorage.getItem("stackly_completed_missions_v1");
+      if (s) completed = JSON.parse(s);
+    } catch (e) {}
+    const pledgeSigned = completed.includes("miss-pledge");
+
+    const badges = [
+      { id: "b-1", name: "First Ascent Pioneer", desc: "Completed your first official expedition order.", icon: "military_tech", unlocked: true },
+      { id: "b-2", name: "Leave No Trace Ambassador", desc: "Signed the national wilderness stewardship accord.", icon: "eco", unlocked: pledgeSigned },
+      { id: "b-3", name: "Campfire Gourmet", desc: "Equipped with titanium stove and thermal cookware.", icon: "local_fire_department", unlocked: true },
+      { id: "b-4", name: "Sub-Zero Alpine Master", desc: "Equipped with 850-fill down for winter high camps.", icon: "ac_unit", unlocked: false, progress: "60% Complete" },
+      { id: "b-5", name: "Continental Divide Peakbagger", desc: "Reach 3 summits above 10,000 ft elevation.", icon: "landscape", unlocked: false, progress: "1 / 3 Summits" },
+      { id: "b-6", name: "Trail Legend VIP", desc: "Accumulate 2,500 lifetime trail loyalty points.", icon: "workspace_premium", unlocked: points >= 2500, progress: `${points} / 2,500 pts` }
+    ];
+
+    container.innerHTML = badges.map(b => `
+      <div class="badge-item-card ${b.unlocked ? 'unlocked' : 'locked'}">
+        <div class="badge-icon-disc">
+          <span class="material-symbols-outlined">${b.icon}</span>
+        </div>
+        <strong class="badge-name">${b.name}</strong>
+        <p class="badge-desc">${b.desc}</p>
+        <span class="badge-status-pill ${b.unlocked ? 'unlocked' : 'locked'}">
+          ${b.unlocked ? 'Unlocked' : (b.progress || 'Locked')}
+        </span>
+      </div>
+    `).join("");
+  }
+
+  renderClaimedWallet(vouchers) {
+    const container = document.getElementById("customerClaimedWallet");
+    if (!container) return;
+
+    const redeemed = vouchers.filter(v => v.redeemed);
+    if (redeemed.length === 0) {
+      container.innerHTML = `
+        <div style="text-align:center; padding:20px; color:var(--color-text-muted); font-size:0.85rem;">
+          No vouchers redeemed yet. Select a reward above to convert your points into promo codes!
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = redeemed.map(v => `
+      <div class="wallet-voucher-card">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <img src="${v.image || 'assets/images/products/prod-flask.webp'}" alt="${v.title}" style="width:48px; height:48px; border-radius:6px; object-fit:cover; background:#f7f4ee;" />
+          <div>
+            <strong style="font-size:0.92rem; color:var(--color-text-dark); display:block;">${v.title}</strong>
+            <span style="font-size:0.75rem; color:var(--color-text-muted);">Redeemed on ${v.redeemedDate || 'Recent'} &bull; Valid thru ${v.expiryDate}</span>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="wallet-voucher-code">${v.code}</span>
+          <button class="dash-btn dash-btn-outline dash-btn-sm" onclick="window.customerDash.copyVoucherCode('${v.code}')">Copy</button>
+        </div>
+      </div>
+    `).join("");
   }
 
   // --- TAB 6: PROFILE & PREFERENCES ---
