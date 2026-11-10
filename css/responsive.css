@@ -180,7 +180,6 @@
   .magazine-sub-form {
     margin: 0 auto 14px auto;
   }
-
   .magazine-stack-img {
     max-width: 340px;
   }
@@ -372,6 +371,9 @@
     max-width: none;
   }
 
+  .abouve-screens-footer {
+  margin-left: 10px;
+}
   .back-to-top-btn {
     left: 18px;
     bottom: 18px;
@@ -391,5 +393,16 @@
 
   .section-title-serif  {
     font-size: 1.75rem;
+  }
+
+  .pdp-tabs-nav{
+    flex-direction: column;
+  }
+  .btn-primary {
+    font-size: 8px;
+  }
+
+  .pdp-breadcrumbs {
+    margin-top: 20px;
   }
 }

@@ -2892,6 +2892,10 @@ ul, ol {
   user-select: none;
 }
 
+.abouve-screens-footer {
+  margin-left: 80px;
+}
+
 .user-pill-dropdown-trigger:hover {
   border-color: var(--color-gold);
   box-shadow: var(--shadow-sm);
@@ -3249,5 +3253,64 @@ ul, ol {
 
     .trust-card {
         padding: 26px 20px;
+    }
+}
+
+/* Contact Footer */
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.7;
+}
+
+/* Contact Icons */
+
+.contact-icon {
+    font-size: 20px;
+    color: var(--color-gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.3s ease;
+}
+
+.contact-list li:hover .contact-icon {
+    transform: translateY(-2px);
+    color: #D6AD69;
+}
+
+/* Contact Links */
+
+.contact-list a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-list a:hover {
+    color: var(--color-gold);
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 576px) {
+    .contact-list {
+        gap: 13px;
+    }
+
+    .contact-list li {
+        gap: 10px;
+        font-size: 0.88rem;
+    }
+
+    .contact-icon {
+        font-size: 19px;
     }
 }
