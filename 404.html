@@ -302,6 +302,10 @@
       white-space: nowrap;
     }
 
+    .error-number-404 {
+      font-size: 50px;
+      margin: 20px;
+    }
     .btn-404 svg {
       width: clamp(15px, 1.6vw, 18px);
       height: clamp(15px, 1.6vw, 18px);
@@ -439,6 +443,16 @@
       .header-trail-telemetry { display: none; }
     }
 
+    @media (min-width: 766px) {
+      .error-actions-group  {
+        margin-bottom: 20px;
+      }
+    }
+
+    .error-desc {
+      margin-bottom: 30px;
+    }
+
     @media (max-width: 480px) {
     
       .error-actions-group {
@@ -516,10 +530,10 @@
     
     <!-- Top Minimal Header -->
     <header class="error-header">
-      <a href="index.html" class="brand-logo-compact" aria-label="Stackly Outdoor Home">
+      <!-- <a href="index.html" class="brand-logo-compact" aria-label="Stackly Outdoor Home">
         <img src="./assets/images/logo-dark.webp" alt="Stackly Logo" class="logo-img">
         
-      </a>
+      </a> -->
 
       <div class="header-trail-telemetry">
         <span class="telemetry-pulse"></span>
