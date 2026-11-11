@@ -18,9 +18,17 @@
   transform: translateY(0);
 }
 
+.heading-word {
+  text-align: center;
+}
+
+.error-number {
+  text-align: center;
+}
+
 /* 2. Word-by-Word Kinetic Reveal (For Major Titles) */
 .heading-word-mask {
-  display: inline-block;
+
   overflow: hidden;
   vertical-align: top;
   padding-bottom: 0.16em;
