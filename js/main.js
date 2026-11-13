@@ -474,32 +474,32 @@ class MainApp {
   }
 
   // --- 8. BACK TO TOP ---
-  // initBackToTop() {
-  //   let topBtn = document.getElementById("backToTopBtn");
-  //   if (!topBtn) {
-  //     topBtn = document.createElement("button");
-  //     topBtn.id = "backToTopBtn";
-  //     topBtn.className = "back-to-top-btn";
-  //     topBtn.setAttribute("aria-label", "Back to top of page");
-  //     topBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
-  //     document.body.appendChild(topBtn);
-  //   }
+  initBackToTop() {
+    let topBtn = document.getElementById("backToTopBtn");
+    if (!topBtn) {
+      topBtn = document.createElement("button");
+      topBtn.id = "backToTopBtn";
+      topBtn.className = "back-to-top-btn";
+      topBtn.setAttribute("aria-label", "Back to top of page");
+      topBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
+      document.body.appendChild(topBtn);
+    }
 
-  //   window.addEventListener("scroll", () => {
-  //     if (window.scrollY > 400) {
-  //       topBtn.classList.add("visible");
-  //     } else {
-  //       topBtn.classList.remove("visible");
-  //     }
-  //   }, { passive: true });
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        topBtn.classList.add("visible");
+      } else {
+        topBtn.classList.remove("visible");
+      }
+    }, { passive: true });
 
-  //   topBtn.addEventListener("click", () => {
-  //     window.scrollTo({
-  //       top: 0,
-  //       behavior: "smooth"
-  //     });
-  //   });
-  // }
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
 }
 
 // Global initialization
